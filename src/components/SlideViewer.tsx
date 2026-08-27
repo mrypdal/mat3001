@@ -241,7 +241,19 @@ export default function SlideViewer() {
   const canEdit = session?.user?.role === 'admin' || session?.user?.role === 'teacher';
 
   if (status === "loading" || status === "unauthenticated" || loading) return <div style={{ padding: "2rem", textAlign: "center" }}>Loading slides...</div>;
-  if (slides.length === 0) return <div style={{ padding: "2rem", textAlign: "center" }}>No slides found.</div>;
+  if (slides.length === 0) {
+    return (
+      <div className="layout-container">
+        <div className="main-content">
+          <TopNav onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} isSidebarOpen={isSidebarOpen} />
+          <div style={{ padding: "4rem", textAlign: "center", color: "#666" }}>
+            <h2>No slides found.</h2>
+            <p>Use the menu to navigate to Writing or Admin to add content.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app-layout" style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden" }}>
