@@ -244,10 +244,6 @@ export default function SlideViewer() {
   if (slides.length === 0) {
     return (
       <div className="app-layout" style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden" }}>
-        {isSidebarOpen && (
-          <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)} />
-        )}
-        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
         <div className="main-content" style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh" }}>
           <TopNav onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} isSidebarOpen={isSidebarOpen} />
