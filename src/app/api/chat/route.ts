@@ -6,7 +6,7 @@ import path from 'path';
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, pageContext } = await req.json();
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
@@ -48,7 +48,10 @@ IMPORTANT: You must always respond in English, regardless of the language the us
 Use Markdown for formatting, and use KaTeX for math (e.g. $E=mc^2$ for inline math and $$E=mc^2$$ for block math).
 
 --- 
-COURSE SLIDES:
+
+${pageContext ? `## CURRENT USER CONTEXT\nThe user is currently looking at this specific content on their screen. Use this context to answer questions like "explain this to me" or "solve this assignment":\n${pageContext}\n\n---` : ""}
+
+### Course Slides Database:
 ${slideContent}
 
 ---

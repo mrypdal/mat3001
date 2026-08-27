@@ -8,6 +8,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import ShareModal from "@/components/ShareModal";
 import { useSession } from "next-auth/react";
+import { useChatContext } from "./ChatContext";
 
 interface Doc {
   id: string;
@@ -44,6 +45,16 @@ export default function DocumentDashboard({ docType }: DocumentDashboardProps) {
   const [saving, setSaving] = useState(false);
   
   const [shareModalDoc, setShareModalDoc] = useState<Doc | null>(null);
+
+  const { setPageContext } = useChatContext();
+
+  useEffect(() => {
+    if (activeDoc) {
+      setPageContext(`[USER IS CURRENTLY VIEWING THIS DOCUMENT]\nTitle: ${activeDoc.title}\n\nContent:\n${activeDoc.content}`);
+    } else {
+      setPageContext("");
+    }
+  }, [activeDoc, setPageContext]);
 
   const [reviewLoading, setReviewLoading] = useState(false);
   const [reviewContent, setReviewContent] = useState<string | null>(null);

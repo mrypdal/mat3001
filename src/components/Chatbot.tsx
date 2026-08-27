@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import 'katex/dist/katex.min.css';
+import { useChatContext } from "./ChatContext";
 
 interface Message {
   role: "user" | "assistant";
@@ -18,6 +19,7 @@ export default function Chatbot() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const { pageContext } = useChatContext();
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +43,7 @@ export default function Chatbot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, pageContext }),
       });
 
       const data = await res.json();
