@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String    @unique
+  password  String
+  role      String    @default("student")
+  createdAt       DateTime        @default(now())
+  classMessages   ClassMessage[]
+  documents       Document[]      @relation("DocumentOwner")
+  sharedDocuments DocumentShare[]
+}
+
+model ClassMessage {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Slide {
+  id        String   @id @default(cuid())
+  originalId String  @unique // Matches the old slide-0, slide-1 string for comment relation
+  title     String
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Document {
+  id          String          @id @default(cuid())
+  title       String
+  content     String
+  docType     String          @default("WRITING") // "WRITING" or "ASSIGNMENT"
+  ownerId     String
+  owner       User            @relation("DocumentOwner", fields: [ownerId], references: [id])
+  sharedWith  DocumentShare[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model DocumentShare {
+  id          String   @id @default(cuid())
+  documentId  String
+  userId      String
+  permission  String   @default("READ") // "READ", "EDIT", "MANAGE"
+  
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, userId])
+}

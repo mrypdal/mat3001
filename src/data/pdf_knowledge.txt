@@ -1,0 +1,6652 @@
+Calculus of Variations
+Per Kristen Jakobsen
+Department of Mathematics and Statistics,
+the Arctic University of Norway, Tromsø, Norway
+August 6, 2026
+Contents
+1
+Generalized extremal problems
+2
+1.1
+Curve of shortest length in a plane . . . . . . . . . . . . . . . . .
+2
+1.2
+Curve of shortest length on a surface . . . . . . . . . . . . . . . .
+3
+1.3
+The isoperimetric problem . . . . . . . . . . . . . . . . . . . . . .
+6
+1.4
+Surface of revolution of minimal area . . . . . . . . . . . . . . . .
+8
+1.5
+General surface of minimal area . . . . . . . . . . . . . . . . . . .
+9
+1.6
+The Fermat Principle . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+1.7
+The brachistochrone problem. . . . . . . . . . . . . . . . . . . . .
+12
+1.8
+The Action Principle.
+. . . . . . . . . . . . . . . . . . . . . . . .
+13
+1.9
+The Maximum Entropy Principle . . . . . . . . . . . . . . . . . .
+14
+2
+The Euler-Lagrange Equations
+15
+2.1
+One dependent variable
+. . . . . . . . . . . . . . . . . . . . . . .
+15
+2.2
+Several dependent variables . . . . . . . . . . . . . . . . . . . . .
+21
+2.3
+Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+28
+2.4
+Several independent variables . . . . . . . . . . . . . . . . . . . .
+32
+3
+Equations of Variational Type
+38
+3.1
+Real valued functions . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+3.2
+Complex valued functions . . . . . . . . . . . . . . . . . . . . . .
+40
+4
+Noether’s Theorem
+44
+4.1
+One dependent variable
+. . . . . . . . . . . . . . . . . . . . . . .
+44
+4.2
+Several dependent variables . . . . . . . . . . . . . . . . . . . . .
+47
+4.3
+Several independent variables . . . . . . . . . . . . . . . . . . . .
+54
+5
+Exercises
+67
+6
+Appendix
+72
+6.1
+The maximum entropy principle for classical systems . . . . . . .
+72
+6.1.1
+The general thermodynamical formalism . . . . . . . . . .
+74
+6.1.2
+The thermodynamic formalism in statistical physics
+. . .
+79
+6.1.3
+The problem of prior . . . . . . . . . . . . . . . . . . . . .
+81
+6.1.4
+Solving the problem of prior using stochastic relations . .
+85
+1
+
+
+6.1.5
+Thermodynamic pressure and its cousins . . . . . . . . . .
+93
+6.2
+The maximum entropy principle for quantum systems
+. . . . . .
+94
+1
+Generalized extremal problems
+Extremal problems, like minimum and maximum problems, have played a major
+role in the development of calculus. In fact, calculus was more or less invented
+to solve such problems.
+In the language of calculus, the quantity we need to maximize or minimize is a
+function of a real variable, x, and the challenge is to find an x0 such that
+f(x) ≤f(x0) (f(x) ≥f(x0))
+∀x̸ = x0,
+(1)
+If f(x) is a well behaved function, calculus tells us that we only need to look at
+points x∗such that
+f ′(x∗) = 0.
+(2)
+All maximum and minimum points will be found among the set of points that
+satisfy (2). By well behaved functions, we mean here that f(x) is continuously
+differentiable and defined on the whole real axis.
+There are however many important extremal problems that do not fall into
+the category described above. In fact, some of these problems are much older
+than calculus itself.
+The so-called isoperimetric problem was clearly stated already 200 BCE1 by
+the Greek mathematician Zenodorus. The problem consists of finding, among
+all curves of a fixed length L, the curve that encloses the largest area.
+We will start our study of the calculus of variation by introducing several
+other interesting extremal problems that are beyond the bounds of standard
+calculus, and then move on to describing mathematical tools which we can use
+to solve them.
+1.1
+Curve of shortest length in a plane
+Let p and q be two points on the plane. The challenge is to find a curve, C,
+connecting p and q, which is of shortest possible length.
+Figure 1: Curve connecting two points p and q in the plane
+In order to state the problem in precise mathematical terms we, introduce
+1BCE=Before Common Era, A religiously neutral substitute for BC
+2
+
+
+a parametrization γ(t) for C,
+γ(t) = (x(t), y(t)),
+0 ≤t ≤1,
+γ([0, 1]) = C,
+γ(0) = p,
+γ(1) = q.
+Using this parametrization, the length of the curve, L(C), can be written as
+L(C) =
+Z 1
+0
+dt ∥γ′(t)∥=
+Z 1
+0
+dt
+p
+x′(t)2 + y′(t)2.
+The challenge is then to find a curve, C0, such that
+L(C) ≥L(C0),
+for all C connecting p and q. This looks just like the minimum problem (1) from
+elementary calculus.
+The only difference is that L is not a function of a real variable, but is rather
+a function defined on the set of smooth curved connecting the points p and q.
+Figure 2: A functional defined on plane curves
+Such a function is called a functional. We will in these lecture notes encounter
+many other functions of this type, with ever larger domains of definition. All
+such functions will be called functionals.
+1.2
+Curve of shortest length on a surface
+Let S be a surface in R3 and let p and q be points on S. The challenge is to
+find a curve, C, on the surface S, connecting p and q, which is of the shortest
+possible length.
+Figure 3: A curve on the surface, S connecting two points p and q on the surface
+3
+
+
+Let γ(t) be a parametrization for C
+γ(t) = (x(t), y(t), z(t))
+0 ≤t ≤1,
+γ([0, 1]) = C ⊂S,
+γ(0) = p,
+γ(1) = q.
+The length of C is
+L(C) =
+Z 1
+0
+dt
+p
+x′(t)2 + y′(t)2 + z′(t)2,
+and the challenge is to find a curve, C0, such that
+L(C) ≥L(C0)
+for all C ⊂S connecting p and q.
+This looks exactly like an extremal problem from regular calculus where we
+have a constraint. In regular calculus such problems are solved using Lagrange
+multipliers. We will see that a similar approach will work for functionals.
+For this particular problem we can remove the constraint using some vector
+calculus.
+Let the surface be parametrized by x(u, v),
+Figure 4: A parametrization for the surface S
+where
+x(u, v) = (x(u, v), y(u, v), z(u, v)),
+(u, v) ∈D,
+x(D) = S,
+x(Γ) = C ,
+x(α) = p,
+x(β) = q.
+Let the curve Γ be parametrized by γ(t)
+γ(t) = (u(t), v(t)),
+0 ≤t ≤1,
+γ([0, 1]) = Γ,
+γ(0) = α,
+γ(1) = β.
+Then then the curve C is parametrized by
+ξ(t) = x(γ(t)),
+0 ≤t ≤1.
+In component form we have
+4
+
+
+x(t) = x(u(t), v(t)),
+y(t) = y(u(t), v(t)),
+z(t) = z(u(t), v(t)),
+so that
+ξ(t) = (x(t), y(t), z(t)).
+Using the chain rule we have
+x′(t) = ∂ux(u(t), v(t))u′(t) + ∂vx(u(t), v(t))v′(t),
+y′(t) = ∂uy(u(t), v(t))u′(t) + ∂vy(u(t), v(t))v′(t),
+z′(t) = ∂uz(u(t), v(t))u′(t) + ∂vz(u(t), v(t))v′(t).
+In vector form this can be written as
+ξ′(t) = Tu u′ + Tv v′,
+where the vectors Tu and Tv are defined by
+Tu = Tu(t) = Tu(u(t), v(t))
+= (∂ux(u(t), v(t)), ∂uy(u(t), v(t)), ∂uz(u(t), v(t))),
+Tv = Tv(t) = Tv(u(t), v(t))
+= (∂vx(u(t), v(t)), ∂vy(u(t), v(t)), ∂vz(u(t), v(t))).
+The two vectors Tu(u, v) and Tv(u, v) are tangent to the surface S. Using Tu
+and Tv we have
+x′(t)2 + y′(t)2 + z′(t)2 = ∥ξ′(t)∥2
+= ξ′(t) · ξ′(t) = (Tu u′ + Tv v′) · (Tu u′ + Tv v′)
+= A u′2 + 2 B u′ v′ + C v′2,
+(3)
+where
+A = A(t) = Tu · Tu,
+B = B(t) = Tu · Tv,
+C = Tv · Tv.
+(4)
+Observe that the functions A, B, C depends only on the structure of the surface
+S
+A(u, v) = Tu(u, v) · Tu(u, v),
+B(u, v) = Tu(u, v) · Tv(u, v),
+C(u, v) = Tv(u, v) · Tv(u, v).
+We are here abusing the notation in the usual calculus way.
+A = A(t) = A(u(t), v(t)).
+5
+
+
+Using (3) and (4), our minimum problem is now to find a curve Γ0 ⊂D,
+connecting α and β, such that
+L(Γ) ≥L(Γ0) for all curves in D connecting α and β,
+where the functional L is
+L(Γ) =
+Z 1
+0
+dt [A(t) u′(t)2 + 2 B(t) u′(t) v′(t) + C(t) v′(t)2]
+1
+2 .
+This is now an unconstrained minimum problem.
+Observe that the three functions, A, B and C determine the length of all curves
+on the surface S. Thus the three functions determine the geometry of the surface
+S.
+The functions A, B and C are called the metric coefficients for S and the
+curve of minimal length, C0, connecting p and q is called a geodesics for the
+surface.
+These ideas and their generalization play a fundamental role in theoretical
+physics.
+In fact, Einstein’s fundamental contribution to gravitational physics was to
+merge gravitational and inertial forces into a collection of 10 metric coefficients
+determining the geometry of the four dimensional space-time continuum. From
+the metric coefficients we can calculate the length of curves connecting points,
+here called events, in space-time. The length of a curve, in this space-time
+context, is the time it would take an observer, to follow the curve from an event
+p to another event q. The time in question is the one measured by the observer
+following the curve. This time is called proper time in Einstein’s gravitational
+theory (General Relativity).
+The physical postulate is that an observer following the curve C0 from p to
+event q, will feel no inertial forces if the curve has maximal length. Since length
+is proper time, this means that if an observer wants to move from event p to
+another q, without feeling inertial forces, she should choose a curve that takes
+as much time as possible as measured by her clock.
+These curves are also called geodiscs, but here, in the space-time context,
+they are curves of maximal, not minimal, length. The metric coefficients are
+determined by the distribution of mass and energy through the Einstein field
+equations.
+1.3
+The isoperimetric problem
+Let us consider the truly ancient isoperimetric problem. Let C be a curve
+enclosing a domain D.
+We want to express the area of D in terms of C, and for this purpose introduce
+a vector field f, on the plane given by
+f(x, y) = 1
+2(x, y).
+Evidently we have
+∇· f = ∂x(1
+2 x) + ∂y(1
+2 y) = 1
+2 + 1
+2 = 1.
+6
+
+
+Figure 5: Curve enclosing a domain D
+But then, using the divergence form of Green’s theorem, we have
+A =
+ZZ
+D
+dA =
+ZZ
+D
+dA ∇· f =
+I
+C
+dl f · n.
+Thus the area of D is a functional of C
+A = A(C) =
+I
+C
+dl f · n.
+(5)
+The length of the curve C is determined by the functional
+L = L(C) =
+I
+C
+dl.
+(6)
+The isoperimetric problem consists of, for a fixed length L∗, finding the curve
+C0 such that
+A(C) ≤A(C0)
+∀C , L(C) = L∗.
+We will now parametrize this problem, and therefore introduce a counter clockwise
+orientation for the curve C.
+Figure 6: Defining orientation for the curve C
+Let γ be a parametrization of the oriented curve C. We thus have
+γ(t) = (x(t), y(t))
+0 ≤t ≤1,
+(7)
+γ([0, 1]) = C,
+γ(0) = γ(1),
+7
+
+
+and γ′(t) points along the orientation of C. The choice of orientation ensures
+that
+n(t) = (y′(t), −x′(t))
+∥γ′(t)∥
+,
+(8)
+is a unit normal defined on C that points out of the domain D. Using (7) and
+(8) in (5) and (6) we have
+L(C) =
+I
+C
+dl =
+1
+Z
+0
+dt ∥γ′(t)∥=
+1
+Z
+0
+dt
+p
+x′(t)2 + y′(t)2,
+A(C) =
+I
+C
+dl f · n =
+1
+Z
+0
+dt ∥γ′(t)∥1
+2 (x(t), y(t)) · (y′(t), −x′(t))
+∥γ′(t)∥
+= 1
+2
+Z 1
+0
+dt (x(t) y′(t) −y(t) x′(t)).
+Thus, our problem consists in finding functions x0(t), y0(t) such that
+i) x0(0) = x0(1),
+y0(0) = y(1),
+ii)
+Z 1
+0
+dt
+p
+x′(t)2 + y′(t)2 = L∗,
+iii) 1
+2
+Z 1
+0
+dt (x(t) y′(t) −y(t) x′(t))
+is maximal.
+1.4
+Surface of revolution of minimal area
+Let y(t) be a function defined on the interval (x1, x2). Assume y(x) > 0 for all
+x ∈(x1, x2).
+Figure 7: Curve defining surface of revolution
+Let A(y) be the area of the surface of revolution that we get by rotating the
+curve y(x) around the x-axis. The challenge is to find a curve y(x) for which
+A(y) is minimal for given fixed points (x1, y1) and (x2, y2).
+Recall from elementary Calculus that the formula for the area A(y) is
+A(y) = 2 π
+Z x2
+x1
+dx y(x)
+p
+1 + y′(x)2.
+8
+
+
+Thus the challenge is to find a curve y(x), defined on (x1, x2), such that
+i) y(x1) = y1, y(x2) = y2,
+ii) A(y) = 2 π
+Z x2
+x1
+dx y(x)
+p
+1 + y′(x)2
+is minimal.
+1.5
+General surface of minimal area
+Let a curve C, in R3 be given. The challenge is to find a surface S ⊂R3 such
+that
+i) ∂S = C,
+ii) A(S) is minimal,
+where A(S) is the area of the surface S. Such a surface is called a minimal surface.
+Many important problems in theoretical physics and applied mathematics can
+be reduced to the problem of finding a minimal surface.
+For example, if we dip a piece of string, described by a closed curve in R3, into
+a bucket of soap water, the resulting soap film, clinging to the string, will form
+a minimal surface.
+Let us parametrize this problem by introducing a parametrization x of the
+surface S. Thus
+Figure 8: Parametrization of surface S bounded by the curve C
+i) x : R2 →R3,
+x = x(u, v),
+ii) x(D) = S,
+iii) x(∂D) = C.
+From calculus we know that the area of S, A(S), is given by the formula
+A(S) =
+ZZ
+D
+du dv ∥Tu × Tv∥,
+where as before
+Tu = ∂x
+∂u,
+Tv = ∂x
+∂v .
+9
+
+
+The challenge is to choose functions x(u, v), y(u, v), z(u, v) with
+x(u, v) = (x(u, v), y(u, v), z(u, v)),
+such that A(S) is minimal under the constraint
+x(∂D) = C.
+Let us restrict to the case when C is given by the graph of a function h = h(x, y)
+defined on the boundary, ∂D, of D. A surface of this type is displayed in figure
+9. For such surfaces we can use a parametrization of the form
+Figure 9: Surface whose boundary is the graph of a function.
+x(x, y) = (x, y, f(x, y)).
+For this parametrization we have
+Tx = ∂x
+∂x = (1, 0, fx),
+Ty = ∂x
+∂y = (0, 1, fy).
+Thus
+∥Tx × Ty∥=
+q
+1 + f 2x + f 2y .
+Therefore the challenge is to find a function f(x, y), defined on a domain D in
+R2, such that
+i) f(x, y) = h(x, y),
+(x, y) ∈∂D,
+ii)
+ZZ
+D
+dx dy
+q
+1 + f 2x + f 2y
+is minimal.
+Note that in this case the functional is defined on a domain consisting of functions
+of two variables. This is clearly a very large domain.
+10
+
+
+1.6
+The Fermat Principle
+Let c be the speed of light in vacuum. Recall that the speed of light typically
+depends on the physical properties of the medium it is travelling through.
+The ratio between the speed of light in vacuum and the speed of light in a
+medium, v, is a dimensionless number
+n = c
+v ,
+(9)
+which is called the refractive index of the material. Under normal circumstances
+v < c so that n > 1.
+The refractive index typically depends on the frequency of the light, but we will
+disregard this effect here. Unless the material is homogeneous, the refractive
+index will depend on position
+n = n(x).
+Let us now consider a light ray passing through a medium that has a refractive
+index n(x).
+Figure 10: Light ray in a refractive medium.
+Using (9) and figure 10, we have
+n = c
+dl
+dt
+,
+⇕
+dt = n
+c dl,
+where now dt is the time it takes light to propagate the distance dl along the
+curve Γ. The total time it takes light to propagate along a curve Γ is then
+T(Γ) = 1
+c
+Z
+Γ
+dl n.
+Fermat’s principle state that light follows the path through a medium of refractive
+index n(x), which takes the shortest possible time. Thus, in order to find the
+path followed by light we must minimize T(Γ) over all paths Γ.
+Let us parametrize this problem. Let γ be a parametrization for Γ.
+γ(t) = (x(t), y(t), z(t)),
+0 ≤t ≤1,
+γ(0) = p,
+γ(1) = q.
+11
+
+
+Thus, in order to find the path followed by light from p to q we must find
+functions x(t), y(t), z(t) such that
+T(Γ) =
+Z 1
+0
+dt n(x(t), y(t), z(t))
+p
+x′(t)2 + y′(t)2 + z′(t)2,
+subject to the constraints
+(x(0), y(0), z(0)) = p,
+(x(1), y(1), z(1)) = q,
+is as small as possible.
+1.7
+The brachistochrone problem.
+(brachistochrone - shortest time in Greek)
+The challenge is to find the arc (x, y(x)), which a particle of mass m must
+follow from (x1, y1) to (x2, y2), in order for it to use as little time as possible.
+The particle is influenced by a constant gravitational field pointing vertically
+down.
+Figure 11: The brachistochrone problem
+We have
+v = ds
+dt ,
+⇕
+dt = ds
+v .
+Thus, the time it takes the particle to move from (x1, y1) to (x2, y2) along the
+arc (x, y(x)) is
+T(y) =
+Z x2
+x1
+dx 1
+v
+p
+1 + y′2.
+We find a relation between v and y using the conservation of energy. We set the
+zero for potential energy at y = y1. Then we have
+1
+2 m v2
+1 = 1
+2 m v2 −m g (y −y1),
+12
+
+
+which leads to
+v =
+p
+2 g √y −y0,
+y0 ≡y1 −v2
+1
+2g ,
+and thus
+T(y) =
+1
+√2g
+Z x2
+x1
+dx
+s
+1 + y′(x)2
+y(x) −y0
+.
+The challenge is then to minimize T(y) subject to the constraints
+y(x1) = y1,
+y(x2) = y2.
+1.8
+The Action Principle.
+Let us consider a system consisting of N mass-points with positions {xi}N
+i=1,
+velocities {x′
+i}N
+i=1 and masses mi. Let us assume that the mass-points are moving
+under the influence of a conservative force. Let V (x1, ..., xN) be the potential of
+this conservative force. Then by definition
+fi = ∂V
+∂xi
+,
+is the force acting on particle number i. The kinetic energy of the system of
+particles is
+T(x′
+1, ..., x′
+N) =
+N
+X
+i=1
+1
+2 mi x′2
+i ,
+and the Lagrangian of the system is by definition
+L(x1, ..., xN, x′
+1, ..., x′
+N) = T(x′
+1, ..., x′
+N) −V (x1, ..., xN).
+A position vector
+P = (x1, ..., xN) ∈R3N,
+is a configuration for the system. Let a curve
+P(t) = (x1(t), ..., xN(t)),
+t1 ≤t ≤t2,
+in the configuration space R3N be given. The action of the curve is by definition
+S(P) =
+Z t2
+t1
+dt L(x1(t), ..., xN(t), x′
+1(t), ..., x′
+N(t)).
+The action principle says that the path, P(t), traced out in configuration space
+by a system of mass-points under the influence of conservative forces, is the one
+that is stationary for the action. By definition, this means that for all curves
+q(t) whose size is of order one, ∥q ∥= O(1), we have
+S(P + ϵq) = S(P) + O(ϵ2).
+This approach to dynamics is very different from the usual one where we solve
+Newton’s equations subject to given initial conditions. We will show that they
+are in fact equivalent. The action principle is also called Hamilton’s principle.
+The action principle is the single most important idea in theoretical physics.
+All fundamental physical models are derived from the action principle, this is
+true for both classical physics and quantum physics.
+13
+
+
+1.9
+The Maximum Entropy Principle
+Let x1, ..., xn be random variables with an associated probability distribution
+ρ(x1, ..., xn). Let f1(x1, ..., xn), ..., fp(x1, ..., xn) be functions defined on the space
+of random variables Rn. The functions fj are our observables. Their expectation
+values are as usual defined by
+⟨fj⟩=
+Z
+Rn dV fj(x1, ..., xn) ρ(x1, ..., xn).
+The expectation value of a given observable of course depends on which proba-
+bility distribution ρ, we use. The challenge in statistics is to figure out which
+probability distribution one should use in any given situation. Let us say that we
+for some reason, (guesswork, hearsay, ...) believe that a probability distribution
+ρ0 accurately represents what we currently know about a given system. The
+probability distribution ρ0 is called the prior distribution, or just the prior.
+Let us next assume that we measure the mean values of the observables
+f1, ..., fp and find the values c1, ..., cp. If
+⟨fj⟩0 =
+Z
+Rn dV fj (x1, ..., xn) ρ0(x1, ..., xn) = cj,
+for j = 1, · · · , p, we are satisfied with our choice of prior. It predicts exactly the
+mean values that are observed.
+But we might not be so lucky. Perhaps
+⟨fj⟩0̸ = cj,
+for at least one j.
+Our selected ρ0 is then not the correct one, it predicts
+expectation values that are not observed. The challenge is to modify ρ0 into a
+new distribution ρ that is consistent with all the observed mean values.
+For this purpose we define a functional S(ρ) by
+S(ρ) = −
+Z
+Rn dV ρ ln
+ ρ
+ρ0
+
+.
+S is by definition the relative entropy of the probability distribution ρ with
+respect to ρ0. We will see later that our use of the word entropy here is consistent
+with its usage in thermodynamics.
+The maximum entropy principle states that one should choose the probability
+distribution that maximizes the functional
+S(ρ) = −
+Z
+Rn dV ρ ln
+ ρ
+ρ0
+
+,
+subject to the constraints
+⟨fj⟩=
+Z
+Rn dV fj ρ = cj.
+14
+
+
+2
+The Euler-Lagrange Equations
+From examples given in the previous subsections, it should be clear that extremal
+problems for functionals play an important role in our description of nature. It
+is now time to find a way to solve such problems.
+2.1
+One dependent variable
+Several of the examples involved a functional of the form
+T(y) =
+Z t1
+t0
+dt L(t, y, y′),
+(10)
+with constraints of the form
+y(t0) = y0,
+y(t1) = y1.
+(11)
+Note that the integrand, defining the functional (10), is in the context of the
+calculus of variation sometimes called an integral density, but more often a
+Lagrangian. The inspiration for the second name came originally from from
+applications of the calculus of variation to mechanical systems. Joseph-Louis
+Lagrange reshaped the subject of particle mechanics in the 1700’s and has had
+a large influence on how we today think about the subject of mechanics. The
+name Lagrangian for the integral densities defining functionals has subsequently
+migrated to field theory, which forms the foundation for fundamental physics in
+general, and particle physics in particular. In these subjects, the functionals of
+interest are time integrals over a Lagrangian, which itself is the space integral
+over a function, which in this context is called a Lagrangian density. Theories in
+fundamental physics are defined in terms of Lagrangian densities.
+In order to be consistent with the standard usage of the terms Lagrangian
+and Lagrangian density, we call the integrand in one of our functional for the
+Lagrangian, with symbol L, if the integral is over time, and Lagrangian density,
+with symbol L, if the functional is defined by an integral over space and time, or
+over space alone.
+Our challenge is to find a function y(x) that satisfies the constraints (11) and
+which is extremal for (10).
+Let us for a moment return to ordinary calculus. Let f(x) be a function of
+a real variable, and let x = x0 be some fixed value of x. The function f(x) is
+by definition differentiable at x = x0 if for ϵ << 1 and for all h of order one, we
+have
+f(x0 + ϵ h) = f(x0) + ϵ A(x0) h + O(ϵ2).
+(12)
+A(x0) is by definition the derivative of f at x = x0. The point x0 is stationary
+for f(x) if
+f ′(x0) ≡A(x0) = 0.
+(13)
+Thus, at a stationary point we have
+f(x0 + ϵ h) = f(x0) + O(ϵ2).
+(14)
+15
+
+
+We know that for a differentiable function defined on the real line, all extremal
+points of a function f(x) are found among the list of stationary points. Recall
+that extremal points are local or global maximum points or minimum points.
+Inspired by (12), (13) and (14) we say that a functional T is differentiable at
+y if for ϵ << 1 and all η(x) of order one, we have
+T(y + ϵ η) = T(y) + ϵ A(y, η) + O(ϵ2),
+(15)
+where the map
+η →A(y, η),
+is linear in η. This linear map is called the variational derivative of T at y(x),
+and in these lecture notes we denote it by δ T(y), thus
+δT(y)(η) = A(y, η).
+The function y = y(t) is stationary for T(y) iff(if and only if)
+δ T(y) = 0,
+⇕
+δ T(y)(η) = 0
+∀η(x).
+Thus at a stationary point we have
+T(y + ϵ η) = T(y) + O(ϵ2)
+∀η(x).
+Just like in ordinary calculus, extremal points for a functional are found among
+the list of stationary points. In the calculus of variation, the function y + ϵη is
+for any given function η called a variation of the function y.
+Let us now calculate the variational derivative of the functional (10).
+T(y + ϵ η) =
+Z t1
+t0
+dt L(t, y + ϵ η, y′ + ϵ η′)
+=
+Z t1
+t0
+dt {L(t, y, y′) + ∂L
+∂y ϵη + ∂L
+∂y′ ϵ η′ + O(ϵ2)}
+= T(y) + ϵ
+Z t1
+t0
+dt {∂L
+∂y η + ∂L
+∂y′ η′} + O(ϵ2).
+(16)
+The functions y(t) and y(t) + ϵ η(t) must satisfy the constraints (11), only such
+functions are relevant. Thus we have
+y(t0) + ϵ η(t0) = y0 = y(t0)
+⇒
+η(t0) = 0,
+y(t1) + ϵ η(t1) = y1 = y(t1)
+⇒
+η(t1) = 0.
+(17)
+Using integration by parts and (17) we have
+Z t1
+t0
+dt ∂L
+∂y′ η′ = ∂L
+∂y′ η
+
+t1
+t0 −
+Z t1
+t0
+dt d
+dt( ∂L
+∂y′ ) η
+(18)
+= −
+Z t1
+t0
+dt d
+dt( ∂L
+∂y′ ) η.
+16
+
+
+Inserting (18) into (16) we get
+T(y + ϵ η) = T(y) + ϵ
+Z t1
+t0
+dt {∂L
+∂y −d
+dt( ∂L
+∂y′ )} η + O(ϵ2)
+∀η(t).
+Thus, by the definition of the variational derivative (15), we have
+δ T(y)(η) =
+Z t1
+t0
+dt {∂L
+∂y −d
+dt( ∂L
+∂y′ )} η.
+We have the following result; the so-called the fundamental lemma of variational
+calculus.
+lemma
+Let a(t) be a continuous function and assume that
+Z t1
+t0
+dt a(t) η(t) = 0,
+(19)
+for all continuous functions η. Then
+a(t) = 0
+t0 ≤t ≤t1.
+If we apply the lemma (19) we find that y(t) is a stationary point for T iff y(t)
+satisfies the equation
+∂L
+∂y −d
+dt( ∂L
+∂y′ ) = 0.
+This equation is called the Euler-Lagrange equation.
+Example 1. In section 1.4 we discussed the problem of finding a curve which,
+upon rotation around the x-axis, generates a surface of minimal area.
+We observed that such a curve, y(x), minimize the functional
+A(y) = 2 π
+Z x2
+x1
+dx y(x)
+p
+1 + y′(x)2,
+subject to the constraints
+y(x1) = y1,
+y(x2) = y2.
+Just as in ordinary calculus the minimum will be found among the stationary
+points for A.
+Let us therefore find the Euler-Lagrange equation for the functional A. For
+A the Lagrangian density is given by
+L = 2 π y
+p
+1 + y′2.
+(20)
+Thus
+∂L
+∂y = 2 π
+p
+1 + y′2,
+∂L
+∂y′ = 2 π y
+y′
+p
+1 + y′2 ,
+17
+
+
+and therefore the Euler-Lagrange equation is
+2 π
+p
+1 + y′2 −d
+dt(2 π y
+y′
+p
+1 + y′2 ) = 0.
+(21)
+Any stationary point y(x) is a solution to this equation. Equation (21) is a
+highly nonlinear second order differential equation. In fact, the Euler-Lagrange
+equation will always be second order for functionals of the form (10).
+Note that the Lagrange density L, in formula (20), defining the functional (10),
+is not totally general since it does not depend explicitly on x.
+For such Lagrangians densities we have in general
+d
+dx(y′ ∂L
+∂y′ −L) = y′′ ∂L
+∂y′ + y′ d
+dx( ∂L
+∂y′ )
+−∂L
+∂y y′ −∂L
+∂y′ y′′ = y′ ( d
+dx( ∂L
+∂y′ ) −∂L
+∂y′ ) = 0,
+where we in the last step used the Euler-Lagrange equation.
+This calculation shows that for an L that does not explicitly depends on x, any
+extremal of A is a solution to the following first order differential equation
+y′ ∂L
+∂y′ −L = c,
+(22)
+where c is a constant.
+The reduction of order for such special Lagrangian
+densities is not just a lucky break. Behind this result, there is a hugely important
+mathematical machine called Noether’s theorem. It will give similar reductions
+of order in many other unrelated situations.
+Noether’s theorem has for almost a century been at the center of the action
+in theoretical physics, both quantum and classical. In quantum theory Noether’s
+theorem, in the form of the gauge principle, is used to derive all the fundamental
+equations in elementary particle physics. These equations, taken together, form
+what is modestly called the Standard Model. This model has predicted the
+outcome of all experiments in fundamental physics since the 1970’s. It is the
+most accurate theory of nature ever created, and it all flows from Noether’s
+theorem.
+Using (22) for the Lagrangian density (20), we get
+y′ 2 π y
+y′
+p
+1 + y′2 −2 π y
+p
+1 + y′2 = c,
+⇕
+−
+y
+p
+1 + y′2 = c1 ≡
+c
+2 π .
+(23)
+Since y(x) from section 1.4 is positive, equation (23) can have solutions only
+if c1 < 0. We can therefore, without loss og generality, write c1 = −α, where
+18
+
+
+α > 0. Using this we have
+y
+p
+1 + y′2 = α,
+⇕
+y2 = α2 (1 + y′2),
+⇕
+y′2 = ( y
+α)2 −1,
+⇕
+y′ = ±
+r
+( y
+α)2 −1.
+(24)
+Equation (24) is separable and can be solved. The general solution is
+y(x) = α cosh
+ x
+α + β
+
+α > 0, β ∈R,
+(25)
+where the constants α and β are determined from the conditions
+y(x1) = y1,
+y(x2) = y2.
+A graph of functions of the type (25) is called a Catenary.
+By construction, functions of the type (25) are stationary points for the area
+functional A(y). In ordinary calculus we use the second derivative test in order
+to decide if a stationary point is a local maximum or a local minimum. Global
+maximum or minimum will be found among the local maximums or minimums
+or at points where the function is singular (not differentiable). This is true
+assuming there are no boundary points. If there are boundary points, maximum
+and minimum can occur there also.
+The same rules apply here in the calculus of variation, which is the official name
+for what we are doing. We will however not develop the theory further in this
+direction and will not discuss the second variational derivative.
+The problem of deciding whether a given stationary point gives a global
+minimum or a global maximum must be investigated in each separate case.
+Solving this problem can be highly non-trivial.
+For the stationary points (25), it is easy easy to verify that a Catenary passing
+through the point (x1, y1) is given by
+y(x) = α cosh
+x −x1
+α
++ cosh−1(y1
+α )
+
+.
+In order to make sure that y(x) also pass through the point (x2, y2) we must
+find an α such that
+α cosh
+x2 −x2
+α
++ cosh−1(y1
+α )
+
+= y2.
+This is a transcendental equation for α and depending on coordinates, (x1, y1), (x2, y2)
+. It might have no positive solutions or several positive solutions.
+19
+
+
+The following cases are known to occur
+i)
+There exists no Catenary connecting the points (x1, y1) and (x2, y2),
+ii) There exists exactly one Catenary connecting (x1, y1) and (x2, y2),
+iii) There exists exactly two Catenaries connecting (x1, y1) and (x2, y2).
+In case ii) the unique Catenary is neither a global nor local minimum. In case
+iii) one of the solutions is a local minimum, and this is also a global minimum,
+if y1 is large enough in a certain sense. Thus a surface of revolution of minimum
+area exists only in case iii) and only if y1 is large enough.
+Clearly, the Euler-Lagrange equation only gives stationary points and these
+points are in general not even local maximum or minimum.
+However, recall that in some cases, like the action principle, we are only looking
+for stationary points.
+Example 2. The Brachistochrone, from section 1.7, is defined to be the minimum
+of the functional
+T(y) =
+1
+√2 g
+Z x2
+x1
+dx (1 + y′2
+y −y0
+)
+1
+2 .
+Thus, the Lagrangian density for this problem is
+L =
+1
+√2 g (1 + y′2)
+1
+2 (y −y0)−1
+2 .
+(26)
+Observe that the Lagrangian density(26) does not depend explicitly on the
+independent variable x. Therefore, using the result from (22), we know that any
+extremal of the functional T is a solution to the following first order ODE
+y′ ∂L
+∂y′ −L = c,
+(27)
+Differentiating L we get
+∂L
+∂y′ =
+1
+√2 g y′ (1 + y′2)−1
+2 (y −y0)−1
+2 ,
+(28)
+and inserting (28) into (27) we get
+y′ ∂L
+∂y′ −L = c,
+⇕
+y′2 (1 + y′2)−1
+2 (y −y0)−1
+2 −(1 + y′2)
+1
+2 (y −y0)−1
+2 = c1 ≡c
+p
+2 g,
+⇕
+y′2 = 1 + y′2 + c1 (1 + y′2)
+1
+2 (y −y0)
+1
+2 ,
+⇕
+c1 (1 + y′2)
+1
+2 (y −y0)
+1
+2 = −1.
+(29)
+20
+
+
+For there to be a solution we must have c1 < 0. Let c1 = −β, β > 0. From (29)
+we then get
+(1 + y′2)
+1
+2 (y −y0)
+1
+2 = 1
+β ,
+⇕
+1 + y′2 =
+1
+β2 (y −y0),
+⇕
+y′2 = 1 −β2 (y −y0)
+β2 (y −y0)
+,
+⇕
+y′ = (α2 −(y −y0)
+y −y0
+)
+1
+2
+α2 = 1
+β2 > 0,
+(30)
+where we have used the positive root since we know that for the current example
+y′ > 0.
+The equation (30) is separable, and we get the following implicit solution
+Z
+dy (
+y −y0
+α2 −(y −y0))
+1
+2 = x + c,
+(31)
+where c is an arbitrary integration constant.
+The integral in (31) can be solved using a trigonometric substitution
+y −y0 = α2 sin2 θ
+2.
+(32)
+Inserting (32) into (31) give us
+α2
+Z
+dθ sin2 θ
+2 = x + c,
+⇕
+1
+2 α2 (θ −sin θ) = x + c.
+Thus our solution is
+x = 1
+2 α2 (θ −sin θ) −c,
+y = y0 + 1
+2 α2 (1 −cos θ).
+This is a parametric representation of a type of curve called a cycloid. One
+can show that there is a unique cycloid passing through any pair of points
+(x1, y1), (x2, y2) with y1 < y2 and that the unique cycloid is a global minimum
+for the propagation time functional T(y).
+2.2
+Several dependent variables
+Several of our examples involved functionals of the general form
+T(y1, ..., yn) =
+Z t1
+t0
+dt L(t, y1, ..., yn.y′
+1, ..., y′
+n).
+21
+
+
+By analogy with multi-variable calculus, we consider independent variations
+yi + ϵηi for all the functions {yi(x)}n
+i=1. Proceeding like for the case of one
+function, we get
+T(y1 + ϵ η1, ..., yn + ϵ ηn)
+=
+Z t1
+t0
+dtL(t1, y1 + ϵ η1, ..., yn + ϵ ηn, y′
+1 + ϵ η′
+1, ..., y′
+n + ϵ η′
+n)
+=
+Z t1
+t0
+dt {L(t1, y1, ..., yn, y′
+1, ..., y′
+n) + ∂L
+∂y1
+ϵ η1
++ ... + ∂L
+∂yn
+ϵ ηn + ∂L
+∂y′
+1
+ϵ η′
+1 + ... + ∂L
+∂y′n
+ϵ η′
+n}
++ O(ϵ2)
+= T(y1, ..., yn)
++ ϵ
+Z t1
+t0
+dt {( ∂L
+∂y1
+−d
+dt( ∂L
+∂y′
+1
+)) η1 + ... + ( ∂L
+∂yn
+−d
+dt( ∂L
+∂y′n
+)) ηn} + O(ϵ2),
+where we in the last step has used integration by parts and the fact that
+ηj(t0) = ηj(t1) = 0
+j = 1, 2, ..., n,
+(33)
+The relations (33) follows from the fact we have constraints
+yj(t0) = y0
+j ,
+yj(t1) = y1
+j ,
+by an argument that is identical to the one in equation (17). A stationary point
+for the functional T(y1, ..., yn) is determined by the condition that
+Z t1
+t0
+dt {( ∂L
+∂y1
+−d
+dt( ∂L
+∂y′
+1
+)) η1 + ... + ( ∂L
+∂yn
+−d
+dt( ∂L
+∂y′n
+)) ηn}
+= 0,
+for all functions {ηi}n
+i=1.
+Since there by assumption are no dependencies
+among the functions ηi(t), we conclude, using the fundamental lemma (19),
+that (y1, ..., yn) is a stationary point for T(y1, ..., yn) only if
+∂L
+∂yi
+−d
+dt( ∂L
+∂y′
+i
+) = 0
+i = 1, 2, ..., n.
+(34)
+These are the Euler-Lagrange equations for the functional T(y1, ..., yn). Observe
+that, in general, (34) are n coupled non-linear second order differential equations.
+Example 3. In 1.1. we found that the problem of finding the shortest curve in
+the plane, connecting two fixed points p = (x0, y0) and q = (x1, y1), amounted
+to minimizing the functional
+T(x, y) =
+Z 1
+0
+dt
+p
+x′2 + y′2,
+subject to the constraints
+(x(0), y(0)) = p,
+(x(1), y(1)) = q.
+22
+
+
+The Lagrangian density is
+L(x, y) =
+p
+x′2 + y′2.
+Observe that
+∂L
+∂x = 0,
+∂L
+∂y = 0,
+∂L
+∂x′ =
+x′
+p
+x′2 + y′2 ,
+∂L
+∂y′ =
+y′
+p
+x′2 + y′2 .
+Thus the Euler-Lagrange equations are
+d
+dt(
+x′
+p
+x′2 + y′2 ) = 0,
+⇕
+x′
+p
+x′2 + y′2 = c1,
+d
+dt(
+y′
+p
+x′2 + y′2 ) = 0,
+⇕
+y′
+p
+x′2 + y′2 = c2.
+(35)
+From (35) we find that
+dy
+dx =
+dy
+dt
+dx
+dt
+= c2
+c1
+,
+⇕
+y = c2
+c1
+x + c3,
+and the curve passing through p and q is
+y(x) = y1 −y0
+x1 −x0
+(x −x0) + y0.
+This is a straight line and is evidently the curve of minimal length. We of course
+already knew that the straight line is the shortest curve connecting two points
+in the plane.
+In 1.2 we asked the same question for two points on a surface in R3. Here the
+answer is not obvious, a straight line in R3 will not work unless S is a plane.
+We are in some sense seeking a curve on a general curved surface that is the
+analogy of straight lines in R3.
+When the family of such curves has been found we can use them to construct
+analogues of triangles, squares etc., on the curved surface and ask geometrical
+questions like: What is the sum of the internal angles of a triangle on a given
+surface S? We can in fact develop a whole analogue to Euclidean geometry for
+plane figures, for any surface, not only plane surfaces.
+This has been done for many kind of surfaces and is of obvious practical
+importance for the case of a sphere. (Fuel efficient long distance transport)
+23
+
+
+Example 4. In section 1.6 we introduced the Fermat principle determining the
+light-rays in a material of variable refractive index.
+The functional was
+T(x, y, z) =
+Z 1
+0
+dt n(x(t), y(t), z(t))
+p
+x′2(t) + y′2(t) + z′2(t).
+The Lagrangian is
+L = n(x, y, z)
+p
+x′2 + y′2 + z′2 = n∥x′∥
+Observe that
+∂L
+∂x = ∂xn∥x′∥,
+∂L
+∂x′ = n x′
+∥x′∥,
+∂L
+∂y = ∂yn∥x′∥,
+∂L
+∂y′ = n y′
+∥x′∥,
+∂L
+∂z = ∂zn∥x′∥,
+∂L
+∂z′ = n z′
+∥x′∥.
+The Euler-Lagrange equations are
+∂xn∥x′∥−d
+dt( n x′
+∥x′∥) = 0,
+(36)
+∂yn∥x′∥−d
+dt( n y′
+∥x′∥) = 0,
+∂zn∥x′∥−d
+dt( n z′
+∥x′∥) = 0.
+Consider the case of a homogeneous medium where n(x, y, z) = n0. For this case
+(36) simplifies into
+d
+dt( x′
+∥x′∥) = 0,
+⇕
+dx
+dt = c1 ∥x′∥,
+d
+dt( y′
+∥x′∥) = 0,
+⇕
+dy
+dt = c2 ∥x′∥,
+d
+dt( z′
+∥x′∥) = 0,
+⇕
+dz
+dt = c3 ∥x′∥.
+24
+
+
+Using x as a new independent variables assuming c1̸ = 0 we get in the usual way
+dy
+dx =
+dy
+dt
+dx
+dt
+= c2
+c1
+,
+⇕
+y = c2
+c1
+x + c4,
+dz
+dx =
+dz
+dt
+dx
+dt
+= c3
+c1
+,
+⇕
+z = c3
+c1
+x + c5.
+Thus the light-rays in a homogeneous medium are straight lines. We of course
+know this from elementary physics.
+For the general case, we introduce path-length as a new parameter
+s(t) =
+Z t
+t0
+dt′ ∥x′(t′)∥.
+Using this as our curve parameter we have, using the chain rule, that
+d
+dt = ∥x′∥d
+ds.
+Thus we have
+∂xn ∥x′∥−d
+dt( n x′
+∥x′∥) = 0,
+⇕
+∂xn ∥x′∥−d
+dt( n
+∥x′∥
+dx
+dt ) = 0,
+⇕
+∂xn ∥x′∥−∥x′∥d
+ds( n
+∥x′∥∥x′∥d
+ds) = 0,
+⇕
+∂xn∥x′∥−∥x′∥d
+ds(n dx
+ds ) = 0,
+⇕
+∂xn −d
+ds(n dx
+ds ) = 0.
+We rewrite the other two Euler-Lagrange equations in the same way. Collecting
+the three scalar equations into one vector equation we have
+d
+ds(n dx
+ds ) = ∇n.
+(37)
+This is the fundamental equation for ray optics.
+We are not going to solve this equation but will make a general observation.
+25
+
+
+Since we are using path-length parametrization, the tangent vector
+T = dx
+ds ,
+is a unit vector. This means that
+T · T = 1,
+⇕
+dT
+ds · T = 0,
+⇕
+α · T = 0,
+where α = dT
+ds is the curvature vector for the curve x(s). It is normal to the
+curve and points in the direction in which the curve bends
+Figure 12: Unit tangent T and curvature vector α, for a light ray.
+From the fundamental equation for ray optics (37) we have
+dn
+ds T + n dT
+ds = ∇n,
+⇓
+α = ∇n
+n
+−d
+ds(ln n) T,
+⇓
+0 < α · α = 1
+n α · ∇n,
+⇓
+α · ∇n > 0.
+Thus the curvature vector for the light-ray points in the direction of increasing
+refractive index. This means that light-rays in an inhomogeneous medium always
+curve towards regions of higher refractive index. This fact has many important
+physical consequences. Hot air close to the ground is less dense and has lower
+refractive index than the higher colder air. The light coming from the sky will
+therefore bend upwards, The sky will appear as ”water” on the ground to an
+observer. This is illustrated in figure 13.
+Another consequence of practical importance is that light rays will be confined
+to move within a region of higher refractive index. Optical fibers, which form
+the physical backbone of the internet, work because of this fact.
+26
+
+
+Figure 13: Explaining the occurrence of a Mirage using ray optics.
+Example 5. In 1.8. we introduced the action principle for a system of mass-
+points moving under the influence of conservative forces.
+The action functional was
+S(x1, ..., xN) =
+Z t1
+t0
+dt {T(x′
+1(t), ..., x′
+N(t)) −V (x1(t), ..., xN(t))},
+(38)
+where T is the kinetic energy of the system of mass-points and V is the potential
+determining the conservative forces.
+The Lagrangian is thus
+L = 1
+2
+n
+X
+i=1
+mi x′2
+i −V (x1, ..., xn).
+(39)
+Observe that
+∂L
+∂xi
+= −∂V
+∂xi
+,
+∂L
+∂x′
+i
+= mi x′
+i,
+and thus the Euler-Lagrange equations are
+∂L
+∂xi
+−d
+dt( ∂L
+∂x′
+i
+) = 0
+i = 1, ..., n ,
+⇕
+−∂V
+∂xi
+−mi x′′
+i = 0,
+⇕
+mi x′′
+i = −∂V
+∂xi
+≡fi.
+This is Newton’s law for n mass-points, mi, moving under the influence of
+conservative forces
+fi = −∂V
+∂xi
+.
+Note that the Lagrangian (39) does not depend explicitly on time. Let
+E =
+n
+X
+i=1
+x′
+i · ∂L
+∂x′
+i
+−L.
+27
+
+
+Then, using the Euler-Lagrange equation we have
+dE
+dt =
+n
+X
+i=1
+{x′′
+i · ∂L
+∂x′
+i
++ x′
+i · d
+dt( ∂L
+∂x′
+i
+)}
+−
+n
+X
+i=1
+{ ∂L
+∂xi
+· x′
+i −∂L
+∂x′
+i
+· x′′
+i }
+=
+n
+X
+i=1
+x′
+i · { d
+dt( ∂L
+∂x′
+i
+) −∂L
+∂xi
+} = 0,
+and thus E is a constant of the motion for any solution of the Euler-Lagrange
+equation, and therefore for any stationary point for the action functional (38).
+Note that
+E =
+n
+X
+i=1
+x′
+i · (mi x′
+i) −
+n
+X
+i=1
+1
+2 mi x2
+i + V
+= 1
+2
+n
+X
+i=1
+mi x′2
+i + V = T + V.
+(40)
+Thus, the conserved quantity is as expected the total energy of the system of
+mass-points. The function E in (40) is called the Hamiltonian for the system
+and is traditionally written using the letter H. Thus
+L = T −V
+-Lagrangian,
+H = T + V
+-Hamiltonian.
+As we have just seen, the action principle leads to Euler-Lagrange equations that
+are equivalent to Newton’s law. Thus from this point of view, nothing appears
+to have been gained from using the action principle.
+However, the action principle, when it is taken together with the theory of
+canonical transformations, is a much more efficient tool for solving mechanical
+problems that Newton’s law.
+Also, insights gained from the use of the action principle in mechanics played
+a major role in the development of quantum mechanics. Because of this, the
+action principle plays an important and ever increasing role in theoretical (and
+practical!) physics today.
+2.3
+Constraints
+Let us consider the general problem of finding the extremum of a functional
+T(y) =
+Z t1
+t0
+dt L(t, y, y′),
+(41)
+subject to the constraint
+J(y) =
+Z t1
+t0
+dt j(t, y, y′) = c.
+(42)
+28
+
+
+We solve this problem using the Lagrange multiplier approach. Let us recall how
+this approach works for the case of function on Rn.
+For this case, f : Rn →R, g : Rn →R are functions on Rn. The challenge
+is to find a stationary point of f subject to the constraint
+g(x1, ..., xn) = c.
+(43)
+In calculus one proves that stationary points for the function f under the
+constraint (43), defined by the function g, can be found by introducing a new
+function
+h(x1, ..., xn) = f(x1, ..., xn) + λ (g(x1, ..., xn) −c),
+and then seek an unconstrained stationary point for h. The parameter λ is called
+a Lagrange multiplier.
+We thus solve the equation
+∇h = 0,
+⇕
+∇(f + λ (g −c)) = 0,
+⇕
+∇f = −λ ∇g.
+The value for λ is chosen so that the constraint
+g(x1, ..., xn) = c.
+is satisfied.
+The exact same approach works for constrained variational problems. We will
+not prove this fact.
+Thus in order to find a stationary point for the functional (41) subject to the
+constraint (42), we introduce the new functional
+K(y) = T(y) + λ (J(y) −c),
+and find the unconstrained stationary points for K. Using the notation δR for
+the variational derivatives of a functional R, we have
+δK = 0,
+⇕
+δ T + λ δ J = 0.
+(44)
+The value of the Lagrange multiplier is chosen so that
+J(y∗) = c,
+where y∗is a solution of (44). Observe that we have
+K(y) =
+Z t1
+t0
+dt L(t, y, y′) + λ (
+Z t1
+t0
+dt j(t, y, y′) −c)
+=
+Z t1
+t0
+dt {L(t, y, y′) + λ (j(t, y, y′) −c
+T )},
+29
+
+
+where T = t1 −t0. Thus the Lagrangian for K is
+L∗= L + λ (j −c
+T ).
+Stationary points for the functional K are as usual solutions to the corresponding
+Euler-Lagrange equations
+∂L∗
+∂y −d
+dt(∂L∗
+∂y′ ) = 0.
+The Euler-Lagrange equation is here a scalar ODE of second order, and therefore
+the general solution contains two integration constants. These two integration
+constants, together with λ, are determined by the following three constraints
+y(t0) = y0,
+y(t1) = y1,
+J(y) = c.
+This procedure can obviously be extended to any number of constraints and
+any number of dependent variables: If we want to find stationary points for the
+functional
+T(y1, ..., yn) =
+Z t1
+t0
+dt L(t, y1, ..., yn, y′
+1, ..., y′
+n),
+subject to the constraints
+Jp(y1, ..., yn) = cp
+p = 1, ..., m ,
+where
+Jp(y1, ..., yn) =
+Z t1
+t0
+dt jp(t, y1, ..., yn, y′
+1, ..., y′
+n),
+we solve the Euler-Lagrange equation for the functional
+K(y1, ..., yn) = T(y1, ..., yn) +
+X
+p
+λp (Jp(y1, ..., yn) −cp).
+The Lagrangian corresponding to K is
+L∗= L +
+X
+p
+λp (jp −cp
+T ),
+where T = t1 −t0. The 2n integration constants, together with the m Lagrange
+multipliers {λp}m
+p=1, are determined by the conditions
+yi(t0) = y0
+i
+yi(t1) = y1
+i
+)
+i = 1, ..., n ,
+Jp(y1, ..., yn) = cp
+p = 1, ..., m .
+30
+
+
+Example 6. Let us consider the isoperimetric problem from section 1.3. The
+solution to this problem was there reduced to maximizing the functional
+2 T =
+Z 1
+0
+dt (x(t) y′(t) −y(t) x′(t)),
+subject to the constraint
+J =
+Z 1
+0
+dt
+p
+x′(t)2 + y′(t)2 = L∗.
+We introduce the Lagrangian
+L = x y′ −y x′ + λ (
+p
+x′2 + y′2 −L∗),
+and observe that
+∂L
+∂x = y′,
+∂L
+∂y = −x′,
+∂L
+∂x′ = −y +
+λ x′
+p
+x′2 + y′2 ,
+∂L
+∂y′ = x +
+λ y′
+p
+x′2 + y′2 .
+The Euler-Lagrange equations are then
+∂L
+∂x −d
+dt( ∂L
+∂x′ ) = 0,
+⇕
+y′ −d
+dt(−y +
+λ x′
+p
+x′2 + y′2 ) = 0,
+(45)
+and
+∂L
+∂y −d
+dt( ∂L
+∂y′ ) = 0,
+⇕
+−x′ −d
+dt(x +
+λ y′
+p
+x′2 + y′2 ) = 0.
+(46)
+Equations (45) and (46) can be integrated once to yield
+2 y −
+λ x′
+p
+x′2 + y′2 = c1,
+2 x +
+λ y′
+p
+x′2 + y′2 = c2,
+⇕
+y −c1
+2 = 1
+2
+λ x′
+p
+x′2 + y′2 ,
+(47)
+x −c2
+2 = −1
+2
+λ y′
+p
+x′2 + y′2 .
+31
+
+
+Squaring and adding the two equations (47) we get
+(y −c1
+2 )2 + (x −c2
+2 )2 = 1
+4 λ2,
+(48)
+which we recognize to be the equation for a circle. Thus all extremals are circles.
+The radius of the circle (48) is R = 1
+2 λ. Thus the constraint is satisfied if
+2 π R = L∗,
+⇕
+λ = L∗
+π .
+2.4
+Several independent variables
+Consider a functional of the form
+T(u) =
+Z
+D
+dx dy L(x, y, u, ux, uy).
+The challenge is to find the stationary points for T subject to the constraint
+u |∂D= f.
+We proceed like before by introducing a variation
+v = u + ϵ η,
+η = η(x, y),
+where, as always, the η is assumed to be of order one, and ϵ is a small quantity.
+Observe that since the boundary condition has to be fixed we have
+v |∂D= u |∂D +ϵ η |∂D= f ⇒η |∂D= 0.
+(49)
+For the functional T we now have
+T(u + ϵ η) =
+Z
+D
+dx dy L(x, y, u + ϵ η, ux + ϵ ηx, uy + ϵ ηy)
+=
+Z
+D
+dx dy {L(x, y, u, ux, uy) + ∂L
+∂u ϵ η + ∂L
+∂ux
+ϵ ηx
++ ∂L
+∂uy
+ϵ ηy} + O(ϵ2)
+= T(u) + ϵ
+Z
+D
+dx dy {∂L
+∂u η + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy}
++ O(ϵ2)
+= T(u) + ϵ
+Z
+D
+dx dy {∂L
+∂u −∂x( ∂L
+∂ux
+) −∂y( ∂L
+∂uy
+)} η
++ O(ϵ2),
+where we in the last step have used Green’s theorem in divergence form and the
+boundary condition (49) on η.
+Using the fundamental lemma we conclude that u is a stationary point for T
+iff it satisfies the following Euler-Lagrange equation.
+∂L
+∂u −∂x( ∂L
+∂ux
+) −∂y( ∂L
+∂uy
+) = 0.
+32
+
+
+Example 7. In section 1.5 we introduced the notion of a minimal surface. We
+consider here the simplified situation where the surface is the graph of a function
+u(x, y) over a domain D in the plane. The challenge is to minimize the functional
+T(u) =
+Z
+D
+dx dy
+q
+1 + u2x + u2y,
+subject to the constraint
+u |∂D= h(x, y).
+The Lagrangian density is
+L =
+q
+1 + u2x + u2y,
+and we have
+∂L
+∂u = 0,
+∂L
+∂ux
+=
+ux
+q
+1 + u2x + u2y
+,
+∂L
+∂uy
+=
+uy
+q
+1 + u2x + u2y
+.
+The Euler-Lagrange equation is thus
+−∂x
+ux
+q
+1 + u2x + u2y
+−∂y
+uy
+q
+1 + u2x + u2y
+= 0,
+which can be rewritten as
+uxx + uyy = 2uxuyuxy −u2
+xuyy −u2
+yuxx
+(50)
+The boundary condition for u is
+u |∂D= h.
+The equation (50) is a non-linear second order partial differential equation and
+is not by any means easy to solve.
+However, if the boundary curve is horizontal
+h(x, y) = h0,
+the boundary value problem clearly has the unique solution
+u(x, y) = h0,
+(x, y) ∈D.
+This is flat and is obviously of minimum area among all surfaces with flat
+boundary curve h = h0. If the boundary curve is not constant but varies little
+on the scale of h0
+h = h0 + ϵ k
+ϵ << 1,
+33
+
+
+we seek a solution that is a small modification of u(x, y) = h0
+u(x, y) = h0 + ϵ v
+ϵ << 1.
+The function v must then satisfy the equation
+vxx + vyy = ϵ2(2vxvyvxy −v2
+xvyy −v2
+yvxx).
+This equation we can solve approximately using a perturbation expansion. Ex-
+pansions of this type will be discussed later in these lecture notes.
+Example 8. In section 1.9 we introduced the maximum entropy principle. The
+aim of this section is to derive the maximum entropy distribution by solving the
+corresponding Euler-Lagrange equation. It turns out that special cases of the
+resulting probability distribution form the foundation for statistical mechanics
+and thermodynamics, information theory and probably also elementary particle
+physics through it’s mathematical grounding in quantum field theory. The
+current section is an excerpt of a more detailed treatment of the maximum
+entropy principle given in an Appendix.
+As you recall, the maximum entropy principle states that, if what we known
+about a system S, prior to a measurement, is described by a probability dis-
+tribution ρ0, and we measure the mean cj, of p observables fj, for S, then the
+probability distribution that best incorporates this new information about the
+system, is the one that maximizes the functional
+S(ρ) = −
+Z
+Rn dV ρ ln
+ ρ
+ρ0
+
+,
+(51)
+under the constraints
+⟨fj⟩=
+Z
+Rn dV f(x1, ..., xn) ρ(x1, ..., xn) = cj.
+Since ρ must be a probability distribution we have one more constraint
+⟨1⟩=
+Z
+Rn dV ρ(x1, ..., xn) = 1,
+and we thus have p+1 constraints and therefore introduce an extended functional
+T(ρ) = S(ρ) + λ0 ⟨1⟩+
+p
+X
+j=1
+λj ⟨fj⟩
+Note that we could have written
+T(ρ) = S(ρ) + λ0 (⟨1⟩−1) +
+p
+X
+j=1
+λj (⟨fj⟩−cj),
+in order to make the values of the constraints explicit, like we have done on
+previous occasions. However, all constant terms vanish when we take variational
+derivative, so we might as well drop them.
+34
+
+
+The Lagrangian density corresponding to the extended functional T(ρ) is
+then
+L = −ρ ln
+ ρ
+ρ0
+
++ λ0 ρ +
+p
+X
+j=1
+λj fj ρ
+Observe that L does not depend on any derivatives of ρ. The Euler-Lagrange
+equation for T is therefore simply
+∂L
+∂ρ = 0,
+⇕
+−ln
+ ρ
+ρ0
+
+−1 + λ0 +
+p
+X
+j=1
+λjfj = 0,
+⇕
+ρ = ρ0
+Z exp
+
+X
+j
+λj fj
+
+,
+where we have defined Z = exp(1 −λ0). In order for the constraint ⟨1⟩= 1 to
+be satisfied, we must have
+⟨1⟩= 1,
+⇕
+Z
+Rn dV ρ0
+Z exp
+
+X
+j
+λj fj
+
+= 1,
+⇕
+Z = Z(λ1, ..., λp) =
+Z
+Rn dV ρ0 exp
+
+
+
+X
+j
+λj fj
+
+
+,
+and the stationary distribution is
+ρ(x1, ..., xn) = ρ0(x1, ..., xn)
+Z(λ1, ..., λp) exp
+
+
+p
+X
+j=1
+λj fj(x1, ..., xn)
+
+.
+(52)
+ρ is called the maximum entropy distribution and Z is the partitionfunction.
+Note that we have not proved that it in fact is the distribution that gives a
+maximum for S, but this can be done.
+The Lagrange multipliers λ1, ..., λp are chosen so that all the constraints are
+satisfied
+⟨fj⟩=
+Z
+Rn dV fj(x1, ..., xn) ρ(x1, ..., xn) = cj
+j = 1, ..., p .
+(53)
+35
+
+
+The system of equations (53) consists of p equations for the p quantities λj. As
+it turns out, we almost never need to know the distribution ρ from (52), it is
+enough to know the partition function. Observe that
+⟨fj⟩=
+Z
+Rn dV fj ρ
+(54)
+= 1
+Z
+Z
+Rn dV fj ρ0 exp
+
+
+p
+X
+i=1
+λifi
+
+
+= 1
+Z
+Z
+Rn dV ∂λj{ρ0 exp
+
+
+p
+X
+i=1
+λifi
+
+}
+= 1
+Z ∂λj
+Z
+Rn dV ρ0 exp
+
+
+p
+X
+i=1
+λifi
+
+
+= 1
+Z ∂λjZ = ∂λj ln Z,
+and thus we can find the mean of all the quantities fj by taking partial derivatives
+of the partition function with respect to the Lagrangian multipliers. Moreover,
+we also have
+∂λjλk ln Z = ∂λj( 1
+Z ∂λkZ)
+= −1
+Z2 ∂λjZ ∂λkZ + 1
+Z ∂λjλkZ
+= −∂λj ln Z ∂λk ln Z + 1
+Z
+Z
+Rn dV fj fk ρ0 exp
+
+X
+i
+λi fi
+
+
+= −∂λj ln Z ∂λk ln Z + ⟨fj fk⟩.
+Thus
+⟨fj fk⟩= ∂λj ln Z ∂λk ln Z + ∂λj λk ln Z
+In a similar way all correlation coefficients
+
+f n1
+1 ...f np
+p
+
+can be expressed
+through derivatives of the partition function.
+Let us consider the special case when our underlying space is the classical state
+space for a mechanical system with n degrees of freedom. This could for example
+consist of n mass points. We thus have a state space R6n since we need 3
+position coordinates x = (x1, x2, x3), and 3 velocity coordinates v = (v1, v2, v3),
+or equivalently three momentum coordinates p = mv, for each particle in order
+to uniquely specify the state of the system.
+Let H = H(x1, ..., xn, p1, ..., pn) be the Hamiltonian for the system of mass
+points. Recall that the value of the Hamiltonian on any given state
+(x1, ..., xn, p1, ..., pn), is the total energy of that state.
+When n is large it is very hard, and also mostly useless, to try to track the exact
+state (x1(t), ..., xn(t), p1(t), ..., pn(t)) of a system of mass points.
+For such a large system it is more useful to consider a probability distribution
+ρ(x1, ..., xn, p1, ..., pn) on the state-space. This point of view is in particular
+36
+
+
+useful when we want to find the fundamental equations describing the motion of
+fluids.
+Here we will assume that we have some prior distribution ρ0 and the observation
+of the mean value of the total energy, H, of the system
+⟨H⟩= E.
+Using the maximal entropy principle we are lead to select the following probability
+distribution
+ρ(x1, ..., xn, p1, ..., pn) = ρ0
+Z exp(λ H).
+In this situation one usually redefines λ by writing
+λ = −1
+k T ,
+where k is the Boltzmann constant and T is a new parameter.
+What we then get is the well known Gibb’s ensemble from statistical physics
+ρ =
+ρ0
+Z(T) exp
+
+−1
+kT H
+
+.
+(55)
+The parameter T is determined by
+⟨H⟩= E,
+(56)
+⇕
+k T 2 ∂T ln Z = E,
+where we have used the chain rule
+∂λ = k T 2 ∂T ,
+in the general formula (54).
+The Gibb’s ensemble is the foundation of statistical physics. All results in statis-
+tical physics flows from formula (55). Statistical physics is also the foundation
+of thermodynamics, so all conclusions from that subject also flow from formula
+(55). In this context, T is the temperature of the system of mass-points and (56)
+is nothing but the equation of state.
+An interesting insight here is that the temperature of a thermodynamic
+system is in fact a Lagrange multiplier!! This is a profound insight that to this
+day has not been fully understood or explored.
+An extended discussion of the maximum entropy principle, and how it relates
+to foundational problems in statistical physics, is included in an Appendix.
+From this example, it appears as if it might be useful to think of any
+application of the maximal entropy principle as an extension of the methods
+of statistical mechanics to systems that has absolutely nothing to do with the
+motion of mass points.
+This wide general applicability of the methods of statistical physics has
+also lead to deep questions and insights into the nature and significance of the
+assumption of equilibrium that appears to underline the application of the Gibb’s
+ensemble in statistical physics.
+37
+
+
+There is also the intriguing fact that the very same functional (51) used in
+the maximum entropy principle, is also the foundation of information theory
+which was discovered by Shannon in 1948. This connection between information
+theory and statistical mechanics (and thermodynamics) has lead to deep insights
+into the role of information in our fundamental physical theories.
+The general nature and wide applicability of the maximum entropy principle has
+been described well by E.T. Jaynes in many papers and the monumental book
+”Probability theory: The Logic of Science”.
+As if all this is not impressive enough for one single principle, it is also a very
+intriguing fact that when one looks deep into the heart of fundamental physics,
+in the form of quantum field theory, one again finds an appropriately generalized
+form of the Gibb’s ensemble! The whole computational engine in the theory of
+quantum fields revolve around this generalized Gibb’s ensemble.
+What on earth is going on...
+3
+Equations of Variational Type
+We have seen that stationary points for functionals are solutions to the Euler-
+Lagrange equations corresponding to the functional. The exact structure of the
+Euler-Lagrange equations and their number depends on the functional. We have
+seen several examples of differential equations of the Euler-Lagrange type in the
+previous sections of these lecture notes. For example have we found that the
+differential equations (21) and (50) are of Euler-Lagrange type.
+In this section we will ask which (systems of) differential equations are Euler-
+Lagrange equations for some functional. This is an important question to ask,
+because many structural properties of differential equations can be decided if we
+know that they are Euler-Lagrange equations for some functional.
+Equations that are Euler-Lagrange equations for a functional are said to be
+variational.
+3.1
+Real valued functions
+Example 9. Let T(u) be the functional
+T(u) =
+ZZ
+D
+dx dy (1
+2 u2
+x + 1
+2 u2
+y),
+with a constraint
+u | ∂D = f.
+The Lagrangian density is
+L = 1
+2 u2
+x + 1
+2 u2
+y,
+and we have
+∂L
+∂u = 0,
+∂L
+∂ux
+= ux,
+∂L
+∂uy
+= uy,
+38
+
+
+so the Euler-Lagrange equation is
+∂L
+∂u −∂x( ∂L
+∂ux
+) −∂y( ∂L
+∂uy
+) = 0,
+⇕
+uxx + uyy = 0.
+Thus the 2D Laplace equation is variational. The same is true in 3D or in any
+dimension for that matter. The same is also true for Poisson’s equation in any
+dimension.
+Example 10. Consider the functional
+T(u) =
+Z
+D
+dx dy
+Z t1
+t0
+dt {1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y.}
+We are looking for functions u(x, y, t) that are stationary points with respect to
+variations that vanish on the boundaries to the domain of integration
+Figure 14: The integration domain of the functional whose Euler-Lagrange
+equation is the wave equation.
+T(u + ϵ η) =
+Z
+D
+dx dy
+Z t1
+t0
+dt {1
+2 (ut + ϵ ηt)2 −1
+2 c2 (ux + ϵ ηx)2
+−1
+2 c2 (uy + ϵ ηy)2}
+=
+Z
+D
+dx dy
+Z t1
+t0
+dt {1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y
++ ϵ ut ηt −c2 ϵ ux ηx −c2 ϵuy ηy} + O(ϵ)
+= T(u) + ϵ
+Z
+D
+dx dy
+Z t1
+t0
+dt {ut ηt −c2 ∇u · ∇η}
++ O(ϵ2)
+= T(u) + ϵ {
+Z
+D
+dx dy
+Z t1
+t0
+dt ((ut η)t −utt η)
+−c2
+Z t1
+t0
+dt
+Z
+D
+dx dy (∇· (∇u η) −∇2u η)} + O(ϵ2)
+39
+
+
+⇓
+T(u + ϵ η) = T(u) + ϵ{
+Z
+D
+dx dy (ut η)
+
+t1
+t0 −
+ZZ
+D
+dx dy
+Z t1
+t0
+dt utt η
+−c2
+Z t1
+t0
+dt
+Z
+∂D
+dl η ∇u · n + c2
+Z t1
+t0
+dt
+Z
+D
+dx dy ∇2u η}
++ O(ϵ2)
+= T(u) + ϵ
+Z
+D
+dx dy
+Z t1
+t0
+dt {−utt + c2 ∇2u} η + O(ϵ2),
+where we in the last step have used the boundary conditions for η. Since η(x, y, t)
+is arbitrary within the domain D × [t0, t1] we can use the fundamental lemma
+to conclude that u is a stationary point for T only if
+utt −c2 ∇2u = 0.
+This proves that the 2D wave equation is variational. The same is true for wave
+equations in any number of spatial dimensions.
+Example 11. Consider the functional
+T(u) =
+Z
+D
+dx dy
+Z t1
+t0
+dt {1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y −1
+2 m u2}
+m > 0
+Using the exact same approach as in example 10, it is easy to show that u is
+extremal for variation η vanishing on the boundary of D × [t0, t1] only if
+utt −c2∇2u + m u = 0
+This is the (real) Klein-Gordon equation. Thus the Klein-Gordon equation is
+variational.
+This is all fine, you might say, but where did the functionals in examples 9-11
+come from? Is there a useful general method for deciding if a given (system of)
+differential equations is variational, and to find an appropriate functional if they
+are variational?
+Sadly, no such general method exists. The functionals must be constructed
+by trial and error.
+3.2
+Complex valued functions
+Many important equations in theoretical physics and applied mathematics
+involve complex valued functions. The prime example is of course the quantum
+mechanical Schr¨odinger equation.
+In order to decide whether such equations are variational, or not, we need to
+extend the calculus of variation to functions whose values are complex.
+Example 12. Let us consider the complex second order differential equation
+Att = |A|2 A
+A(t) ∈C.
+(57)
+Introduce the real and imaginary parts of A
+A(t) = u(t) + i v(t).
+(58)
+40
+
+
+Inserting (58) into (57), we get
+utt + i vtt = (u2 + v2) (u + i v).
+Separating real and imaginary parts we get two coupled real equations
+utt = (u2 + v2) u,
+(59)
+vtt = (u2 + v2) v.
+Consider the functional
+T(u, v) =
+Z t1
+t0
+dt (1
+2 u2
+t + 1
+2 v2
+t + 1
+4 u4 + 1
+2 u2 v2 + 1
+4 v4).
+(60)
+The Lagrangian is
+L = 1
+2 u2
+t + 1
+2 v2
+t + 1
+4 u4 + 1
+2 u2 v2 + 1
+4 v2,
+(61)
+and the corresponding Euler-Lagrange equations are
+∂L
+∂u −d
+dt( ∂L
+∂ut
+) = 0,
+⇕
+u3 + v2 u −utt = 0,
+⇕
+utt = (u2 + v2) u,
+∂L
+∂v −d
+dt( ∂L
+∂vt
+) = 0,
+⇕
+v3 + u2 v −vtt = 0,
+⇕
+vtt = (u2 + v2) v.
+This shows that (59) is variational with the corresponding functional defined in
+(60). We could now define a complex equation like (57) to be variational if the
+system of real equations we get when separating into real and imaginary parts is
+variational.
+It would however be better if we could define what it means for a complex
+equation to be variational without first separating it into real and imaginary
+parts.
+Observe that the Lagrangian (61) can be written more compactly as
+L = 1
+2 u2
+t + 1
+2 v2
+t + 1
+4 (u2 + v2)2.
+(62)
+We have
+u + i v = A,
+u −i v = A∗,
+u = 1
+2 (A + A∗),
+v = 1
+2i (A −A∗).
+(63)
+41
+
+
+Inserting (63) into the Lagrangian (62), we get
+L = 1
+8 (At + A∗
+t )2 −1
+8 (At −A∗
+t )2
++ 1
+4 (A A∗)2
+= 1
+8 A2
+t + 1
+4 At A∗
+t + 1
+8 A∗2
+t −1
+8 A2
+t + 1
+4 At A∗
+t
+−1
+8 A∗2
+t + 1
+4 A2 A∗2
+= 1
+2 At A∗
+t + 1
+4 A2 A∗2.
+Since a factor of 2 makes no difference for the Euler-Lagrange equation, we might
+as well use the Lagrangian
+L = At A∗
+t + 1
+2 A2 A∗2.
+(64)
+In this Lagrangian density, A is the only dependent variable. A∗is of course
+calculated by taking the complex conjugate of A. However let us disregard this
+fact and assume that A and A∗can be varied independently.
+Then, any functional of the form
+T(A, A∗) =
+Z t1
+t0
+dt L(A, A∗, At, A∗
+t ),
+for some Lagrangian L, will in the usual way lead to Euler-Lagrange equations
+∂L
+∂A∗−d
+dt( ∂L
+∂A∗
+t
+) = 0,
+∂L
+∂A −d
+dt( ∂L
+∂At
+) = 0.
+For our particular Lagrangian (64) we have
+∂L
+∂A = A A∗2,
+∂L
+∂At
+= A∗
+t ,
+∂L
+∂A∗= A2 A∗,
+∂L
+∂A∗
+t
+= At.
+The Euler-lagrange equations are thus
+A A∗2 −A∗
+tt = 0,
+⇕
+A∗
+tt = |A|2 A∗,
+A2 A∗−Att = 0,
+⇕
+Att = |A|2 A,
+which is our original equation (57) and its complex conjugate.
+Thus, following this formal procedure, where we assume that A and A∗can be
+42
+
+
+varied independently, we have again proved that (57) is variational, and we have
+done this without separating the problem into real and imaginary parts.
+This procedure will always work and its conclusions are equivalent to what
+we get by separating into real and imaginary part.
+However, an important caveat is that we must use this formal procedure only
+for Lagrangians that are real valued. We must thus always make sure that
+L∗= L
+Example 13. Consider the functional
+T(A, A∗) =
+Z
+D
+dx dy
+Z t1
+t0
+dt L(A, A∗, At, A∗
+t , Ax, A∗
+x, Ay, A∗
+y),
+where L = L∗.
+Following the procedure from example 12 with dependent
+variables A and A∗we get the Euler-Lagrange equations
+∂L
+∂A −∂t( ∂L
+∂At
+) −∂x( ∂L
+∂Ax
+) −∂y( ∂L
+∂Ay
+) = 0,
+∂L
+∂A∗−∂t( ∂L
+∂A∗
+t
+) −∂x( ∂L
+∂A∗x
+) −∂y( ∂L
+∂A∗y
+) = 0.
+(65)
+As a matter of fact, we only need one of the equations (65) since the first one is
+just the complex conjugate of the second one.
+Her we choose to use the second equation. Consider the special Lagrangian
+density
+L = At A∗
+t −c2 Ax A∗
+x −c2 Ay A∗
+y −m A A∗.
+(66)
+We have
+∂L
+∂A∗= −m A,
+∂L
+∂A∗
+t
+= At,
+∂L
+∂A∗x
+= −c2 Ax,
+∂L
+∂A∗y
+= −c2 Ay,
+and the Euler -Lagrange equation is
+−m A −Att + c2 Axx + c2 Ayy = 0,
+⇕
+Att −c2 ∇2A + m A = 0.
+This shows that the 2D complex Klein-Gordon equation is variational with
+Lagrangian density defined in (66). The same is true for the 1D and 3D cases.
+Example 14. Consider a Lagrangian density
+L = i ℏ
+2 (ψ∗ψt −ψ ψ∗
+t ) −ℏ2
+2m (ψx ψ∗
+x + ψy ψ∗
+y) −V (x, y) ψ ψ∗.
+(67)
+We evidently have L = L∗. Observe that
+∂L
+∂ψ∗= i ℏ
+2 ψt −V ψ,
+∂L
+∂ψ∗
+t
+= −i ℏ
+2ψ,
+∂L
+∂ψ∗x
+= −ℏ2
+2m ψx,
+∂L
+∂ψ∗y
+= −ℏ2
+2m ψy,
+43
+
+
+and the Euler-Lagrange equation is
+i ℏ
+2 ∂tψ −V ψ −∂t(−ℏ
+2 i ψ)
+−∂x(−ℏ2
+2m ψx) −∂y(−ℏ2
+2m ψy) = 0,
+⇕
+i ℏ∂tψ = −ℏ2
+2m ∇2ψ + V ψ.
+This shows that the Sch¨odinge equation is variational with Lagrangian density
+defined in (67). It is easy to show that the stationary Sch¨odinger equation is
+also variational.
+4
+Noether’s Theorem
+Noether’s theorem creates a one-to-one correspondence between conserved quan-
+tities of variational equations and symmetries of the corresponding functionals.
+The theorem was proved by the mathematician Emmy Noether in 1915. It
+has been described as:
+”One of the most important mathematical theorems ever proved in guiding
+the development of modern physics”
+4.1
+One dependent variable
+Let us introduce the theorem in the simplest possible context. We consider a
+functional of the form
+T(y) =
+Z t1
+t0
+dt L(t, y, y′).
+(68)
+Let us consider some variation
+y →y + ϵ η,
+(69)
+where η = η(t) now is some specific function. Inserting (69) into (68) we get
+T(y + ϵ η) =
+Z t1
+t0
+dt L(t, y + ϵ η, y′ + ϵ η′)
+=
+Z t1
+t0
+dt {L(t, y, y′) + ∂L
+∂y ϵ η + ∂L
+∂y′ ϵ η′} + O(ϵ2)
+= T(y) + ϵ
+Z t1
+t0
+dt {∂L
+∂y η + ∂L
+∂y′ η′} + O(ϵ2).
+We now introduce the key idea of invariance.
+44
+
+
+The functional T(y) is invariant under the variation (69) if there exists a function
+F(t) such that
+∂L
+∂y η + ∂L
+∂y′ η′ = dF
+dt .
+(70)
+If F = 0 we say that the Lagrangian L is invariant.
+Let us next consider a more general variation
+y(t) →y(t) + ϵ(t) η(t),
+(71)
+where T is invariant with respect to the variation (69) and ϵ(t) is a function that
+is numerically small, |ϵ(t)| << 1, vanishes at the boundary points t0 and t1, but
+which is otherwise arbitrary. Inserting the variation (71) into the functional (68)
+we get
+T(y + ϵ η) =
+Z t1
+t0
+dt L(t, y + ϵ η, y′ + ϵ η′ + ϵ′ η)
+=
+Z t1
+t0
+dt {L + ϵ (∂L
+∂y η + ∂L
+∂y′ η′) + η ∂L
+∂y′ ϵ′} + O(ϵ2)
+= T(y) +
+Z t1
+t0
+dt {ϵ dF
+dt −d
+dt(η ∂L
+∂y ) ϵ} + O(ϵ2)
+= T(y) +
+Z t1
+t0
+dt ϵ {dF
+dt −d
+dt(η ∂L
+∂y′ )} + O(ϵ2)
+= T(y) +
+Z t1
+t0
+dt ϵ dj
+dt + O(ϵ2),
+(72)
+where we have used (70) in line three, and where the Noether current j(t) is
+defined to be
+j = F −η ∂L
+∂y′ .
+(73)
+Equation (72) is true for any y(t). In particular it is true for a y(t) that is a
+stationary point for the functional T. But if y is stationary we must have
+T(y + ˜ϵ ˜η) = T(y) + O(˜ϵ2),
+(74)
+for any ˜η of order one and small number ˜ϵ.
+If we let ˜ϵ measure the size of ϵ(t) and define
+˜η(t) = ϵ(t)
+˜ϵ
+η(t),
+then the variation (71) is exactly of the form
+y(t) →y(t) + ˜ϵ ˜η(t).
+(75)
+Therefore, when y is a stationary point for the functional T(y), we must from
+(72) have
+Z t1
+t0
+dt ϵ(t) dj
+dt = 0,
+(76)
+45
+
+
+and this holds for all ϵ(t) that vanishes on the boundaries. The fundamental
+lemma then implies that
+dj
+dt = 0,
+or in other words, the Noether current corresponding to an invariant for a
+functional is conserved for any stationary point of the functional. Such stationary
+y(t)’s satisfy, as we recall, the Euler- Lagrange equations corresponding to the
+functional. This is one instance of Noether’s theorem
+Example 15. Let us consider a functional
+T(y) =
+Z t1
+t0
+dt L(y, y′),
+thus L does not depend explicitly on t.
+We now consider an infinitesimal translation of the variable t
+t →t + ϵ.
+(77)
+The translation (77) induces a corresponding variation of y(t) that we find using
+Taylor’s formula
+y(t) →y(t + ϵ) = y(t) + ϵ y′(t) + ... .
+(78)
+Thus we have a variation of the form (69) with η(t) = y′(t).
+Observe that using this particular variation we have
+∂L
+∂y η + ∂L
+∂y′ η′ = ∂L
+∂y y′ + ∂L
+∂y′ y′′
+= ∂L
+∂t + ∂L
+∂y y′ + ∂L
+∂y′ y′′ = dL
+dt .
+Thus the functional is invariant under the variation (78) because L does not
+depend explicitly on t.
+The conserved Noether current corresponding to the variation (78) is then, from
+(73),
+j = L −y′ ∂L
+∂y′ .
+Let us verify directly that j is indeed conserved. Using the Euler-Lagrange
+equations we have
+dj
+dt = ∂L
+∂y y′ + ∂L
+∂y′ y′′ −y′′ ∂L
+∂y′ −y′ d
+dt( ∂L
+∂y′ )
+= y′ (∂L
+∂y −d
+dt( ∂L
+∂y′ )) = 0.
+Example 16. The motion of a mass-point m under the influence of a conservative,
+time invariant force
+F = −∂V
+∂x ,
+V = V (x),
+46
+
+
+is determined by Newton’s law
+m x′′ = −∂V
+∂x .
+We have seen that this equation is variational with Lagrangian
+L = 1
+2 m x′2 −V (x),
+(79)
+and we observe that L is invariant under time translation because V does not
+depend on time.
+By applying the general result from example 15, we have the following conserved
+Noether current
+j = L −x′ ∂L
+∂x′
+= 1
+2 m x′2 −V (x) −m x′2
+= −(1
+2 m x′2 + V (x)) = −E(t),
+where E(t) is the total energy of the mass-point.
+Thus the energy is conserved because the Lagrangian (79) of the action functional
+does not depend on time and is thus invariant under time translation.
+This link between energy conservation and invariance under time translation
+for the Lagrangians holds in general.
+The reason why energy conservation plays such a prominent role in our
+description of nature is because we insist that our natural laws should look the
+same for all observers, even if they live at different times. This is part of the
+essence of what we mean by the term natural law.
+Thus, energy conservation is not actually a part of nature, but is rather a
+consequence of how we choose to describe nature.
+4.2
+Several dependent variables
+Let us next consider the case when we have several dependent variables
+T(y1, y2, ..., yn) =
+Z t1
+t0
+dt L(t, y1, ..., yn, y′
+1, ..., y′
+n).
+(80)
+We introduce a variation
+yi →yi + ϵ ηi
+i = 1, ..., n ,
+(81)
+47
+
+
+where ηi = ηi(t) is a specific set of n functions and ϵ << 1.
+Inserting the variation (81) into the functional (80) we get
+T(y1 + ϵ η1, ..., yn + ϵ ηn)
+=
+Z t1
+t0
+dt L(t, y1 + ϵ η1, ..., yn + ϵ ηn, y′
+1 + ϵ η′
+1, ..., y′
+n + ϵ η′
+n)
+=
+Z t1
+t0
+dt {L(t, y1, ..., yn, y′
+1, ..., y′
+n) + ∂L
+∂y1
+ϵ η1 + ... + ∂L
+∂yn
+ϵ ηn
++ ∂L
+∂y′
+1
+ϵ η′
+1 + ... + ∂L
+∂y′n
+ϵ η′
+n} + O(ϵ2)
+= T(y1, ..., yn) + ϵ
+Z t1
+t0
+dt { ∂L
+∂y1
+η1 + ... + ∂L
+∂yn
+ηn + ∂L
+∂y′
+1
+η′
+1
++ ... + ∂L
+∂y′n
+η′
+n} + O(ϵ2).
+We now define the functional T to be invariant under the variation (81) if there
+exists a function F(t) such that
+∂L
+∂y1
+η1 + ... + ∂L
+∂yn
+ηn + ∂L
+∂y′
+1
+η′
+1 + ... + ∂L
+∂y′n
+η′
+n = dF
+dt .
+(82)
+If F = 0 we say that the Lagrangian L is invariant.
+Let us next introduce the more general variation
+yi(t) →yi(t) + ϵ(t) ηi(t),
+(83)
+where the functions ϵ(t) satisfies the properties preceding (72).
+Inserting the variation (83) into the functional (80) we get
+T(y1 + ϵ η1, ..., yn + ϵ ηn)
+=
+Z t1
+t0
+dt L(t, y1 + ϵ η1, ..., yn + ϵ ηn, y′
+1
++ ϵ η′
+1 + ϵ′ η1, ..., y′
+n + ϵ η′
+n + ϵ′ ηn)
+=
+Z t1
+t0
+dt (L(t, y1, ..., yn, y′
+1, ..., y′
+n) + ϵ(t) { ∂L
+∂y1
+η1 + ∂L
+∂y′
+1
+η′
+1
++ ... + ∂L
+∂yn
+ηn + ∂L
+∂y′n
+η′
+n} + ϵ′(t){η1
+∂L
+∂y′
+1
++
+... + ηn
+∂L
+∂y′n
+} + O(ϵ2))
+= T(y1, ..., yn) +
+Z t1
+t0
+dt ϵ(t) {dF
+dt −d
+dt(η1
+∂L
+∂y′
+1
++
+... + ηn
+∂L
+∂y′n
+)} + O(ϵ2)
+= T(y1, ..., yn) +
+Z t1
+t0
+dt ϵ(t) dj
+dt + O(ϵ2),
+where the Noether current is
+j = F −η1
+∂L
+∂y′
+1
+−... −ηn
+∂L
+∂y′n
+(84)
+48
+
+
+By an argument identical to (74)-(76) we conclude that the Noether current is
+conserved
+dj
+dt = 0,
+for any solutions to the Euler - Lagrange equations
+∂L
+∂yi
+−d
+dt( ∂L
+∂y′
+i
+) = 0
+i = 1, ..., n .
+This is Noether’s theorem for the functional (80).
+Example 17. Let us consider the Lagrangian
+L = my′
+1y′
+2 −(y1 −2y2)2
+(85)
+The Lagrangian L, does not depend explicitly on time.
+In general, let us consider a Lagrangian of the form L = L(y1, ..., yn, y′
+1, ..., y′
+n),
+which does not depend explicitly on time.
+Observe than an infinitesimal time translation
+t →t + ϵ,
+induces, like in (78), variations of the form
+yi(t) →yi(t) + ϵ y′
+i(t),
+(86)
+and we observe that the functional (80) is invariant under the variation (86)
+∂L
+∂y1
+η1 + ... + ∂L
+∂yn
+ηn + ∂L
+∂y′
+1
+η′
+1 + ... + ∂L
+∂y′n
+η′
+n
+= ∂L
+∂y1
+y′
+1 + ... + ∂L
+∂yn
+y′
+n + ∂L
+∂y′
+1
+y′′
+1 + ... + ∂L
+∂y′n
+y′′
+n
+= dL
+dt .
+Thus we have the following conserved Noether current.
+j = L −y′
+1
+∂L
+∂y′
+1
+−... −y′
+n
+∂L
+∂y′n
+.
+(87)
+Applying this result to our particular Lagrangian (85) we have the following
+conserved Noether current
+j = L −y′
+1
+∂L
+∂y′
+1
+−y′
+2
+∂L
+∂y′
+2
+= my′
+1y′
+2 −(y1 −2y2)2 −y′
+1my′
+2 −y′
+2my′
+1
+= −(my′
+1y′
+2 + (y1 −2y2)2).
+Let us verify by direct calculations that this is indeed a conserved quantity for
+the Euler-Lagrange equations corresponding to the Lagrangian (85).
+49
+
+
+The Euler-Lagrange equations are
+my′′
+1 = 4(y1 −2y2),
+my′′
+2 = −2(y1 −2y2).
+Using these equations we have
+dj
+dt = −(my′′
+1y′
+2 + my′
+1y′′
+2 + 2(y1 −2y2)(y′
+1 −2y′
+2))
+= −(4(y1 −2y2)y′
+2 −2y′
+1(y1 −2y2) + 2(y1 −2y2)(y′
+1 −2y′
+2)) = 0.
+Let us next consider the variation
+y1 →y1 + ϵη1,
+(88)
+y2 →y1 + ϵη2,
+(89)
+where η1 = a, η2 = 1
+2a and where a is a real number of order one. For this
+particular variation we have
+∂L
+∂y1
+η1 + ∂L
+∂y2
+η2 + ∂L
+∂y′
+1
+η′
+1 + ∂L
+∂y′
+2
+η′
+2
+= ∂L
+∂y1
+η1 + ∂L
+∂y2
+η2
+= −2(y1 −2y2)a + 4(y1 −2y2)1
+2a = 0.
+Thus, not only the functional, but also the Lagrangian itself is invariant under
+the variation (89). Then, according to (87), we have the following conserved
+Noether current
+j = −∂L
+∂y′
+1
+η1 −∂L
+∂y′
+2
+η2
+= −my′
+2a −my′
+1
+1
+2a
+= −ma(y′
+2 + 1
+2y′
+1).
+Example 18. Consider the Lagrangian
+L = y′2
+1 + y′2
+2 + y2
+1 + 2y2
+1y2
+2 + y4
+2.
+(90)
+The Euler-Lagrange equations for this system are
+y′′
+1 = 2y3
+1 + 2y1y2
+2,
+(91)
+y′′
+2 = 2y3
+2 + 2y2
+1y2.
+(92)
+We can consider y1 and y2 to be coordinates of points (y1, y2) in the plane,
+R2. A counterclockwise rotation of an angle θ in the plane is, with respect to
+these coordinates, given by the transformation
+y1(θ) = y1 cos(θ) −y2 sin(θ),
+y2(θ) = y1 sin(θ) + y2 cos(θ).
+50
+
+
+For an infinitesimal angle θ = ϵ we get a variation of the form
+y1 →y1 + ϵη1,
+y2 →y2 + ϵη2,
+(93)
+where η1 = −y2, and η2 = y1.
+It is straight forward to verify that
+∂L
+∂y1
+η1 + ∂L
+∂y2
+η2 + ∂L
+∂y′
+1
+η′
+1 + ∂L
+∂y′
+2
+η′
+2 = 0,
+so that the Lagrangian (90) is indeed invariant with respect to the variation (93).
+Then according to (87) we have the following conserved Noether current
+j = −∂L
+∂y′
+1
+η1 −∂L
+∂y′
+2
+η2
+= 2y2y′
+1 −2y1y′
+2.
+Using the Euler-Lagrange equations we can verify by direct calculation that j is
+indeed a conserved quantity
+dj
+dt = 2y2y′′
+1 −2y1y′′
+2
+= 2y2(2y3
+1 + 2y1y2
+2) −2y1(2y3
+2 + 2y2
+1y2)
+= 4y2y3
+1 + 4y1y3
+2 −4y1y3
+2 −4y3
+1y2 = 0.
+In the following three examples we will consider systems consisting of a
+collection of mass points with positions xi ∈R3, velocities x′
+i ∈R3 and quantities
+of mass mi. Such systems can already be treated using the general theory
+developed on pages 48 and 49, however is might be clearer to rather redo the
+derivation of the Euler-Lagrange equation, the condition of invariance and the
+Noether current, starting with a functional of the form
+T(x1, x2, ...., xn) =
+Z t1
+t0
+dt L(t, x1, ...., xn, x′
+1, ...., x′
+n).
+(94)
+We will not do this here, but leave it to the reader. The resulting Euler-Lagrange
+equations are
+∂L
+∂xi
+−d
+dt
+∂L
+∂x′
+i
+= 0, i = 1, ...., n.
+(95)
+The condition for the functional (94) to be invariant under the variation
+xi →xi + ϵηi, i = 1, ...., n,
+(96)
+is now
+∂L
+∂x1
+· η1 + · · · + ∂L
+∂xn
+· ηn + ∂L
+∂x′
+1
+· η′
+1 + · · · + ∂L
+∂x′n
+· η′
+n = dF
+dt ,
+(97)
+and the conserved Noether current is
+j = F −η1 · ∂L
+∂x′
+1
+−· · · −ηn · ∂L
+∂x′n
+.
+(98)
+51
+
+
+Example 19. In example 5 we discussed the action principle for systems of
+mass points moving under the influence of conservative forces. The functional
+for this situation was of the form
+T(x1, ..., xn) =
+Z t1
+t0
+dt L(t, x1, ..., xn, x′
+1, ..., x′
+n),
+(99)
+where the Lagrangian is
+L = 1
+2
+n
+X
+i=1
+mi x′2
+i −V (t, x1, ..., xn).
+(100)
+Let us assume that the potential does not depend explicitly on time. Then the
+functional (99) is invariant with respect to variations of the form (96), where
+ηi = x′
+i. The corresponding Noether current is then from (98)
+j = L −
+n
+X
+i=1
+x′
+i · ∂L
+∂x′
+i
+= 1
+2
+n
+X
+i=1
+mi x′2
+i −V −
+n
+X
+i=1
+mi x′2
+i
+= −(1
+2
+n
+X
+i=1
+mi x′2
+i + V ) = −E,
+where E is the total energy of the system of mass-points.
+Thus, we see again that energy conservation exists because we insist on natural
+laws that appear the same for all observers, independently of when they live.
+Example 20. Let us next assume that the the Lagrangian (100 ) is invariant
+with respect to a variation of the form (96), where ηi = ai. Here, {ai}n
+i=1 are
+vector in R3. According to (97), this invariance holds only if
+∂L
+∂x1
+· η1 + · · · + ∂L
+∂xn
+· ηn + ∂L
+∂x′
+1
+· η′
+1 + · · · + ∂L
+∂x′n
+· η′
+n = 0
+⇓
+∂L
+∂x1
+· η1 + · · · + ∂L
+∂xn
+· ηn = 0
+−∂V
+∂x1
+· a1 −· · · −∂V
+∂xn
+· an = 0
+(101)
+Given this property for the potential, we have according to (98) the following
+conserved Noether current
+j = −
+X
+i
+ai · ∂L
+∂x′
+i
+= −
+X
+i
+mi ai · x′
+i.
+The most common situation is when ai = a
+∀i, for some fixed vector a. For
+this case the Noether current is
+j = −a ·
+X
+i
+mi x′
+i.
+52
+
+
+Thus the component of the total momentum in the direction of a is conserved, if
+the potential satisfy the condition
+a ·
+X
+i
+∂V
+∂xi
+= 0.
+This would be for example be the case if the potential is invariant with respect to
+translation of the origin along the direction a. If the invariance (102 ) holds for
+three vectors a, b, c, that span R3, we can conclude that the total momentum
+of the system of mass points is conserved
+P =
+X
+i
+mi x′
+i.
+(102)
+This conservation law holds for example if the potential only depends on differ-
+ences of the vectors xi.
+For this case, the laws of motion for mass-points looks the same for all
+observers, independently of where in space they are located.
+This invariance with respect to location in space is something we choose to
+impose on all our fundamental natural laws. The consequence of this choice is
+that we will have conservation of momentum
+Example 21. Recall that counterclockwise rotations of angle θ around some
+axis k in R3 can be written in the following way
+x →x cos θ + (k × x) sin θ + k (k · x) (1 −cos θ).
+This is Rodrigue’s formula. For an infinitesimal rotation angle we get
+x →x + ϵ(k × x).
+(103)
+The rotation of coordinates (103), induces a corresponding variation
+xi(t) →xi(t) + ϵηi,
+(104)
+where
+ηi = k × xi.
+Let us assume that the Lagrangian for the system of mass-points is invariant
+with respect the variation (104). For this to be true we must, according to (97),
+have
+X
+i
+∂L
+∂xi
+· ηi + ∂L
+∂x′
+i
+· η′
+i = 0
+⇕
+−
+X
+i
+∂V
+∂xi
+· (k × xi) +
+X
+i
+mix′
+i · (k × x′
+i) = 0
+⇕
+−
+X
+i
+∂V
+∂xi
+· (k × xi) = 0.
+(105)
+53
+
+
+It is easy to verify that this last identity holds if the potential is invariant
+with respect to rotation around the axis k. The conserved Noether current
+corresponding to the variation (104 ) is according to (98)
+j = −
+n
+X
+i=1
+(k × xi) · ∂L
+∂x′
+i
+= −
+n
+X
+i=1
+(k × xi) · (mi x′
+i)
+= −
+n
+X
+i=1
+k · (xi × mi x′
+1)
+= −k ·
+n
+X
+i=1
+xi × mi x′
+i = −k · L,
+where L is the total angular momentum of the system of mass-points.
+Thus, if the Lagrangian is invariant with respect to rotations around some axis
+k, then the component of the total angular momentum along k is conserved.
+If the system is invariant with respect to rotations around three separate axes,
+that together span R3, the total angular momentum is conserved. This implies
+that the potential is invariant with respect to all possible rotations in R3.
+Like for the location in time and space, this invariance with respect to
+direction, which is called isotropy, is something we choose to impose on all our
+fundamental natural laws.
+The consequence of this choice is that we will have conservation of angular
+momentum.
+Our natural laws in general involve fields and partial differential equations,
+Maxwell’s equations for the electromagnetic field is an example that comes to
+mind.
+In all these cases, invariance with respect to location in space and time and
+with respect to direction in space will lead to conserved Noether currents that
+we, by convention, call energy, momentum and angular momentum of the fields.
+4.3
+Several independent variables
+Let us first consider a functional of the form
+T(u) =
+Z
+D
+dx dy L(x, y, u, ux, uy),
+(106)
+and let us consider a variation
+u(x, y) →u(x, y) + ϵ η(x, y),
+(107)
+54
+
+
+where η is some specific function. Inserting (107) into (106) we get
+T(u + ϵ η) =
+Z
+D
+dx dy L(x, y, u + ϵ η, ux + ϵ ηx, uy + ϵ ηy)
+=
+Z
+D
+dx dy {L(x, y, u, ux, uy) + ∂L
+∂u ϵ η + ∂L
+∂ux
+ϵ ηx
++ ∂L
+∂uy
+ϵ ηy} + O(ϵ2)
+= T(u) + ϵ
+Z
+D
+dx dy {∂L
+∂u η + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy} + O(ϵ).
+The functional (106) is said to be invariant under the variation (107), if there
+exists functions F1(x, y), F2(x, y) such that
+∂L
+∂u η + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy = ∂xF1 + ∂yF2
+(108)
+If F1 = F2 = 0 we say that the Lagrangian density L, is invariant under the
+variation (107).
+Let us now assume that the functional T is invariant under a variation of
+the form (107) for some specific choice of η(x, y). Using this η(x, y), we consider
+the more general variation
+u(x, y) →u(x, y) + ϵ(x, y) η(x, y),
+(109)
+where ϵ(x, y) is a numerically small function that vanished on the boundary of
+D but is otherwise arbitrary. Inserting (109) into the functional (106) we get
+T(u + ϵ η) =
+Z
+D
+dx dy L(x, y, u + ϵ η,ux + ϵ ηx + ϵx η, uy + ϵ ηy + ϵy η)
+=
+Z
+D
+dx dy{L(x, y, u, ux, uy) + ∂L
+∂u ϵ η + ∂L
+∂ux
+(ϵ ηx + ϵx η)
++ ∂L
+∂uy
+(ϵ ηy + ϵy η)} + O(ϵ2)
+= T(u) +
+Z
+D
+dx dy {ϵ(∂L
+∂u η + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy)
++ η ∂L
+∂ux
+ϵx + η ∂L
+∂uy
+ϵy} + O(ϵ2)
+= T(u) +
+Z
+D
+dx dy {ϵ (∂xF1 + ∂xF2) −∂x (η ∂L
+∂ux
+) ϵ
+−∂y(η ∂L
+∂uy
+) ϵ} + O(ϵ2),
+(110)
+where we have used the divergence theorem and the boundary conditions on ϵ in
+addition to the definition (108) of invariance of T with respect to the variation
+(107).
+Thus from (110) we have
+T(u + ϵ η) = T(u) +
+Z
+D
+dx dy ϵ {∂xj1 + ∂yj2} + O(ϵ2),
+(111)
+55
+
+
+where the Noether current j = (j1, j2) is
+j1 = F1 −η ∂L
+∂ux
+,
+j2 = F2 −η ∂L
+∂uy
+.
+(112)
+Equation (111) holds for all u. If u is extremal, all variations of T(u) vanish, in
+particular they vanish for variations of the form (109). Using a 2D version of
+the fundamental lemma we conclude that the Noether current satisfies
+∂xj1 + ∂yj2 = 0.
+(113)
+This kind of identity is in general called a local conservation law.
+The 2D Laplace equation
+In example 9 we discussed the functional
+T(u) =
+ZZ
+D
+dx dy
+1
+2 u2
+x + 1
+2 u2
+y
+
+.
+The Lagrangian density L, is here
+L = 1
+2 u2
+x + 1
+2 u2
+y,
+and we found that the corresponding Euler-Lagrange equation is the Laplace
+equation
+uxx + uyy = 0.
+Observe that L invariant under the variation
+u(x, y) →u(x, y) + ϵ.
+Thus η = 1 and the components of the Noether current are
+j1 = −∂L
+∂ux
+= −ux,
+j2 = −∂L
+∂uy
+= −uy.
+The local conservation law (113) is thus
+∂xj1 + ∂yj1 = 0,
+⇕
+uxx + uyy = 0.
+This invariance clearly does not tell us anything new since it’s local conservation
+law is just the Laplace equation itself.
+We also observe that L is independent of x and y.
+Let us consider an arbitrary infinitesimal translation in the plane
+x →x + ϵ a,
+(114)
+y →y + ϵ b,
+a2 + b2 = 1.
+56
+
+
+Thus n = (a, b) is a unit vector determining the direction of the translation. The
+infinitesimal translation (114) induces the following variation in u
+u(x, y) →u(x, y) + ϵ η(x, y),
+where
+η(x, y) = (a ux + b uy).
+Observe that for this η we have
+∂L
+∂u η + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy
+∂L
+∂u (a ux + b uy) + ∂L
+∂ux
+(a uxx + b uxy) + ∂L
+∂uy
+(a uxy + b uyy)
+= a (∂L
+∂u ux + ∂L
+∂ux
+uxx + ∂L
+∂uy
+uxy)
+= b (∂L
+∂u uy + ∂L
+∂ux
+uxy + ∂L
+∂uy
+uyy)
+= ∂x(a L) + ∂y(b L),
+since L does not depend explicitly on x and y.
+Thus from (108) we conclude that
+F1 = a L,
+F2 = b L,
+and the components of the Noether current are
+j1 = a L −(a ux + b uy) ∂L
+∂ux
+= a L −(a ux + b uy) ux,
+j2 = b L −(a ux + b uy) ∂L
+∂uy
+= b L −(a ux + b uy) uy,
+and we can conclude that the Laplace equation has the local conservation law
+∂xj1 + ∂yj2 = 0
+(115)
+Let us show by direct calculations that this is indeed a local conservation law
+that holds for all solutions to the Laplace equation.
+57
+
+
+We have
+∂xj1 + ∂yj2 = 0
+⇕
+a ∂x(1
+2 u2
+x + 1
+2 u2
+y) −∂x(a u2
+x + b ux uy)
++b ∂y(1
+2 u2
+x + 1
+2 u2
+y) −∂y(a ux uy + b u2
+y) = 0
+⇕
+a ux uxx + a uy uxy −2 a ux uxx −b uxx uy
+−b ux uxy + b ux uxy + b uy uyy
+−a uxy uy −a ux uyy −2 b uy uyy = 0
+⇕
+−(a ux + b uy) (uxx + uyy) = 0.
+Thus, the local conservation law (115) clearly holds for any solution to the
+Laplace equation.
+The 1D wave equation
+Let us consider the well known 1D wave equation
+utt −c2uxx = 0.
+This equation describe oscillations, y = u(x, t), transverse to the x-axis, confined
+to a 2D plane, which we without loss of generality assume is the xy-coordinate
+plane in a xyz-Cartesian coordinate system in 3D physical space.
+From example 10 we have seen that the 1D wave equation is the Euler-
+Lagrange equation for the functional
+T(u) =
+Z x1
+x0
+dx L.
+where the Lagrangian density is
+L = 1
+2 u2
+t −1
+2 c2 u2
+x.
+Let us start by introducing an infinitesimal time translation
+t →t + ϵ.
+This time translation induces a variation of the form
+u(t, x) →u(t, x) + ϵ ut(t, x).
+For this variation η = ut and we have
+∂L
+∂u η + ∂L
+∂ut
+ηt + ∂L
+∂ux
+ηx
+= ut (utt) + (−c2 ux) uxt
+= ut utt −c2 ux uxt
+= ∂t(1
+2 u2
+t −1
+2 c2 u2
+x),
+58
+
+
+and thus, according to (108), the functional T is invariant with
+F1 = 1
+2 u2
+t −1
+2 c2 u2
+x,
+F2 = 0.
+The components of the conserved Noether current are according to (112)
+j1 = 1
+2 u2
+t −1
+2 c2 u2
+x −ut ut
+= −(1
+2 u2
+t + 1
+2 c2 u2
+x),
+j2 = −ut (−c2 ux) = c2 ut ux,
+and the local conservation law is
+∂tj1 + ∂xj2 = 0.
+(116)
+Introducing the quantities
+e = 1
+2 u2
+t + 1
+2 c2 u2
+x,
+f = −c2 ut ux,
+(117)
+the local conservation law (116) can be rewritten in the form
+∂te + ∂xf = 0.
+Next, define a quantity E by
+E(t) =
+Z x1
+x0
+dx e(t, x)
+=
+Z x1
+x0
+dx (1
+2 u2
+t + 1
+2 c2 u2
+x).
+For this quantity we evidently have
+dE
+dt =
+Z x1
+x0
+dx ∂te = −
+Z x1
+x0
+dx ∂xf = c2(ut ux)|x1
+x0.
+Let us assume that u satisfies one of the following boundary conditions
+u(t, x0) = u(t, x1) = 0,
+Dirichlet
+ux(t, x0) = ux(t, x1) = 0,
+Neumann
+x0 = −∞,
+x1 = +∞,
+and u(x, t) vanish at ±∞
+If this the case, we can conclude that
+dE
+dt = 0,
+⇕
+E = const,
+59
+
+
+and thus
+E =
+Z x1
+x0
+dx (1
+2 u2
+t + 1
+2 c2 u2
+x),
+is a conserved quantity for any solution to the wave equation.
+It is in general true that, whenever we have a functional of time dependent fields,
+and the Lagrangian of the functional does not depend explicitly on time, the
+space integral of the time component of the Noether current will be a conserved
+quantity for appropriate boundary conditions at the spatial boundary. In general,
+for any application of Noether’s theorem, the derived local conservation law will
+lead to a conserved quantity only for some select boundary conditions.
+Inspired by the situation for systems of mass points, we define the space
+integral of the time component of the Noether current to be the total energy of
+the system of time dependent fields. Note that frequently one needs to scale the
+Noether current in such a way that the time component is positive, in that way
+ensuring that the total energy is a positive quantity.
+The (scaled) time component of the Noether current is defined to be the
+energy density and the (scaled) space component(s) are called the energy flux
+density. For this particular example, e(t, x) is the energy density, and f(t, x) is
+the energy flux density.
+In some cases, the formula for the energy density of a field system is known
+from physical modeling. In all such cases the energy density derived from the
+modeling is equal or proportional to the energy density defined using time
+translation invariance and Noether’s theorem.
+For the current example we know that the 1D wave equation is a model for
+small vibrations of a string. With respect to this example we recognize the first
+term in (117) to be proportional to the kinetic energy, K, and the second term
+to be proportional to the potential energy, V , of a small piece of the string.
+Thus for this example we clearly we have
+e ∝K + V.
+Let us next look at translation along a direction a = (a, b), a2 + b2 = 1, in
+the xy-coordinate plane
+x = (x, y) →x + ϵ a.
+This translation in the xy-coordinate planes induces the following variation on
+the function u(t, x)
+u(t, x) →u(t, x + ϵa) + ϵb
+= u(t, x) + ϵaux(t, x) + ϵb
+= u + ϵ(aux + b).
+Thus, for this variation η = aux + b and we have
+∂L
+∂u η + ∂L
+∂ut
+ηt + ∂L
+∂ux
+ηx
+= ut(auxt) −c2ux(auxx)
+= (1
+2au2
+t −1
+2c2au2
+x)x.
+60
+
+
+According to (108), the functional T is therefore invariant with
+F1 = 0,
+F2 = 1
+2au2
+t −1
+2c2au2
+x.
+The components of the conserved Noether current are according to (112)
+j1 = F1 −η ∂L
+∂ut
+= −(aux + b)ut
+= −autux −but,
+j2 = F2 −η ∂L
+∂ux
+= 1
+2au2
+t −1
+2c2au2
+x −(aux + b)(−c2ux)
+= 1
+2au2
+t + 1
+2c2au2
+x + bc2ux.
+and the local conservation law is
+∂tj1 + ∂xj2 = 0,
+which can be rewritten in the form
+a · (∂tp + ∂xf) = 0,
+(118)
+where we have defined
+p = (utux, ut),
+(119)
+f = −(1
+2u2
+t + 1
+2c2u2
+x, c2ux).
+Since (118) holds for all unit vectors a, we have
+∂tp + ∂xf = 0
+Again, inspired by the situation for systems of mass points, we define p(t, x) to
+be the momentum density and f(t, x) to be the momentum flux density.
+Defining
+P =
+Z x1
+x0
+dx p(t, x)
+We have
+dP
+dt =
+Z x1
+x0
+dx ∂tp
+= −
+Z x1
+x0
+dx ∂xf
+= −f(t, x)|x1
+x0.
+61
+
+
+It is easy to verify that neighter Dirichlet conditions, nor Neuman conditions,
+at the boundary points x0, x1 ensure that f(t, x)|x1
+x0 equal zero. Thus, for these
+common boundary conditions for the 1D wave equation, the quantity P is not
+conserved. However, it is conserved if x0 →−∞, x1 →∞, and we assume that
+u(x, t) is localized in the sense that u, ut, ux approach zero fast enough when
+x →±∞. It is also conserved if the interval is finite, and we can extend the
+function u(x, t) to the whole real line as a periodic continuously differentiable
+function of period x1 −x0.
+For these kind of boundary conditions, the conserved quantity P is by
+definition the total momentum for the system
+As a conclusion of this example, let us consider an infinitesimal rotation of
+the xy-coordinate plane around the z-axis.
+(x, y) →(x, y) + ϵ (−y, x).
+This translation in the xy-coordinate planes induces the following variation on
+the function u(t, x)
+u(t, x) →u(t, x) + ϵx.
+Thus, for this variation η = x and we have
+∂L
+∂u η + ∂L
+∂ut
+ηt + ∂L
+∂ux
+ηx
+= −c2ux
+= (−c2u)x.
+Therefore, according to (108), the functional T is invariant with
+F1 = 0,
+F2 = −c2u.
+The components of the conserved Noether current are according to (112)
+j1 = F1 −η ∂L
+∂ut
+= −xut,
+j2 = F2 −η ∂L
+∂ux
+= −c2u −x(−c2ux)
+= c2xux −c2u.
+The local conservation law can then be written in the form
+∂tm + ∂xfm = 0,
+where
+m(t, x) = xut,
+fm(t, x) = c2(u −xux),
+62
+
+
+are by definition the angular momentum density and the angular momentum
+flux density. The total angular momentum for the system is
+M(t) =
+Z x1
+x0
+dx m(t, x),
+(120)
+and using the local conservation law we have
+dM
+dt =
+Z x1
+x0
+dx ∂tm(t, x)
+= −
+Z x1
+x0
+dx ∂xfm(t, x) = −fm(t, x)|x1
+x0.
+In general, the total angular momentum is not conserved. It is however conserved
+if x0 →−∞, x1 →∞, and we assume that u(x, t) is localized. Note that for this
+case, assuming the the interval is finite, extending u to the whole real line as a
+continuously differentiable function of period x1 −x0, does not ensure that the
+total angular momentum is conserved.
+As a cross check on our definitions of momentum density and angular mo-
+mentum density for this system, recall that for systems of mass point of total
+momentum p, the angular momentum is given in terms of the momentum by
+the formula m = x × p. For the current system, the 1D wave equation, we have
+found the momentum density in (119).
+Using the notation ˆx, ˆy and ˆz for unit vector of the xyz-Cartesian coordinate
+system, we have
+x × p = xˆx × (utuxˆx + utˆy)
+= xutˆz = mˆz.
+So, m(t, x) is indeed the angular momentum density for the system.
+Let us next consider functionals of the form
+T(u) =
+Z
+D
+dx dy
+Z t1
+t0
+dt L(t, x, y, u, ut, ux, uy).
+(121)
+Following the by now familiar procedure, we define (121) to be invariant under
+a variation
+u(t, x, y) →u(t, x, y) + ϵ η(t, x, y),
+if there exists functions F1, F2 and F3 such that
+∂L
+∂u η + ∂L
+∂ut
+ηt + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy = ∂tF1 + ∂xF2 + ∂yF3.
+The conserved Noether current components are
+j1 = F1 −η ∂L
+∂ut
+,
+(122)
+j2 = F2 −η ∂L
+∂ux
+,
+j3 = F3 −η ∂L
+∂uy
+,
+63
+
+
+and the local conservation law is
+∂tj1 + ∂xj2 + ∂yj3 = 0.
+This is Noether’s theorem for the functional (121).
+2D wave equation
+The 2D wave equation has been seen, in example 10, to
+be variational with Lagrangian
+L = 1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y.
+This Lagrangian density is translation invariant with respect to time and space
+and this will lead to conserved Noether currents whose spatial integral of the
+time component of the current will be the total energy and the total momentum.
+Let us start with time translation
+t →t + ϵ,
+which leads to the variation
+u(t, x, y) →u(t, x, y) + ϵ ut(t, x, y).
+In a calculation entirely similar to the one in example ?? we find that the
+functional i invariant with F1 = L, F2 = F3 = 0.
+The components of the Noether current are then from (122)
+j1 = 1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y −ut (ut)
+= −(1
+2 u2
+t + 1
+2 c2 u2
+x + 1
+2 c2 u2
+y),
+j2 = −ut (−c2 ux) = c2 ut ux,
+j3 = −ut (−c2 uy) = c2 ut uy,
+and the conservation law is
+∂tj1 + ∂xj2 + ∂yj3 = 0.
+Defining the energy density to be
+e = 1
+2 u2
+t + 1
+2 c2 u2
+x + 1
+2 c2 u2
+y,
+and the energy flux density to be
+f = −c2 ut ∇u,
+where ∇is the 2D gradient operator, we have
+∂te + ∇· f = 0.
+(123)
+For the total energy inside a domain D ⊂R2 we have
+E =
+Z
+D
+dx dy e,
+64
+
+
+and using (123) we get
+dE
+dt =
+Z
+D
+dx dy ∂te = −
+Z
+D
+dx dy ∇· f
+= −
+Z
+∂D
+dl f · n
+(124)
+The sign convention chosen for f ensures that f · n > 0 means that energy is
+leaving the domain D. This convention is standard.
+Figure 15: The integration domain for the functional and convention for unit
+normal on the boundary
+Equation (124) clearly expresses conservation of energy; the only way energy
+can change in D is if energy is escaping across the boundary. We get conservation
+of energy if the energy flux is zero on ∂D, which would happen if for example
+u|D is independent of time, or if ∂nu|D = 0, or if D = R2 and solutions vanish
+fast enough at infinity.
+d
+dt
+Z
+D
+dx dy {1
+2 u2
+t + 1
+2 c2 u2
+x + 1
+2 c2 u2
+y} = 0.
+Let us next look at translation along a direction a = (a, b), a2 + b2 = 1
+x = (x, y) →x + ϵ a.
+The corresponding variation is clearly
+u(t, x, y) →u(t, x, y) + ϵ(a ux + b uy),
+and for this variation we have
+∂L
+∂u η + ∂L
+∂ut
+ηt + ∂L
+∂ux
+ηx + ∂L
+∂uy
+ηy
+= ∂L
+∂ut
+(a uxt + b uyt) + ∂L
+∂ux
+(a uxx + b uxy) + ∂L
+∂uy
+(a uxy + b uyy)
+= a ( ∂L
+∂ut
+uxt + ∂L
+∂ux
+uxx + ∂L
+∂uy
+uxy)
++ b ( ∂L
+∂ut
+uyt + ∂L
+∂ux
+uyx + ∂L
+∂uy
+uyy)
+= a ∂xL + b ∂yL.
+65
+
+
+So the functional is invariant with F1 = 0, F2 = a L, F3 = b L. The components
+of the Noether current are from (122)
+j1 = −(a ux + b uy) ut = −ut (a ux + b uy),
+j2 = a (1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y) −(a ux + b uy) (−c2 ux)
+= a 1
+2 u2
+t −a 1
+2 c2 u2
+x −a 1
+2 c2 u2
+y + a c2 u2
+x + b c2 ux uy
+= 1
+2 a u2
+t + 1
+2 a c2 u2
+x −1
+2 a c2 u2
+y + b c2 ux uy,
+j3 = b (1
+2 u2
+t −1
+2 c2 u2
+x −1
+2 c2 u2
+y) −(a ux + b uy) (−c2 uy)
+= 1
+2 b u2
+t −1
+2 b c2 u2
+x + 1
+2 b c2 u2
+y + a c2 ux uy,
+and the local conservation law is
+∂tj1 + ∂xj2 + ∂yj3 = 0.
+Inserting the expressions for the components of the Noether current into this local
+conservation law produces a very messy expression. However, if we introduce a
+vector P and a Cartesian tensor f of rank 2 by
+P = −ut ∇u,
+f = c2 ∇u ∇u −1
+2 c2 Tr(∇u ∇u) I + 1
+2 u2
+t I,
+where I is the identity matrix, we can write the local conservation law as
+∂ta · P + ∇· (a · f) = 0.
+(125)
+The argument leading up to (125) is true for all vectors a. Therefore we have
+the local conservation law
+∂tP + ∇· f = 0.
+(126)
+By definition, P is the momentum density and f is the momentum flux density.
+The total momentum inside some domain D is
+P =
+Z
+D
+dx dy P,
+and from (126) we get
+dP
+dt =
+Z
+D
+dx dy ∂tP = −
+Z
+∂D
+dl f · n.
+(127)
+All of this can be generalized to the 3D wave equation. Then (127) will involve
+a surface integral of the momentum flux over a 2D surface ∂D bounding a 3D
+domain D ⊂R3.
+Formula (127), and formulas like it, for other field systems, have important
+practical applications.
+Let us for example assume that an object, filling a domain D ⊂R2, is
+embedded in a wave field satisfying the 2D-wave equation. Let us apply formula
+66
+
+
+Figure 16:
+(127) to R2 −D and assume that the wave field is localized so that we get no
+contribution from the boundary at infinity. The only boundary to R2 −D is
+then ∂D. The outward normal to R2 −D points into D
+Since total momentum is conserved, we know that momentum lost from R3 −D
+to D through the boundary ∂D, must be gained by D. Similarly momentum
+gained by R −D must be lost by D.
+If Q is the total momentum inside D we thus have, using (127), that
+dQ
+dt = −dP
+dt =
+Z
+∂D
+dl f · n = −
+Z
+∂D
+dl f · s,
+where now s = −n is the normal to ∂D pointing out of D.
+Recall that change of momentum per. unit time is in fact force. Thus the force,
+F = dQ
+dt , acting on the embedded object D in the wave field is
+F = −
+Z
+∂D
+dl f · s.
+This is an important result since it allows us, for example, to calculate the
+surface-wave induced mechanical forces on ship hulls and stationary structures
+like oil platforms or structures that generate electric power from surface waves.
+We end our exposition of the calculus of variation and Noether’s theorem
+here. This is not because this is the end of the story for Noether’s theorem.
+For Noether’s theorem, and also for the calculus of variations, we have barely
+scratched the surface. Beyond these notes there is a whole universe to explore.
+5
+Exercises
+1. Find all extremals for the functional
+I(y) =
+Z t1
+t0
+dtetp
+1 + (y′)2
+2. Find the unique extremal for
+I(y) =
+Z 1
+0
+dt(y′2 −y2 + 2ty)
+67
+
+
+satisfying the constrains y(0) = 0, y(1) = 1.
+3. Show that there is no extremal for the functional
+I(y) =
+Z 1
+−1
+dtt4(y′)2
+that satisfy the constraints y(−1) = −1, y(1) = 1.
+4. Find a unique smooth extremal for
+I(y) =
+Z 3
+2
+dty2(1 −y′)2
+that satisfy the constraints y(2) = 1, y(3) =
+√
+3.
+5. Derive the Euler-Lagrange equation for a functional of the general form
+I(y) =
+Z t1
+t0
+dtL(t, y, y′, y′′)
+Find the unique extremal to the functional
+I(y) =
+Z 1
+0
+dt(y′′)2
+that satisfy the constraints
+y(0) = y′(0) = 0
+y(1) = y′(1) = 0
+6. Find the extremals for the functional
+I(y) =
+Z 1
+0
+dt(y′′)2
+subject to the constraints
+J(y) =
+Z 1
+0
+dty = L
+and y(0) = 0, y(1) = 2, y′(0) = 1, y′(1) = −1.
+7. Find the extremals of the functional
+I(y) =
+Z 1
+0
+dt(y′)2
+subject to the constraints
+J1(y) =
+Z 1
+0
+dty = 2
+J2(y) =
+Z 1
+0
+dtyt = 1
+2
+and y(0) = y(1) = 0.
+68
+
+
+8. On page 40 in these lecture notes, we discussed extremals of real valued
+functionals whose domain of definition consisted of a complex valued
+function A. We argued that the Euler-Lagrange equations could be found
+by varying the field A and it’s complex conjugate A∗as if they were
+independent variables. Let us consider such functionals of the form
+I(A, A∗) =
+Z t0
+t0
+dtL(t, A, A∗, At, A∗
+t )
+(128)
+Show that the Euler-Lagrange equations for this type of functional are
+∂L
+∂A −d
+dt
+ ∂L
+∂At
+
+= 0
+∂L
+∂A∗−d
+dt
+ ∂L
+∂A∗
+t
+
+= 0
+Since these two equations are complex conjugate of each other we only
+need one of them. Find the Euler-Lagrange equations corresponding to
+the functionals
+a)
+I(A, A∗) =
+Z t0
+t0
+dt(AtA∗
+t + AA∗AA∗)
+(129)
+b)
+I(A, A∗) =
+Z t0
+t0
+dt(1
+2i(AA∗
+t −A∗At) + 1
+2AA∗AA∗)
+(130)
+9. A functional of the type (128) is said to be invariant under variations of
+the form
+A(t) 7→A(t) + εη(t)
+(131)
+A∗(t) 7→A∗(t) + εη(t)
+if there exists a function F(t) such that
+∂L
+∂Aη + ∂L
+∂A∗η∗+ ∂L
+∂At
+ηt + ∂L
+∂A∗
+t
+η∗
+t = dF
+dt
+If F = 0 we say that the Lagrangian is invariant. Show that the conserved
+Noether current corresponding to the variation (131) is
+j = F −η ∂L
+∂At
+−η∗∂L
+∂A∗
+t
+Show that the Lagrangian in both functionals (129) and (130) are invariant
+under an infinitesimal rotation of the complex phase of A.
+A(t) 7→A(t) + iεA(t)
+(132)
+A∗(t) 7→A∗(t) −iεA∗(t)
+Find the conserved Noether current corresponding to the variation (132)
+for the two functionals (129) and (130) and show directly using the Euler-
+Lagrange equations that the Noether currents are indeed conserved.
+69
+
+
+10. Consider real valued functionals of the form
+I(A, A∗) =
+Z
+D
+dxdy
+Z t0
+t0
+dtL(t, A, A∗, At, A∗
+t , Ax, A∗
+x, Ay, A∗
+y)
+(133)
+Show that the Euler-Lagrange equations for this functional are
+∂L
+∂A −∂t
+ ∂L
+∂At
+
+−∂x
+ ∂L
+∂Ax
+
+−∂y
+ ∂L
+∂Ay
+
+= 0
+∂L
+∂A∗−∂t
+ ∂L
+∂A∗
+t
+
+−∂x
+ ∂L
+∂A∗x
+
+−∂y
+ ∂L
+∂A∗y
+
+= 0
+Find the Euler-Lagrange equation corresponding to the functional
+I(A, A∗) =
+Z
+D
+dxdy
+Z t0
+t0
+dt
+ AtA∗
+t −c2AxA∗
+x −c2AyA∗
+y −mAA∗
+(134)
+This equation is called the complex Klein-Gordon equation and describe,
+among other things, charged spin-less elementary particles. In this context
+m is the mass of the elementary particle.
+11. A functional of the type (133) is said to be invariant under variations of
+the form
+A(t, x, y) 7→A(t, x, y) + εη(t, x, y)
+(135)
+A∗(t, x, y) 7→A∗(t, x, y) + εη∗(t, x, y)
+if there exists functions Fj = Fj(t, x, y) for j = 1, 2, 3 such that
+∂L
+∂Aη + ∂L
+∂A∗η∗+ ∂L
+∂At
+ηt + ∂L
+∂A∗
+t
+η∗
+t + ∂L
+∂Ax
+ηx
++ ∂L
+∂A∗x
+η∗
+x + ∂L
+∂Ay
+ηy + ∂L
+∂A∗y
+η∗
+y = ∂tF1 + ∂xF2 + ∂yF3
+If F1 = F2 = F3 = 0, we say that the Lagrangian is invariant. Show that
+the components of the Noether current corresponding to the variation (135)
+are
+j1 = F1 −η ∂L
+∂At
+−η∗∂L
+∂A∗
+t
+j2 = F2 −η ∂L
+∂Ax
+−η∗∂L
+∂A∗x
+j3 = F3 −η ∂L
+∂Ay
+−η∗∂L
+∂A∗y
+The conservation law for the Noether current is
+∂tj1 + ∂xj2 + ∂yj3 = 0
+70
+
+
+12. Consider the following two functionals
+I(ψ, ψ∗) =
+Z
+D
+dxdy
+Z t0
+t0
+dt(ℏ
+2i(ψ∗ψt −ψψ∗
+t )
+(136)
+−ℏ2
+2m(ψxψ∗
+x + ψyψ∗
+y) −V (x, y)ψψ∗)
+(137)
+I(ψ, ψ∗) =
+Z
+D
+dxdy
+Z t0
+t0
+dt(ψtψ∗
+t −c2ψxψ∗
+x
+(138)
+−c2ψyψ∗
+y −mψψ∗)
+(139)
+The first functional is discussed on page 43 in the lecture notes on varia-
+tional calculus. There we proved that the Euler-Lagrange equation for this
+functional is the quantum mechanical Schr¨odinger equation. The second
+functional we discussed in problem 10. There we proved that the corre-
+sponding Euler-Lagrange equation is the complex Klein-Gordon equation.
+Show that the Lagrangian for the functionals (136) and (138) are invariant
+under an infinitesimal rotation of the complex phase of ψ.
+ψ(t, x, y) 7→ψ(t, x, y) + iεψ(t, x, y)
+(140)
+ψ∗(t, x, y) 7→ψ∗(t, x, y) −iεψ∗(t, x, y)
+a) Find the Noether current and its conservation law corresponding to
+the infinitesimal phase variation (140) for the Schr¨odinger functional
+(136).
+The Schr¨odinger equation was derived by Erwin Schr¨odinger in 1925.
+Initially it was not at all clear what the physical interpretation of the
+wave function ψ should be. Schr¨odinger himself favored initially an
+interpretation in terms of charge density, but could not make it work
+and this interpretation was abandoned. The interpretation that lives
+on to this day was given by Max Born in 1926. In this interpretation
+ψψ∗(t, x, y) is the probability for finding the electron at a point (x, y)
+at time t. Schr¨odinger never accepted this interpretation, nether did
+Einstein.
+In what way does the conservation law corresponding to the invariance
+of the Lagrangian under the infinitesimal phase variation (140) support
+the interpretation introduced by Max Born?
+b) Find the Noether current and its conservation law corresponding to
+the infinitesimal phase variation (140) for the complex Klein-Gordon
+functional (138).
+The Klein-Gordon equation was in fact first derived by Erwin Schr¨odinger
+in 1925 as a quantum mechanical equation for the electron. In his
+mind the Klein-Gordon equation was much more likely to be the right
+equation for the electron than what we today call the Schr¨odinger
+equation. It is for example invariant under Lorentz transformations
+and thus respect the fundamental rules of Einsteins special theory of
+relativity. Today’s Schr¨odinger equation is an approximation to the
+Klein-Gordon equation that is valid only for electrons moving slowly
+compared to the speed of light, and it is not Lorentz invariant and
+thus does not respect Einsteins special theory of relativity. However
+71
+
+
+Schr¨odinger was forced to abandon his fully relativistic Klein-Gordon
+equation for the electron because it turned out to be inconsistent with
+known atomic spectral data.
+Argue, using the the conservation law corresponding to the invariance
+of the Lagrangian under the infinitesimal phase variation (140), that
+it is not possible to generalize Max Born’s interpretation to the Klein-
+Gordon equation by constructing a probability density from ψ. This
+is another reason why it was abandoned at the time.
+It turned out that abandoning the Klein-Gordon equation was pre-
+mature. It has since then been reintroduced as a quantum equation,
+but for charged, spin-less particles. In this context the interpretation
+is nowhere near the original one introduced by Max Born. Today the
+wave function in the Klein-Gordon equation is interpreted as a field
+of operators that create particles from the void and return them to
+the void by annihilation.
+One might be surprised at how much insight there is to be gained by using
+the simple fact that the global phase of the quantum mechanical wave
+function is arbitrary. Thus nothing change if we make the substitution
+ψ 7→ψeiα
+The conserved Noether currents corresponding to invariance with respect
+to phase, that you have found in problem 12, is however not close to the
+end of the story. When this phase invariance is coupled to the Gauge
+Principle, which is closely related to Noether’s theorem, the existence of
+the electromagnetic field and the form of it’s interaction with electrons is
+determined. And there is more: The quantum mechanical wave equations
+that describe weakly interacting particles like neutrinos, and strongly
+interacting ones like quarks, also has an invariance with respect to rotation
+of the global phase. However, for these equations the arbitrary phase
+is multidimensional and the arbitrary rotation of phase involve 2 x 2
+matrices for the weakly interacting case, and 3 x 3 matrices for the strongly
+interacting case. When the Gauge principle is applied to these two cases,
+the existence of the weak interaction field and the strong interaction field,
+and their interaction with their respective particles, like neutrinos and
+quarks, are determined, just like in the case of electromagnetics. The field
+equations for weak interactions and strong interactions are generalizations
+of the Maxwell equations involving more than one vector potential. Also
+these generalized Maxwell-like equations are nonlinear, not linear like the
+electromagnetic Maxwell equation.
+6
+Appendix
+6.1
+The maximum entropy principle for classical systems
+Let x1, ..., xn be random variables with an associated probability distribution
+ρ(x1, ..., xn). Let f1(x1, ..., xn), ..., fp(x1, ..., xn) be functions defined on the space
+of random variables Ω= {(x1, x2, ..., xn)} where the variables xn can run over
+a finite set, an infinite discrete set, for example a set indexed by a finite set
+72
+
+
+of integers, or the variables can run over the real numbers. We will usually
+think about the real number case and will therefore write integrals instead of
+sums. The functions fj are our observables. Their expectation values are as
+usual defined by
+⟨fj⟩=
+Z
+Rn dV fj(x1, ..., xn) ρ(x1, ..., xn).
+(1)
+The expectation value of a given observable of course depends on which proba-
+bility distribution, ρ, we use. The challenge in statistics is to figure out which
+probability distribution one should use in any given situation. Let us say that
+we for some reason, (expert knowledge,guesswork, hearsay, ...) believe that a
+probability distribution ρ0 accurately represents what we currently know about
+a given system. The probability distribution ρ0 is called the prior distribution,
+or just the prior.
+Let us next assume that we measure the mean values of the observables
+f1, ..., fp and find the values c1, ..., cp. If
+⟨fj⟩0 =
+Z
+Rn dV fj (x1, ..., xn) ρ0(x1, ..., xn) = cj
+(2)
+for all j, we are satisfied with our choice of prior. It predicts exactly the mean
+values that are observed.
+But we might not be so lucky. Perhaps
+⟨fj⟩0̸ = cj,
+(3)
+for at least one j.
+Our selected ρ0 is then not the correct one, it predicts
+expectation values that are not observed. The challenge is to modify ρ0 into a
+new distribution ρ that is consistent with all the observed mean values.
+For this purpose we define a functional S(ρ) by
+S(ρ) = −
+Z
+Rn dV ρ ln
+ ρ
+ρ0
+
+.
+(4)
+S is by definition the relative entropy of the probability distribution ρ with
+respect to ρ0. We will see later that our use of the word entropy here is consistent
+with its usage in thermodynamics.
+The maximum entropy principle states that one should choose the probability
+distribution that maximizes the functional
+S(ρ) = −
+Z
+Rn dV ρ ln
+ ρ
+ρ0
+
+,
+(5)
+subject to the constraints
+⟨fj⟩=
+Z
+Rn dV fj ρ = cj, j = 1, 2, ..., p.
+(6)
+73
+
+
+6.1.1
+The general thermodynamical formalism
+In this section we will solve the maximum principle stated in the previous section
+using the calculus of variations. The problem will initially be solved in the
+general setting described in the previous section, but we will eventually specialize
+to the case of statistical mechanics.
+In order to proceed we must first recognize that in additional to the p
+constraints (6), we have one more constraint that simply expresses the fact that
+ρ is a probability distribution.
+⟨1⟩=
+Z
+Rn dV ρ(x1, ..., xn) = 1,
+(7)
+and we thus have p+1 constraints and therefore introduce an extended functional
+T(ρ) = S(ρ) −λ0 ⟨1⟩−
+p
+X
+j=1
+λj ⟨fj⟩,
+(8)
+Note that we could have written
+T(ρ) = S(ρ) −λ0 (⟨1⟩−1) −
+p
+X
+j=1
+λj (⟨fj⟩−cj),
+(9)
+in order to make the values of the constraints explicit. However, all constant
+terms vanish when we take variational derivative, so we might as well drop the
+constant terms. Also note that our choice of minus sign in front of the Lagrange
+multiplier terms in (8) and (9) is a convention inspired by the application of this
+formalism to the case of statistical mechanics.
+The integral density corresponding to the extended functional T(ρ) is
+L = −ρ ln
+ ρ
+ρ0
+
+−λ0 ρ −
+p
+X
+j=1
+λj fj ρ.
+(10)
+Observe that L does not depend on any derivatives of ρ. The Euler-Lagrange
+equation for T is therefore simply
+∂L
+∂ρ = 0,
+(11)
+⇕
+−ln
+ ρ
+ρ0
+
+−1 −λ0 −
+p
+X
+j=1
+λjfj = 0,
+whose solution is
+ρ = ρ0
+Z exp
+
+
+−
+X
+j
+λj fj
+
+
+,
+74
+
+
+where we have defined Z = exp{(1 + λ0)}. In order for the constraint ⟨1⟩= 1 to
+be satisfied, we must have
+⟨1⟩= 1,
+⇕
+Z
+Rn dV ρ0
+Z exp
+
+
+−
+X
+j
+λj fj
+
+
+= 1,
+⇕
+Z = Z(λ1, ..., λp) =
+Z
+Rn dV ρ0 exp
+
+
+−
+X
+j
+λj fj
+
+
+,
+(12)
+and the stationary distribution is
+ρ(x1, ..., xn) = ρ0(x1, ..., xn)
+Z(λ1, ..., λn) exp
+
+
+−
+p
+X
+j=1
+λj fj(x1, ..., xn)
+
+
+.
+(13)
+ρ is called the maximum entropy distribution and Z is the partitionfunction.
+Note that we have not proved that the distribution (13) in fact gives a maximum
+value for S, but this can be done[4].
+The Lagrange multipliers λ1, ..., λp are chosen so that all the constraints are
+satisfied
+⟨fj⟩=
+Z
+Rn dV fj(x1, ..., xn) ρ(x1, ..., xn) = cj
+j = 1, ..., p .
+(14)
+The system of equations (14) consists of p equations for the p unknown quantities
+λj.
+As it turns out, we almost never need to know the distribution ρ from (13),
+it is enough to know the partition function. Observe that
+⟨fj⟩=
+Z
+Rn dV fj ρ
+= 1
+Z
+Z
+Rn dV fj ρ0 exp
+
+−
+p
+X
+i=1
+λifi
+
+
+= −1
+Z
+Z
+Rn dV ∂λj{ρ0 exp
+
+−
+p
+X
+i=1
+λifi
+
+}
+= −1
+Z ∂λj
+Z
+Rn dV ρ0 exp
+
+−
+p
+X
+i=1
+λifi
+
+
+= −1
+Z ∂λjZ = −∂λj ln Z
+⇓
+⟨fj⟩= −∂λj ln Z,
+(15)
+75
+
+
+and thus we can find the mean of all the quantities fj by taking partial derivatives
+of the natural logarithm of the partition function with respect to the Lagrangian
+multipliers. Moreover, we also have
+∂λjλk ln Z = ∂λj( 1
+Z ∂λkZ)
+(16)
+= −1
+Z2 ∂λjZ ∂λkZ + 1
+Z ∂λjλkZ
+= −∂λj ln Z ∂λk ln Z + 1
+Z
+Z
+Rn dV fj fk ρ0 exp
+
+−
+X
+i
+λi fi
+
+
+= −∂λj ln Z ∂λk ln Z + ⟨fj fk⟩.
+Thus
+⟨fj fk⟩= ∂λj ln Z ∂λk ln Z + ∂λj λk ln Z
+(17)
+In a similar way all correlation coefficients
+
+f n1
+1 ...f np
+p
+
+can be expressed through
+partial derivatives of the partition function.
+Inserting the maximum entropy distribution (13) into the entropy functional
+(5) gives us the following expression for the maximal value of the entropy
+S = ln Z +
+X
+j
+λj ⟨fj⟩.
+(18)
+From a mathematical point of view we now have two sets of variables {⟨f1⟩, ..., ⟨fp⟩}
+and {λ1, ..., λp}. Geometrically we imagine that these two pairs of variables,
+together with S, defines a space Ωof odd dimension 2p + 1 with coordinates
+{S, ⟨f1⟩, ..., ⟨fp⟩, λ1, ..., λp}. The p identities (14) defines a p + 1 dimensional
+surface Λ in Ω.
+Taking the differential of the identity (18) we get
+dS =
+X
+j
+∂ln Z
+∂λj
+dλj +
+X
+j
+{⟨fj⟩dλj + λjd ⟨fj⟩}.
+Restricting this differential to the surface Λ, and thus using the identities (15),
+gives us the following expression for the differential dS restricted to the surface
+Λ
+dS =
+X
+j
+λjd ⟨fj⟩.
+(19)
+The identity (18) defines the entropy as a function depending on all 2p variables
+in Ω. We therefore have
+dS =
+X
+j
+∂S
+∂λj
+dλj +
+X
+j
+∂S
+∂⟨fj⟩d ⟨fj⟩.
+(20)
+Comparing (19) and (20) we conclude that on the surface Λ we must have the
+identities
+∂S
+∂λj
+= 0,
+∂S
+∂⟨fj⟩= λj.
+(21)
+76
+
+
+Thus, on the surface Λ, the entropy depends only on the variables {⟨f1⟩, ..., ⟨fp⟩}
+and the derivative with respect to these variables determines the values of the
+Lagrange multipliers in terms of the data {c1, ..., cp} of the problem.
+It is frequently the case that in addition to the variables {x1, ..., xn}, the
+observables depends on parameters. For notational simplicity, let us assume that
+there is only one parameter denoted by the symbol α. Thus we have observables
+{f1(x1, ...xn; α), ..., fp(x1, ...xn; α)}. The presence of the parameter does not
+change the argument leading up to the maximum entropy distribution (13) and
+thus we have the formulas
+ρ(x1, ..., xn; α) =
+ρ0(x1, ..., xn)
+Z(λ1, ..., λp; α) exp
+
+
+−
+p
+X
+j=1
+λj fj(x1, ..., xn; α)
+
+
+,
+Z(λ1, ..., λp; α) =
+Z
+Rn dV ρ0 exp
+
+
+−
+X
+j
+λj fj(x1, ..., xn; α)
+
+
+.
+(22)
+Differentiation of the partition function (22) with respect to the parameter α
+gives us the expression
+∂Z
+∂α = −
+Z
+Rn dV ρ0
+X
+j
+λj
+∂fj
+∂α exp
+
+
+−
+X
+j
+λj fj
+
+
+,
+⇓
+∂ln Z
+∂α
+= −
+X
+j
+λj
+∂fj
+∂α
+
+.
+(23)
+If we repeat the calculation leading from (18) to (19) for the case when the
+observables depends on a parameter α, we now get instead of (19) the following
+more general expression for the differential of the entropy
+dS =
+X
+j
+λjd ⟨fj⟩−
+X
+j
+λj
+∂fj
+∂α
+
+dα,
+(24)
+where we have used the identity (23).
+Note that this differential identity can be written in the form
+dS =
+X
+j
+λjdQj,
+(25)
+where we have introduced the quantities dQj representing generalized heat
+associated with the observables
+dQj = d ⟨fj⟩−
+∂fj
+∂α
+
+dα
+= d ⟨fj⟩−
+∂fj
+∂α dα
+
+= d ⟨fj⟩−⟨dfj⟩.
+(26)
+77
+
+
+Formula (26) tells us what heat actually represents. Physical systems on the
+human scale, these are evidently the ones of most immediate interest to us,
+consists of an immense number of elementary subsystems. The detailed con-
+figurational variables for all these elementary systems defines the microscopic
+degrees of freedom of the human scale system. The state of these microscopic
+degrees of freedom are unknown to us and our ability manipulate them directly
+is entirely lacking. The few degrees of freedom of the system whose state we
+can know defines the macroscopic degrees of freedom for the system. In our
+description of thermodynamics these are the observables fj. These macroscopic
+degrees of freedom typically depend on quantities that, in the context of a given
+physical system, we can fully control and which consequently are subject to no
+statistical fluctuations. These quantities are represented by the parameter(s) α.
+The volume of the container containing a gas, the temperature in the immediate
+surroundings of the container and the external pressure applied to a fluid-gas
+interface separating a system from the environment, are examples of quantities
+represented by the parameter(s) α.
+A change in the mean value of a macroscopic degrees of freedom,d ⟨fj⟩, comes
+from two sources. The first source is a change in the observable representing the
+said macroscopic degree of freedom. This change is brought about by changing
+the the parameters α. This quantity is represented by ⟨dfj⟩in formula (26).
+When this quantity is subtracted from d ⟨fj⟩, what remains is the second source of
+change of the mean. This second source is a change in the underlying probability
+distribution, which represents a change in our information about the microscopic
+state of the system. When our ignorance about the microscopic state of a system
+increase, the system grows “hotter”, corresponding to an increase in dQj. If our
+ignorance decrease, the system grows “colder”, corresponding to a decrease in
+dQj.
+As is usual in thermodynamics, the formalism is misleading in the sense
+that dQj merely denote an infinitesimal amount of generalized heat and is
+not the differential of some function Qj. No such function exists. The proper
+mathematical way to think about the identity (24) is that dS and dQj are
+differential forms where dS is an exact differential forms, meaning it is the
+differential of a function, and dQj are inexact differential forms and thus not the
+differential of a function. However, the mathematical formalism of differential
+forms must be introduced in the very large context of differential geometry and
+we will not digress into this area of mathematics.
+The above explanation of the nature of heat, referred to the original appli-
+cation of the thermodynamical formalism, where the systems has an immense
+number of microscopic degrees of freedom, which are in principle knowable and
+controllable, but as practical matter, not. We however know that the thermo-
+dynamical formalism can be applied to any situation where systems has more
+degrees of freedom than the ones we chose to observe. This might be because
+the underlying degrees of freedom are unknown but it could also be the case that
+they are known but that we for various reasons choose to ignore them. In both
+cases the argument above stands, and the existence of the unknown or ignored
+degrees of freedom manifest as heat in the theory.
+The quantities we can control and which are represented by the parameter(s)
+α need not necessarily be numerical parameters like temperature, pressure,
+volume etc. For example, for the situation where the underlying space is the
+state space a mechanical system consisting of a finite number of particles, a
+78
+
+
+system of classical fields or even the Fock state space for a quantum mechanical
+many particle system, the microscopic degrees of freedom are in most cases of
+interest confined to a bounded spatial domain D. A domain which is defined
+by its bounding surface Γ. For this case, all observables for the system will
+depend on the bounding surface Γ, fj = fj(x1, ...xn; Γ), and thus for this case
+the parameter α is a surface and the macroscopic degrees of freedom fj are
+functionals.
+In order to derive analogs to the important thermodynamical formulas (23)
+and (24) for this case, we consider a small deformation, δΓ, of the bounding
+surface Γ. Thus Γ −→Γ + δΓ. This deformation leads to variations
+δΓfj(x1, ...xn; Γ) = fj(x1, ...xn; Γ + δΓ) −fj(x1, ...xn; Γ),
+δΓZ(λ1, ..., λp; Γ) = Z(λ1, ..., λp; Γ + δΓ) −Z(λ1, ..., λp; Γ).
+(27)
+Arguing exactly like we did for the simple case of a single parameter we now
+find the important identity
+δΓ ln Z = −
+X
+j
+λj ⟨δΓfj⟩.
+(28)
+This identity will, for the special cases mentioned above, lead to the definition
+of the thermodynamic pressure and related quantities. Corresponding to the
+differential identity for the entropy (24) we now get the following more general
+variational identity
+δS =
+X
+j
+λjd ⟨fj⟩−
+X
+j
+λj ⟨δΓfj⟩.
+(29)
+6.1.2
+The thermodynamic formalism in statistical physics
+Let us now consider the special case when our underlying space is the classical
+state space for a mechanical system with n degrees of freedom. This could for
+example consist of n mass points. We will assume that the system is confined
+to a bounded domain D in R3 defined by a bounding surface Γ. The state
+space is thus a subset of the euclidean space R6n with coordinates (q, p) =
+(q1, ..., qn, p1, ..., pn), since we need 3 position coordinates and 3 momentum
+coordinates for each particle in order to uniquely specify the state of the system.
+Let H = H(q, p) be the Hamiltonian for the system of mass points. Recall that
+the value of the Hamiltonian on any given state, (q, p), is the energy, E, of that
+state.
+When n is large it is very hard, and also mostly useless, to try to track the exact
+state (q(t), p(t)) of a system of mass points.
+For such a large system it is more useful to consider a probability distribution
+ρ(q, p) on the state-space. This is the point of view introduced by Gibbs. We
+will first consider the simplest, and by far the most common situation, where
+the Hamiltonian, H = H(q, p) is the only observable. The maximum entropy
+distribution for this case is
+ρ(q, p) = ρ0(q, p)
+Z
+exp
+
+−H(q, p)
+kT
+
+,
+(30)
+79
+
+
+where the partition function is given by
+Z = Z(T) =
+Z
+R6n dqdp ρ0(q, p) exp
+
+−H(q, p)
+kT
+
+,
+(31)
+and where we have redefined the single Lagrange multiplier using
+λ =
+1
+k T .
+(32)
+In this formula, k is the Boltzmann constant and T is a new parameter which by
+definition is the thermodynamic temperature. The parameter T is determined
+by
+E = ⟨H⟩,
+⇕
+E = k T 2 ∂T ln Z,
+(33)
+where we have used the chain rule
+∂λ = −k T 2 ∂T ,
+(34)
+in the general formula (15).
+Formula (33) is in statistical mechanics and thermodynamics called the
+equation of state, and all thermodynamic statements that can be made about
+the system flows from this formula. The formula for the equation of state may
+look innocent, in order to find it you merely need to take the derivative of the
+partition function, and partition function also looks innocent, after all it is just
+a function of one variable, the kind of function we study in first year calculus.
+However, in order to actually find an expression for this single variable function
+one needs to do the integral in formula (31), and this is a multiple integral
+involving something like 1027 integration variables in typical situations! Clearly,
+an exact formula for the partition function can rarely be found. Approximate
+expressions where the large number of particles are used to ones advantage can
+more frequently be found, but pushing through calculations like these are as a
+rule extremely technical. More than one Nobel price has been handed out for
+developing feasible schemes for calculating the partition function. Given the level
+of complexity involved in calculating the partition function from the defining
+formula (31), and the fact that the partition function simply is a function of one
+or a few variables, it should come as no surprise that the most common approach
+to finding the equation of state is to fit parametrized functions to experimental
+data.
+The maximum entropy distribution (30) is recognized to essentially be the
+Gibb’s Canonical ensemble from statistical physics.
+The Gibb’s ensemble is the foundation of statistical physics. All results
+in statistical physics flows from formula (30). Statistical physics is also the
+foundation of thermodynamics so all conclusions from that subject also flow
+from the Gibb’s ensemble (30). In the thermodynamics context, (33) is, as we
+have already remarked, nothing but the equation of state.
+An interesting insight here is that the temperature of a thermodynamic
+system is in fact a Lagrange multiplier!! This is a profound insight that to this
+day has not been fully understood or explored.
+80
+
+
+From this example, it appears useful to think of any application of the maximal
+entropy principle as an extension of the methods of statistical mechanics to
+systems that has absolutely nothing to do with the motion of mass points.
+This wide general applicability of the methods of statistical physics has lead
+to deep questions and insights into the nature and significance of the assumption
+of equilibrium that appears to underline the application of the Gibb’s ensemble
+in statistical physics.
+There is also the intriguing fact that the very same functional (5) used in the
+maximum entropy principle, is also the foundation of information theory which
+was discovered by Shannon in 1948. This connection between information theory
+and statistical mechanics (and thermodynamics) has lead to deep insights into
+the role of information in our fundamental physical theories.
+As already discussed in the introduction, the general nature and wide applicability
+of the maximum entropy principle has been described well by E.T. Jaynes in
+many papers and the (unfinished) monumental book ”Probability theory: The
+Logic of Science”.
+As if all this is not impressive enough for one single principle, it is also a very
+intriguing fact that when one looks deep into the heart of fundamental physics,
+in the form of quantum field theory, one again finds an appropriately generalized
+form of the partition function (12). The whole computational engine in the
+theory of quantum fields revolve around a generalized Gibb’s ensemble!
+What on earth is going on...
+6.1.3
+The problem of prior
+Note that formula (30) does not uniquely define Gibbs ensemble because of the
+presence of the prior distribution ρ0. The actual Gibbs ensemble corresponds to
+the choice ρ0 = 1. When using the information theoretical approach to statistical
+mechanics and thermodynamics, like we do here, one should be very wary when
+it comes to the choice of the prior distribution. It is simply the most contentious
+issue in the whole theory. One should ask pointed questions of justification for
+any proposed choice. What kind of information about the system is it based on,
+and is it the correct embodiment of said information?
+In fact, if one study expositions of statistical mechanics and thermodynamics,
+which are based on the traditional objective dynamical approach to the subject,
+one finds that the choice of what from the information theoretical point of view
+is the prior distribution, is much discussed. The reasons for choosing ρ0 = 1 that
+have appeared through these discussions are, in our humble opinion, not very
+convincing.
+The problem of determining the prior distribution has been at the center
+of probability theory and statistics from the very start.
+The general rules
+of probability theory tells us how to compute probabilities for derived events
+from probabilities of primary events. The problem of prior is concerned with
+the problem of assigning probabilities to primary events. The assignment is
+supposed to reflect an observers state of knowledge about the primary events.
+The assignment should be the same for different observers with the same state of
+knowledge but can be different for observers with different states of knowledge
+[7]. In this sense probability assignments are subjective [8],[1],[2]. The problem
+of the prior is how to turn states of knowledge into probability assignments. The
+first solution to this problem was used by the very founders of probability theory
+81
+
+
+(Bernoulli and Laplace). If the observers only knowledge of the primary events
+are their number, then a uniform probability assignment should be used. This
+idea was later named the principle of indifference by J. M. Keynes. Generalizing
+this idea to countably infinite or even continuous spaces of primary events has
+turned out to be very problematic. Laplace himself used such a generalization
+is his work on probability theory. His probability distribution was uniform
+and not normalizable since it was defined on the whole real line.
+Using a
+uniform distribution for representing indifference about a random variable on a
+finite interval on the real line would seem to be more reasonable, at least it is
+normalizable. However even in this case serious problems arise as the well known
+Bertrand’s paradox shows. Problems and paradoxes arising from the various
+generalizations of the principle of indifference to continuous random variables
+played no small part in the creation and for a long time complete dominance of
+the frequency interpretation[3] of probability theory.
+The principle of maximum entropy appears first in the writings of W. Gibbs
+[5] on thermodynamics and statistical physics and later in the fundamental work
+on information theory by Shannon [10]. However it was E. T. Jaynes [6] who
+realized the real importance and general nature of the principle of maximum
+entropy. In his hands it turned into a general method for turning prior knowledge
+in the form of mean values for observables defined on finite state spaces, into
+prior probability assignments.
+Let us consider this simplest case in more detail. Let Ω= {x1, x2, ...., xn} be
+a finite space of primary events. The algebra of possible events is the set of all
+subsets of Ω. A probability assignment on the set of primary events is a finite
+set of numbers p = {pi} such that 0 ≤pi ≤1 and Pn
+i=1 pi = 1. Let f1, ..., fk be
+real valued functions on Ω. The principle of maximum entropy states that if
+the means of the functions f1, .., fk are known, ⟨fi⟩= ci, one should, among all
+probability assignments that satisfy the constraints, pick the one that maximizes
+the entropy S = −Pn
+i=1 pi ln pi. The solution to this constrained maximization
+problem is, as we have seen, the maximum entropy distribution
+p =
+1
+Z(λ1, ..., λk) exp
+
+−
+k
+X
+j=1
+λjfj
+
+,
+(35)
+where Z is the partition function and is given by
+Z(λ1, ..., λk) =
+n
+X
+i=1
+exp
+
+−
+k
+X
+j=1
+λjfj(i)
+
+.
+(36)
+Observe that for the particular situation where there are no constraints, the
+principle gives Z = n and the maximum entropy distribution is uniform
+pi = 1
+n.
+(37)
+Thus, for an observer that only know that there are n possible primary events,
+the maximum entropy distribution is exactly the one suggested by the principle
+of indifferent! The conclusion appeared to be that not only could the maximum
+entropy distribution tell us how to choose the best distribution in the presence
+of observed means of a finite number of observables, it could also tell us which
+82
+
+
+distribution to choose when our ignorance is so profound that the only thing
+we know about a situation is the number of possible primary events. This
+distribution is of course exactly what we have called the prior distribution. For
+a time it looked as if the problem of prior was essentially solved. However
+continuous valued random variables again turned out to be the Achilles heel.
+For finite spaces of events the principle will give a unique probability assignment,
+but when generalizing it to continuous random variables by taking a continuum
+limit of the finite discrete expression for the entropy, an unknown probability
+density appears. The density appears because the continuum limit is not unique.
+Different limiting expressions are found depending on how one approach the
+continuum through a countable set of discrete spaces. The unknown probability
+distributions that appears essentially depends on how the discrete points bunch
+up in the limit. The meaning of this probability density became clear when
+it was realized that it is the maximum entropy distribution corresponding to
+no constraints. Thus it was understood that in order to apply the principle of
+maximum entropy one must start with a prior distribution. The principle of
+maximum entropy could not determine the prior, it could only tell us how to
+modify an already existing prior in order to satisfy constraints in the form of
+mean values. It seemed as if one were back to square one.
+There does however exist a systematic way to turn prior information on
+means of observables into prior distributions, and it does involve the maximum
+entropy principle, but not in the direct way just described. In fact, after a
+certain reformulation it will become evident that the problem of selecting a prior
+is not merely a side issue that has to be resolved in order to proceed with the
+real work of applying the maximum entropy principle, the problem of prior is
+the only issue as far as the maximum entropy principle is concerned.
+In order to describe this reformulation of the principle of maximum entropy,
+we will return to the special case of statistical mechanics. In the previous section
+we discussed the problem of specifying the prior in the context of statistical
+mechanics and expressed our doubt as to the justifications for making the
+standard choice ρ0(q, p) = 1. Even if we are doubtful about the justification
+for this particular choice, it is clear that when we apply the maximum entropy
+principle in statistical mechanics there is a physical context that certainly
+makes some choices of the prior more reasonable than othersr. By picking
+the Hamiltonian function as our observable we must also acknowledge that the
+system evolve according to the corresponding Hamiltonian equations. It is always
+the case that the the Hamiltonian function, H(q, p), which represents the energy,
+is a constant of the motion. Depending on the symmetries of the interaction,
+Hamiltonian systems of equations may also have other conserved quantities. The
+generic situation is however that the energy is the only conserved quantity. We
+will assume that this is the case and let the corresponding Hamiltonian function
+H be our only observable. The maximum entropy distribution is now given by
+expression (104) where ρ0 is the prior distribution. It is in the current context
+reasonable to impose the condition that the prior is a stationary solution to the
+corresponding Liouville equation. But this means that the prior distribution,
+ρ0 = ρ0(q, p), is a conserved quantity for the Hamiltonian system and since
+the Hamiltonian is the only independent conserved quantity for our generic
+Hamiltonian system we must have
+ρ0(q, p) = f0(H(q, p)),
+83
+
+
+where f0 is an arbitrary function defined on the positive real line. Using this
+fact we have from (31)
+Z(T) =
+Z
+R6n dq dpρ0(q, p) exp
+
+−H(q, p
+kT
+
+=
+Z
+R6n dq dpf0(H(q, p)) exp
+
+−H(q, p
+kT
+
+=
+Z ∞
+0
+dE exp
+
+−E
+kT
+
+f0(E)
+Z
+H=E
+dq dp
+=
+Z ∞
+0
+dE exp
+
+−E
+kT
+
+ρ0(E),
+(38)
+where we have defined
+ρ0(E) = f0(E)
+Z
+H=E
+dq dp.
+(39)
+The constraints on the microscopic prior distribution ρ0(q, p) has reduced our
+original maximum entropy principle on the extremely high dimensional space
+R6n with the Hamiltonian as our observable, to a maximum entropy problem
+on the real line where the coordinate on the line, E, is the observable and the
+macroscopic prior is given by (39). The maximum entropy distribution for this
+case is
+ρ(E) = ρ0(E)
+Z(T) exp
+
+−E
+kT
+
+,
+(40)
+where the partition function is given by
+Z(T) =
+Z ∞
+0
+dE ρ0(E) exp
+
+−E
+kT
+
+.
+(41)
+This simple situation where we apply the entropy principle to a low dimensional
+state space Rp and where the observables are the coordinate functions, x1, ..., xp
+on the space is not special at all, in fact this is the most common situation when
+we apply the maximum entropy principle and other applications can almost
+always be reduced to this situation using an approach similar to the reduction
+from R6n to R described for the case of statistical mechanics.
+In most applications of probability theory in statistics there is no underlying
+high dimensional space of primary events, Ω, like in statistical mechanics and
+other areas of physics, and the random variables are not some functions, like the
+Hamiltonian, defined on this space.
+Thus in the typical case one can assume that Ω= Rp, where p is a fairly
+small number, and that the random variables are just the coordinate function
+on Rp. The prior probability distribution is then a function, ρ0 = ρ0(x1, ..., xp),
+on Rp, and the partition function is given by the formula
+Z(λ1, .., λp) =
+Z
+Rp dx1dx2...dxp ρ0(x1, ..., xp) exp
+
+−
+p
+X
+j=1
+λjxj
+
+.
+(42)
+The partition function is thus nothing but the multi dimensional Laplace trans-
+form of the prior distribution. This relation can be inverted, using analytical
+84
+
+
+continuation and the multidimensional Fourier transform on the imaginary λj
+axes, and thereby expressing the prior in terms of the partition function
+ρ0(x1, ..xp) =
+1
+(2π)p
+Z
+Rp dλ1..dλpZ(iλ1, .., iλp) exp
+
+i
+p
+X
+j=1
+λjxj
+
+.
+(43)
+The whole content of the maximum entropy principle is contained in the integral
+transforms (42) and (43) connecting the partition function and the prior distri-
+bution. This is the promised reformulation of the maximum entropy principle,
+and we understand now that the prior distribution is not merely a bit player
+in this drama, it is the only player. In the next section we will show how this
+reformulation of the maximum entropy principle gives us a method for solving the
+problem of prior, which we now see is the only remaining fundamental problem
+in the statistical modeling of natural or artificial systems.
+6.1.4
+Solving the problem of prior using stochastic relations
+In probability theory and statistics, random variables are often grouped into
+statistical quantities. These are certain algebraic combinations of means of
+functions of the random variables. A large set of such statistical quantities are
+in use, some simple examples are
+⟨x⟩
+The mean of x.
+(44)
+
+x2
+−⟨x⟩2
+The variance of x.
+(45)
+
+x3
+−3 ⟨x⟩
+
+x2
++ 2 ⟨x⟩3
+The third cumulant.
+(46)
+⟨xy⟩−⟨x⟩⟨y⟩
+The cross variance of x and y.
+(47)
+All such quantities can systematically be expressed as functions of the form
+F(q1, .., qk) where the variables qj are means of monomials in the random
+variables. We will define stochastic relations to be systems of equations for the
+quantities qj.
+Fi(q1, .., qk) = 0
+i = 1, ..., s.
+(48)
+Such relations are common in probability and statistics. Examples are zero
+mean, fixed variance, uncorrelated variables and identities expressing higher
+order cumulants in terms of lower ones. Identities such as the last ones in the
+previous list are the fundamental tools used to construct theories of turbulence
+in fluid, gases and elsewhere. They are also, in their quantum incarnations,the
+key tools used to find viable simplified models in solid state physics and material
+science.
+In the previous section we have seen that the maximum entropy principle
+defines a Laplace transform that map the prior distribution to a partition
+function. As a direct consequence of this transformation, we can express means
+of monomials in the random variables in terms of partial derivatives of the
+partition function. For example we have
+⟨fi⟩= −1
+Z ∂λiZ,
+var(fi) =
+
+f 2
+i
+
+−⟨fi⟩2 = −1
+Z2 ∂λZ2 + 1
+Z ∂λλZ.
+85
+
+
+This means that the maximum entropy principle turns stochastic relations into
+systems of partial differential equations for the partition function and therefore
+imposes constraints on the prior distribution.
+The problem is now how to describe the space of solutions of these systems
+of partial differential equations. In general, not all solutions to the equations
+can correspond to prior probability distributions. From the definition of the
+partition function it is for example clear that
+Z(0) = 1,
+Z(λ1, · · · , λp) ≥0,
+must hold for any acceptable solution.
+Finding necessary and sufficient conditions for functions to be the Laplace
+transform of a probability distribution, and thus be acceptable solutions of the
+systems of differential equations corresponding to stochastic relations, is not a
+simple matter, but some results are known [9]. We will not discuss this problem
+but rather try to explicitly construct the solution space or to say something
+useful about the structure of the solution space using methods from the formal
+theory of differential equations . Typically, the solution space is not a linear
+space and even when it is, the dimension could easily be infinite. However,
+depending on the number and types of stochastic relations the solution space can
+end up being parametrized by a finite set of parameters or even be a single point.
+In this last situation the stochastic relations determine the prior uniquely. Note
+that in ordinary (parametric) statistics finite parameter families of probability
+distributions (Gaussian, Poisson, Bernoulli, t-distribution, etc) are assumed to
+apply in given situations. From the point of view discussed in these notes, this
+means that in ordinary statistics, stochastic relations constrain the solution space
+enough for it to be parameterized in terms of a finite number of parameters.
+Nonparametric statistics correspond to the situation when the solution space
+is so weakly constrained that it can not be parameterized in terms of a finite
+number of parameters. Methods from the theory of partial differential equations
+can in some cases parameterize such weakly constrained solution spaces, not in
+terms of real numbers, but in terms of arbitrary functions. However for such
+weakly constrained solution spaces there is another powerful tool available. This
+is the formal theory of partial differential equations. The main object of study in
+this theory is the infinitely prolonged hierarchy of a given systems of differential
+equations. Thus one studies the infinite set of all differential consequences of a
+given system of equations. Each such differential consequence can be converted
+back into a stochastic relation by using the relation between mean of monomials
+and partial derivatives in reverse. One therefore gets the corresponding hierarchy
+of stochastic relations that are consequences of the original relations induced by
+the maximum entropy principle and implemented through the Laplace transform.
+In the remaining part of this subsection we will discuss several examples that
+illustrate the method that has been outlined.
+Stochastic relations for one random variable
+Essentially all families of
+distribution in use in parametric statistics can be derived from simple stochastic
+relations involving the mean, variance and skewness. In this section we show
+some examples that support this statement.
+86
+
+
+Delta distribution
+Let us consider the stochastic relation corresponding
+to a fixed mean. It is
+⟨x⟩−q = 0.
+(49)
+The Laplace transform convert this into the ordinary differential equation
+Zλ = −qZ.
+(50)
+For this simple stochastic relation our system of partial differential equations is
+a single linear ordinary differential equation. The solution space is linear and
+parameterized by a single parameter
+Z(λ) = ae−qλ.
+(51)
+The condition Z(0) = 1 fixes the parameter a to be one and we have a unique
+solution. It is a simple matter to apply the inverse transform (43) to find the
+corresponding prior distribution
+ρ0(x) = 1
+2π
+Z ∞
+−∞
+dλZ(iλ) exp(iλx)
+= 1
+2π
+Z ∞
+−∞
+dλ exp(−iqλ) exp(iλx)
+= 1
+2π
+Z ∞
+−∞
+dλ exp(i(x −q)λ)
+= δ(x −q).
+(52)
+Normal distribution
+The stochastic relation corresponding to constant
+variance is
+var(x) = q,
+(53)
+and the corresponding differential equation is
+ZZλλ −Z2
+λ −qZ2 = 0.
+(54)
+This is a second order nonlinear ordinary differential equation. The general
+solution of the nonlinear equation that satisfies the requirement Z(0) = 1 is
+Z(λ) = e−aλ+ 1
+2 qλ2,
+a ∈R.
+(55)
+Using this partition function we can predict the mean of the random variable x
+to be
+⟨x) = −
+1
+Z(λ)
+∂Z(λ)
+∂λ
+= a
+(56)
+and the corresponding prior distribution is found, using (43), to be
+87
+
+
+ρ0(x) = 1
+2π
+Z
+R
+dλ Z(iλ) exp(iλ x)
+= 1
+2π
+Z ∞
+−∞
+dλ exp
+
+−iaλ −1
+2qλ2
+
+exp(iλ x)
+=
+1
+√2πq e−(x−a)2
+2q
+.
+(57)
+which is the normal distribution.
+Poisson distribution
+Let us consider the stochastic relation
+var(x) =< x > .
+(58)
+The corresponding differential equation is
+ZZλλ −Z2
+λ + ZZλ = 0.
+(59)
+This equation and most equations derived from stochastic relations simplify
+considerably if we introduce a new function φ through Z = eφ. The equation
+for φ is
+φλλ = −φλ.
+(60)
+This equation is easy to solve and the corresponding family of partition functions
+satisfying, as always, the constraint Z(0) = 1 is
+Z(λ) = ea(e−λ−1).
+(61)
+The corresponding prior distribution is found using (43)
+ρ0(x) = 1
+2π
+Z
+R
+dλ Z(iλ)eiλ x
+= 1
+2π
+Z
+R
+dλ ea(e−iλ−1)eiλ x
+= e−a
+∞
+X
+k=0
+ak
+k!
+1
+2π
+Z
+R
+dλ eiλ(x−k)
+= e−a
+∞
+X
+k=0
+ak
+k! δ(x −k).
+This is a distribution supported on Ω= {0, 1, 2, ....} and which on this discrete
+support has the values
+ρ0(k) = e−aak
+k!
+.
+(62)
+This is the Poisson distribution.
+88
+
+
+Gamma distribution
+Let us consider a stochastic relation
+var(x) = 1
+k ⟨x⟩2
+k > 0.
+(63)
+Expressed in terms of φ the corresponding differential equation is
+φλλ = 1
+k φ2
+λ.
+(64)
+The general solution of this equation gives the following family of partition
+functions
+Z(λ) = (1 + aλ)−k
+a > 0.
+(65)
+The corresponding prior distribution is supported on Ω= (0, ∞) and is given by
+ρ0(x) = xk−1 e−x
+a
+akΓ(k).
+(66)
+This is the Gamma distribution
+Bernoulli and Binomial distribution
+Let the variance be the following
+quadratic function of the mean
+var(x) = ⟨x⟩(1 −⟨x⟩).
+(67)
+The corresponding differential equation for φ is
+φλλ = −φλ(1 + φλ).
+(68)
+The solution of the equation gives the following family of partition functions
+Z(λ) = p + qe−λ
+p + q = 1.
+(69)
+The corresponding prior distribution is found using (43)
+ρ0(x) = 1
+2π
+Z
+R
+dλ Z(iλ)eiλ x
+= 1
+2π
+Z
+R
+dλ (p + qe−iλ)eiλ x
+= 1
+2π
+Z
+R
+dλ peiλ x + 1
+2π
+Z
+R
+dλ qei(x−1)λ
+= pδ(x) + qδ(x −1).
+The distribution is supported on Ω= {0, 1} and is clearly the Bernoulli distribu-
+tion. If we generalize the stochastic relation to
+var(x) = ⟨x⟩(1 −1
+n ⟨x⟩).
+(70)
+where n is a natural number we get the differential equation
+φλλ = −φλ(1 + 1
+nφλ).
+(71)
+89
+
+
+The partition function is found to be
+Z(λ) = (p + qe−λ )n
+p + q = 1.
+(72)
+The corresponding prior distribution is now
+ρ0(x) = 1
+2π
+Z
+R
+dλ Z(iλ)eiλ x
+= 1
+2π
+Z
+R
+dλ (p + qe−iλ)neiλ x
+= 1
+2π
+Z
+R
+dλ
+n
+X
+k=0
+n
+k
+
+pn−kqkeiλ (x−k)
+=
+n
+X
+k=0
+n
+k
+
+pn−kqkδ(x −k).
+The prior distribution is supported on Ω= {0, 1, ...n} and is on this domain
+given by
+ρ0(k) =
+n
+k
+
+pkqn−k,
+(73)
+This is clearly the Binomial distribution.
+Stochastic relations for more than one random variable
+When the
+number of random variables become larger than one, stochastic relations in
+general leads to systems of nonlinear partial differential equations. Unless the
+number and type of relations is right, it is impossible to describe the solution
+space in terms of a finite number of parameters. This lead us into the domain
+of nonparametric statistics. This is the domain where the methods from the
+formal theory of differential equations comes into play. It is not possible to give
+nontrivial applications of the theory here and we will therefore limit ourselves to
+two simple examples.
+The Multinomial distribution
+Let x1, ...xn be n random variables and
+consider the following system of stochastic relations
+var(xi) = ⟨xi⟩(1 −1
+n ⟨xi⟩) i = 1, ..n ,
+cov(xi, xj) = −1
+n ⟨xi⟩⟨xj⟩
+i, j = 1, ...n,
+i̸ = j.
+(74)
+The corresponding system of partial differential equations is
+φλiλi = −φλi(1 + 1
+nφλi),
+φλiλj = −1
+nφλiφλj.
+(75)
+90
+
+
+The second part of the system of equations has general solutions of the form
+φ = n ln(θ) where θ(λ1, .., λn) = Pn
+i=1 θi(λi). Inserted into the first part of the
+system this form for φ easily gives the partition function in the form
+Z(λ1, · · · , λn) =
+
+
+n
+X
+j=1
+pje−λj + pn+1
+
+
+n
+(76)
+=
+X
+k1+···+kn+1=n
+
+n
+k1, · · · , kn+1
+
+pk1
+1 · · · pkn+1
+n+1 e−Pn
+j=1 kjλj. (77)
+Here we have introduced the standard multinomial symbol
+
+n
+k1, · · · , kn+1
+
+=
+n!
+k1! · · · kn+1!.
+In order to ensure the correct normalization for the corresponding prior distribu-
+tion we must as usual have
+Z(0, · · · , 0) = 1
+⇕
+n+1
+X
+j=1
+pj = 1.
+We now find the prior distribution determined by the partition function (77)
+using the transform (43)
+ρ0(x1, · · · , xn) =
+1
+(2π)n
+Z ∞
+−∞
+dλ1 · · · dλn Z (λ1, · · · , λn) e−i Pn
+j=1 kjλj
+=
+X
+k1+···+kn+1=n
+
+n
+k1, · · · , kn+1
+
+pk1
+1 · · · pkn+1
+n+1 e−Pn
+j=1 kjλjδ(x1 −k1) · · · δ(xn −kn).
+This is the multinomial distribution. The positivity of ρ0 is ensured if pj ≥0.
+Taken together with the normalization condition this implies that
+0 ≤pj ≤1, j = 1, · · · , n + 1
+n+1
+X
+j=1
+pj = 1.
+Note that for the case discussed in this example the assumed stochastic relations
+gave rise to a system of partial differential equations for the partition function
+whose solution space could be parametrized by a finite number of parameters.
+The corresponding family of prior distributions were then also described in terms
+of a finite number of parameters. We are thus in the domain of parametric
+statistics. In general the given set of stochastic relations will give rise to a
+system of partial differential equations for the partition function whose space of
+solutions can only be parametrized using an infinite number of parameters. For
+such cases we are in the realm of non-parametric statistics. In the next example
+we will see an example of this.
+91
+
+
+Stochastic relations for the mean
+For a single random variable, stochas-
+tic relations involving only the mean gives distributions located on a finite
+number of points. For more than one random variable such relations gives rise
+to nonparametric statistics, or solution spaces parameterized by functions. The
+theory of partial differential equations can be used to give a full description of
+these solution spaces. As an example of such a relation consider the case of two
+random variables whose means are constrained to be on a circle of radius r.
+⟨x⟩2 + ⟨y⟩2 = r2.
+(78)
+The corresponding partial differential equation is i terms of φ
+φ2
+λ + φ2
+µ = r2,
+(79)
+and is known from optics as the Eiconal equation.The following Z is in the
+solution space
+Z = er√
+λ2+µ2.
+(80)
+This partition functions predicts that the following stochastic relation should
+hold
+var(x) =
+⟨y⟩
+⟨x⟩
+2
+var(y).
+(81)
+The partial differential equation has, however, infinitely many solutions. The
+method of characteristics can be used to describe the complete solution space. In
+order to derive stochastic relations that holds for all Z in the solution space, these
+are the ones that can be said to be consequences of the of the circle constrain,
+we should consider differential prolongations of the original differential equation.
+The first prolongation is the system
+φ2
+λ + φ2
+µ = r2,
+(82)
+φλφλλ + φµφµλ = 0,
+(83)
+φλφλµ + φµφµµ = 0,
+(84)
+and this system implies that
+φλλ =
+φµ
+φλ
+2
+φµµ.
+(85)
+Translated into stochastic relations this is exactly the one we derived for
+the special solution φ = r
+p
+λ2 + µ2 and it thus holds for all solutions. It is of
+considerable interest to find a finite set of basic stochastic relations that through
+some constructive procedure give rise to all consequences of some given system
+of stochastic relations. This is exactly the kind of question addressed in the
+formal theory of partial differential equations and the tools developed there can
+now, through the maximum entropy principle, be applied to solve problems in
+the area of nonparametric statistics.
+92
+
+
+6.1.5
+Thermodynamic pressure and its cousins
+We will now investigate an important consequence of the fundamental variational
+identity (28) for the thermodynamic case when the total energy is the only
+observable. For this special case the variational identity turns into
+⟨δΓH⟩= −kT δΓ ln Z.
+(86)
+The force acting at a boundary point x can, taking into account the fact that
+the state of the system is determined by the position and momenta of all the n
+particles comprising the system, be given by a function
+F = F(p, q, x),
+x ∈Γ, (p, q) ∈R6n.
+(87)
+A small deformation of the boundary is determined by an infinitesimal defor-
+mation vector field drΓ defined on the boundary Γ. The change in total energy
+induced by this deformation is given by
+δΓH(p, q; Γ) = −
+Z
+Γ
+dx F(p, q, x) · drΓ.
+(88)
+The fundamental variational identity (28) now gives
+Z
+Γ
+dx ⟨F(p, q, x)⟩· drΓ = kT δΓ ln Z.
+(89)
+We will in the following only consider the common situation defined by
+⟨F(p, q, x)⟩= p(x) n,
+(90)
+where n is the unit normal for the surface Γ. Note that by definition, p is now
+the pressure for the system. For this case (91) turns into the identity
+Z
+Γ
+dx p(x) n · drΓ = kT δΓ ln Z.
+(91)
+Let us first consider the case of a smooth surface, and for this kind of surface,
+let us consider an infinitesimal variation of the surface that is a pure expansion
+or contraction. This means that drΓ = nds. For this kind of variation the
+fundamental variational identity (91) takes the form
+ds
+Z
+Γ
+dx p(x) = kT δΓ ln Z.
+(92)
+Using the fact that the volume spanned by the deformation is dΓV = A(Γ)ds,
+where A(Γ) is the area of the surface, we have
+⟨p⟩Γ = kT δΓ ln Z
+dΓV
+,
+(93)
+where ⟨p⟩Γ is the average of the pressure over the surface of the cavity.
+For some important cases the partition function depends on the surface only
+through the volume. For this situation we have
+δΓ ln Z = ∂ln Z
+∂V dΓV,
+93
+
+
+so that
+⟨p⟩Γ = kT ∂ln Z
+∂V .
+(94)
+This is the standard formula for the thermodynamic pressure that one finds in
+any textbook. It is very frequently true that, independently of the shape, the
+partition function for large cavities depends only on the volume of the cavity.
+This may however not be the case for smaller cavities and for such cases we must
+retreat to the more general identity (93). It is easy to verify that the indentity
+(94) holds for any surface smooth or not. If the deformation is a pure expansion
+or contraction of a part of the surface defined by Γ0 ⊂Γ, we also get the identity
+(94), but now with Γ →Γ0.
+The general variational identity for the entropy (29) takes for the particular
+case discussed in this section the form
+δS = 1
+kT d ⟨H⟩−1
+kT ⟨δΓH⟩
+= 1
+kT d ⟨H⟩+ δΓ ln Z
+= 1
+kT d ⟨H⟩+ 1
+kT ⟨p⟩Γ dΓV,
+which can be rewritten as
+kTdS = dE + ⟨p⟩Γ dΓV,
+(95)
+where we have used (93) and where now E = ⟨H⟩is the energy of the sys-
+tem. We recognize (95) as one of the fundamental formulas from conventional
+thermodynamics.
+In this section we have done the derivation of the formulas for the Thermo-
+dynamical pressure for the case of a classical system. However, the derivation
+of the pressure formula for the case of quantum systems leads the exact same
+formulas. If there are more observables in addition to the energy, for example
+total momentum and/or total angular momentum, the pressure formulas must
+be generalized. The derivation of the generalizations follow the pattern laid
+down in this section.
+6.2
+The maximum entropy principle for quantum systems
+We have in the first section of these notes introduced the thermodynamical
+formalism in the context of classical physics and classical observables. It involved
+a state space that was finite or at least finite dimensional, and the challenge was
+to determine which probability distribution on the state space is the best to use,
+given the means of a finite number of observables of the system. The solution
+to this problem was to choose the probability distribution that maximized the
+entropy functional (4) under the constraints determined by the given means. At
+the face of it, for a quantum system, the situation appears to be very different.
+For this case the state space is an infinite dimensional Hilbert space and the
+full information that an observer has is encoded in the density operator for the
+system. This is a self-adjoint positive operator ˆρ, on the Hilbert space with trace
+equal to one.
+Tr(ˆρ) = 1.
+94
+
+
+The expectation value of any quantum observable, ˆA is by definition
+D
+ˆA
+E
+= Tr(ˆρ ˆA).
+(96)
+The question one poses is which density operator should be used if we only know
+the expectation value of a finite number of quantum observables ˆAi.
+D
+ˆAi
+E
+= ai,
+i = 1, 2, ...p.
+(97)
+Even though there are real differences between the classical and the quantum
+case, much is also the same.
+The analog of the Gibbs entropy measure (5) is the Von Neumann entropy
+measure for density operators given by
+S(ˆρ) = −Tr(ˆρ ln ˆρ).
+(98)
+The solution to the question posed on the previous page proposed by the
+Maximum entropy method is to choose the density operator that maximize
+the Von Neumann entropy while satisfying the constraints (97). It is a simple
+exercise to show that the unique solution to this maximization problem is the
+following density operator
+ˆρ =
+1
+Z(λ1, ..., λp) exp
+ 
+−
+X
+i
+λi ˆAi
+!
+.
+(99)
+This operator is the maximum entropy density operator. The function Z is the
+partition function and is given by
+Z(λ1, ..., λp) = Tr
+(
+exp
+ 
+−
+X
+i
+λi ˆAi
+!)
+.
+(100)
+Arguing like in the classical case we find that much of the thermodynamic
+formalism is the same as before. Specifically we have
+S = ln Z +
+p
+X
+i=1
+λi
+D
+ˆAi
+E
+,
+D
+ˆAi
+E
+= −∂ln Z
+∂λi
+,
+λi =
+∂S
+∂
+D
+ˆAi
+E,
+(101)
+X
+i
+λi
+*
+∂ˆAi
+∂α
++
+= −∂ln Z
+∂α ,
+(102)
+where in the last identity we assume that all the observables depend on some
+parameter α. Like for the classical case, it is common that the system of interest
+is restricted to some spatial domain D. In this case we get a quantum analog to
+the classical formula (28)
+δΓ ln Z = −
+X
+j
+λj
+D
+δΓ ˆAj
+E
+.
+(103)
+95
+
+
+As we can see, much of the thermodynamic formalism is the same for the classical
+and the quantum case. However some things are different, or they at least appear
+to be different. In the classical case we can find correlations between different
+observables by computing mixed partial derivatives of the partition function
+as shown in (16) and (17). In the quantum case this is problematic unless
+the operators commute. For the case of two observables ˆA and ˆB we have for
+example
+∂2Z
+∂µ∂λ
+= ∂2Z
+∂λ∂µ
+= 2
+D
+ˆA ˆB + ˆB ˆA
+E
+−
+D
+ˆA
+E D
+ˆB
+E
+.
+In a sense this should not come as a surprise. The reason for this is that ˆA ˆB is
+not in general Hermitian even if both ˆA and ˆB are. Thus
+D
+ˆA ˆB
+E
+is not something
+that you could ever measure, so it does not make sense to try to predict it.
+However, ˆA ˆB + ˆB ˆA is a Hermitian operator and thus
+D
+ˆA ˆB + ˆB ˆA
+E
+is something
+one would want to predict. And, this is exactly what you would be able to
+predict using the thermodynamical formalism.
+There is another important way in which the classical and quantum cases
+are different; namely the question of how to include prior information about the
+system into the thermodynamical formalism. In the classical case this was taken
+care of by using the entropy measure (5) that included the prior distribution
+ρ0. We have seen how maximization the entropy in the context of statistical
+mechanics leads to the distribution
+ρ(x1, ..., xn, p1, ..., pn) = ρ0
+Z exp
+
+−H
+kT
+
+,
+(104)
+which we recognized to be the Gibbs canonical ensemble.
+This is however
+not entirely correct, the canonical ensemble corresponds to the case when we
+have a uniform prior. We could have gotten this distribution directly from a
+maximization of the functional
+S(ρ) = −
+Z
+Rn dV ρ ln(ρ).
+(105)
+This is in fact the functional used by Gibbs in his foundational studies of
+thermodynamics. It is this functional that is called the Gibbs entropy measure.
+The functional we introduced in (5) measure by definition the relative entropy of
+ρ with respect to ρ0. It is also denoted by other names in the research literature.
+The Von Neumann entropy introduced in (98) is the direct analog of the
+Gibbs entropy measure (105). However, in contrast to the classical case, there
+does not exists a measure of information for quantum systems that is universally
+recognized to be the best measure to use in all cases where there is prior
+information to take into account. Many different kind of measures has been
+studied by physicists and mathematicians over the years. Today these questions
+are intensely pursued in the topical field of quantum information theory.
+Note that the classical relative entropy measure can be written in the form
+S(ρ| ρ0) = −
+Z
+Rn dV ρ (ln(ρ −ln ρ0)).
+(106)
+96
+
+
+One approach to a quantum version of relative entropy is to directly generalize
+(106) to the quantum case. This gives us for any pair of density operators ˆρ and
+ˆρ0 the relative quantum entropy in the form
+SQ(ˆρ| ˆρ0) = −Tr(ˆρ (ln ˆρ −ln ˆρ0)).
+(107)
+One could now guess that the corresponding maximal entropy distribution, when
+the only observable is the total energy, will take the form
+ˆρ = ˆρ0
+Z exp
+ 
+−
+ˆH
+kT
+!
+,
+(108)
+However, a formula like this can not possibly be correct because the right hand
+side of (108) is not a Hermitian operator unless the prior ˆρ0 commutes with the
+total energy operator ˆH.
+Here we will not pursue these matters, but we should keep in mind that
+there is a real issue here concerning the general validity of the thermodynamical
+formalism for quantum systems in cases when there is prior information present.
+97
+
+
+References
+[1] R. T. Cox. Probability, frequence and reasonable expectations. American
+Journal of Physics, pages 1–13, 1946.
+[2] R. T. Cox. The Algebra of Probable Inference. Johns Hopkins University
+Press, 1961.
+[3] R. Fisher. On the mathematical foundations of theoretical statistics. Philo-
+sophical Transactions of the Royal Society, A, 222:309–368, 1922.
+[4] K. W. Ford(Editor). Statistical Physics, volume 3 of Brandeis university
+summer institute lectures in theoretical physics. W. A. Benjamin, Inc, 1962.
+[5] J. W. Gibbs. Elementary Principles in Statistical mechanics. Scribner’s
+sons, 1902.
+[6] E. T. Jaynes. Information theory and statistical mechanics. Physical Review,
+106:620, 1957.
+[7] E. T. Jaynes. Probability Theory: The Logic of Science. Kluwer, 1982.
+[8] H. Jeffreys. Theory of Probability. Oxford University Press, 1961.
+[9] O. S. Rothaus. Some properties of laplace transforms of measures. Trans-
+actions of the American Mathematical Society, 131(1):163–169, 1968.
+[10] C. H. Shannon. A mathematical theory of communication. The Bell System
+Technical Journal, 27:379–423, 623–656, 1948.
+98
+
+

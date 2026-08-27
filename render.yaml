@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: calculus-slides-app
+    env: node
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: DATABASE_URL
+        value: file:///data/sqlite.db
+      - key: NEXTAUTH_URL
+        value: https://calculus-slides-app.onrender.com
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1
