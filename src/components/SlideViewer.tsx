@@ -243,12 +243,27 @@ export default function SlideViewer() {
   if (status === "loading" || status === "unauthenticated" || loading) return <div style={{ padding: "2rem", textAlign: "center" }}>Loading slides...</div>;
   if (slides.length === 0) {
     return (
-      <div className="layout-container">
-        <div className="main-content">
+      <div className="app-layout" style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden" }}>
+        {isSidebarOpen && (
+          <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)} />
+        )}
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+        <div className="main-content" style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh" }}>
           <TopNav onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} isSidebarOpen={isSidebarOpen} />
-          <div style={{ padding: "4rem", textAlign: "center", color: "#666" }}>
+          
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "#666" }}>
             <h2>No slides found.</h2>
-            <p>Use the menu to navigate to Writing or Admin to add content.</p>
+            <p style={{ marginBottom: "2rem" }}>Use the menu to navigate to Writing or Admin, or create a slide below.</p>
+            {canEdit && (
+              <button 
+                onClick={handleAddSlide} 
+                className="btn" 
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <span className="material-icons">add</span> Create First Slide
+              </button>
+            )}
           </div>
         </div>
       </div>
