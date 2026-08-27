@@ -80,7 +80,7 @@ export default function ClassChat() {
   };
 
   return (
-    <div style={{ position: "fixed", bottom: "2rem", right: "6.5rem", zIndex: 9998 }}>
+    <div style={{ position: "fixed", bottom: "2rem", right: "7.5rem", zIndex: 9998 }}>
       {isOpen && (
         <div style={{
           width: "50vw",

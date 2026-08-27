@@ -59,7 +59,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div style={{ position: "fixed", bottom: "2rem", right: "2rem", zIndex: 9999 }}>
+    <div style={{ position: "fixed", bottom: "2rem", right: "3rem", zIndex: 9999 }}>
       {isOpen && (
         <div style={{
           width: "50vw",
