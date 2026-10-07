@@ -357,3 +357,130 @@
     padding: 0.8rem 1rem;
   }
 }
+
+/* Fartsplott */
+.plotBar {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.plotControls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.segment {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.segment button {
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.segment button:hover {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.segment .segActive {
+  background: var(--primary);
+  color: #fff;
+}
+
+.plotSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gridLine {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.axisLine {
+  stroke: var(--text-muted);
+  stroke-width: 1.2;
+}
+
+.axisText {
+  fill: var(--text-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.axisLabel {
+  fill: var(--foreground);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.limitLine {
+  stroke: #d97706;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.limitText {
+  fill: #d97706;
+  font-size: 11px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.legendItem:hover {
+  border-color: var(--primary);
+}
+
+.legendOff {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legendSub {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.plotNote {
+  margin: 0.75rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}

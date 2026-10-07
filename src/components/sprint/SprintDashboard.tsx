@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { InlineMath, BlockMath } from "react-katex";
 import { fitKeller } from "@/lib/sprintModel";
 import styles from "./sprint.module.css";
+import SpeedPlot from "./SpeedPlot";
 
 interface Person {
   name: string | null;
@@ -55,6 +56,12 @@ export default function SprintDashboard() {
   const [timeS, setTimeS] = useState("");
   const [resultError, setResultError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [showPlot, setShowPlot] = useState(false);
+  const plotRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (showPlot) plotRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showPlot]);
 
   const user = session?.user;
   const isStaff = user?.role === "admin" || user?.role === "teacher";
@@ -346,6 +353,31 @@ export default function SprintDashboard() {
             </div>
           )}
         </section>
+
+        <div className={styles.plotBar}>
+          <button
+            type="button"
+            id="toggle-plot-btn"
+            className={styles.primaryBtn}
+            onClick={() => setShowPlot((v) => !v)}
+          >
+            {showPlot ? "Skjul fartsplott" : "Lag fartsplott"}
+          </button>
+        </div>
+
+        {showPlot && (
+          <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={plotRef}>
+            <h2>Fartskurver</h2>
+            <SpeedPlot
+              subjects={fits.map(({ subject, fit }) => ({
+                id: subject.id,
+                name: subject.name,
+                fit,
+                measurements: subject.results,
+              }))}
+            />
+          </section>
+        )}
       </main>
     </div>
   );
