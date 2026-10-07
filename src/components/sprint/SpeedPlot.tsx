@@ -68,7 +68,7 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
     return { xMax, yMax, xDistMax };
   }, [usable, hidden, mode]);
 
-  const { xMax, yMax, xDistMax } = geometry;
+  const { xMax, yMax } = geometry;
   const sx = (x: number) => M.l + (x / xMax) * (W - M.l - M.r);
   const sy = (v: number) => H - M.b - (v / yMax) * (H - M.t - M.b);
 
@@ -93,10 +93,6 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
     }
     return pts.join(" ");
   };
-
-  // I distanse–tid-plottet kjenner vi absolutt tid bare for målinger som starter på 0 m: da er t(endM) = tiden.
-  const positionDots = (s: SpeedPlotSubject) =>
-    s.measurements.filter((m) => m.startM === 0 && m.endM > 0 && m.timeS > 0);
 
   if (usable.length === 0) {
     return (
@@ -130,6 +126,7 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
         {yTicks.map((y) => (
           <g key={`y${y}`}>
             <line x1={M.l} x2={W - M.r} y1={sy(y)} y2={sy(y)} className={styles.gridLine} />
+            <line x1={M.l - 6} x2={M.l} y1={sy(y)} y2={sy(y)} className={styles.axisLine} />
             <text x={M.l - 8} y={sy(y) + 4} textAnchor="end" className={styles.axisText}>
               {fmtTick(y)}
             </text>
@@ -138,7 +135,8 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
         {xTicks.map((x) => (
           <g key={`x${x}`}>
             <line x1={sx(x)} x2={sx(x)} y1={M.t} y2={H - M.b} className={styles.gridLine} />
-            <text x={sx(x)} y={H - M.b + 20} textAnchor="middle" className={styles.axisText}>
+            <line x1={sx(x)} x2={sx(x)} y1={H - M.b} y2={H - M.b + 6} className={styles.axisLine} />
+            <text x={sx(x)} y={H - M.b + 24} textAnchor="middle" className={styles.axisText}>
               {fmtTick(x)}
             </text>
           </g>
@@ -156,26 +154,10 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
           {yLabel}
         </text>
 
-        {/* 40 m-markering i distansemodus */}
-        {mode === "distance" && xDistMax >= 40 && (
-          <g>
-            <line x1={sx(40)} x2={sx(40)} y1={M.t} y2={H - M.b} className={styles.limitLine} />
-            <text x={sx(40) - 6} y={M.t + 12} textAnchor="end" className={styles.limitText}>
-              modellens gyldighet ~40 m
-            </text>
-          </g>
-        )}
-
         {usable.map((s, i) =>
           hidden.has(s.id) ? null : (
             <g key={s.id}>
               <path d={curve(s)} fill="none" stroke={colorFor(i)} strokeWidth={2.5} strokeLinecap="round" />
-              {mode === "position" &&
-                positionDots(s).map((m, j) => (
-                  <circle key={j} cx={sx(m.timeS)} cy={sy(m.endM)} r={4.5} fill={colorFor(i)} stroke="var(--surface)" strokeWidth={1.5}>
-                    <title>{`${s.name}: ${m.endM} m på ${fmtTick(m.timeS)} s (målt)`}</title>
-                  </circle>
-                ))}
             </g>
           )
         )}
@@ -192,25 +174,9 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
           >
             <span className={styles.swatch} style={{ background: colorFor(i) }} />
             {s.name}
-            <span className={styles.legendSub}>
-              v<sub>max</sub> {fmtTick(s.fit.vmax!)} m/s · τ {fmtTick(s.fit.tau!)} s
-            </span>
           </button>
         ))}
       </div>
-      <p className={styles.plotNote}>
-        {mode === "position" ? (
-          <>
-            Kurvene viser modellen x(t) = v<sub>max</sub>(t − τ(1 − e<sup>−t/τ</sup>)). Prikkene er målinger som starter
-            på 0 m (tiden fra start til sluttpunktet). Flyingtider som 10–20 m gir bare tiden mellom to punkter og kan
-            ikke plottes som egne prikker.
-          </>
-        ) : (
-          <>
-            Kurvene viser modellen v(t) = v<sub>max</sub>(1 − e<sup>−t/τ</sup>).
-          </>
-        )}
-      </p>
     </div>
   );
 }
