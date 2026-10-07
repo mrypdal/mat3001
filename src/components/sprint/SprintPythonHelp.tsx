@@ -347,7 +347,7 @@ export default function SprintPythonHelp() {
       <h3>Når det ikke virker</h3>
       <ul>
         <li>
-          <code>NameError: name '…' is not defined</code>: Du har ikke kjørt cellen som lager den. Kjør alle cellene
+          <code>{"NameError: name '…' is not defined"}</code>: Du har ikke kjørt cellen som lager den. Kjør alle cellene
           ovenfra og ned.
         </li>
         <li>
