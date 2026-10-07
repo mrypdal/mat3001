@@ -107,18 +107,18 @@ export default function SprintTheory() {
       <Step n={2} title="Netto kraft avtar lineært med farten">
         <p>
           Hvor stor netto kraft løperen klarer å skape, avhenger av farten. Modellen antar at den avtar{" "}
-          <em>lineært</em>: den er <InlineMath math="f_0" /> (per kilo) ved <InlineMath math="v=0" /> og null ved{" "}
+          <em>lineært</em>: netto kraft per kilo er <InlineMath math="a_0" /> ved <InlineMath math="v=0" /> og null ved{" "}
           <InlineMath math="v=v_{\max}" />. Grafen av kraft mot fart er en rett linje mellom disse to punktene:
         </p>
-        <BlockMath math={M`\frac{F_{\text{netto}}}{m}=f_0\left(1-\frac{v}{v_{\max}}\right).`} />
+        <BlockMath math={M`\frac{F_{\text{netto}}}{m}=a_0\left(1-\frac{v}{v_{\max}}\right).`} />
         <p>
-          Da er <InlineMath math="f_0" /> akselerasjonen ved start, og når <InlineMath math="v=v_{\max}" /> er
+          Her er <InlineMath math="a_0" /> akselerasjonen ved start (enhet m/s²), og når <InlineMath math="v=v_{\max}" /> er
           akselerasjonen null, slik at farten ikke øker mer. Setter vi dette inn i ligningen fra steg 1, får vi
         </p>
-        <BlockMath math={M`\frac{dv}{dt}=f_0\left(1-\frac{v}{v_{\max}}\right).`} />
+        <BlockMath math={M`\frac{dv}{dt}=a_0\left(1-\frac{v}{v_{\max}}\right).`} />
         <p>
-          For å forenkle innfører vi en konstant <InlineMath math="\tau=\dfrac{v_{\max}}{f_0}" />. Den har enhet
-          sekund. Da er <InlineMath math="f_0=v_{\max}/\tau" />, og
+          For å forenkle innfører vi en konstant <InlineMath math="\tau=\dfrac{v_{\max}}{a_0}" />. Den har enhet
+          sekund. Da er <InlineMath math="a_0=v_{\max}/\tau" />, og
         </p>
         <BlockMath math={M`\frac{dv}{dt}=\frac{v_{\max}}{\tau}\left(1-\frac{v}{v_{\max}}\right)=\frac{v_{\max}-v}{\tau}.`} />
         <p>Akselerasjonen er altså proporsjonal med hvor langt farten er fra <InlineMath math="v_{\max}" />.</p>
