@@ -331,7 +331,7 @@ export default function SprintDashboard() {
                         {fit.a0 !== null ? <>{fmt(fit.a0)}<span className={styles.unit}>m/s²</span></> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
-                        {fit.rms !== null ? <>{fmt(fit.rms, 3)}<span className={styles.unit}>s</span></> : <span className={styles.dash}>–</span>}
+                        {fit.rms !== null && (fit.dof ?? 0) > 0 ? <>{fmt(fit.rms, 3)}<span className={styles.unit}>s</span></> : <span className={styles.dash} title={fit.rms !== null ? "Eksakt tilpasning: to målinger gir ingen kontroll av modellen" : undefined}>–</span>}
                       </td>
                       <td className={styles.status}>
                         {fit.status === "ok" && fit.warnings.length === 0 && <span className={styles.ok}>✓ OK</span>}

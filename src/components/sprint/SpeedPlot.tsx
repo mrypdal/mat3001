@@ -87,16 +87,22 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
     return pts.join(" ");
   };
 
-  // Målt snittfart per strekning: d/T, plottet midt i strekningen.
-  const dots = (s: SpeedPlotSubject) =>
+  // Målt snittfart per strekning (lengde / tid) tegnes som en stolpe over hele strekningen.
+  // Snittfart er ikke det samme som momentan fart, så kurven skal krysse stolpen, ikke gå gjennom midten.
+  // Ringen viser modellens snittfart på samme strekning (ligger på stolpen når modellen treffer tiden).
+  const bars = (s: SpeedPlotSubject) =>
     s.measurements
       .filter((m) => m.endM > m.startM && m.timeS > 0)
       .map((m) => {
-        const v = (m.endM - m.startM) / m.timeS;
-        let x: number;
-        if (mode === "distance") x = (m.startM + m.endM) / 2;
-        else x = (timeToDistance(m.startM, s.fit.vmax!, s.fit.tau!) + timeToDistance(m.endM, s.fit.vmax!, s.fit.tau!)) / 2;
-        return { x, v, label: `${m.startM}–${m.endM} m` };
+        const { vmax, tau } = s.fit;
+        const len = m.endM - m.startM;
+        const vMeasured = len / m.timeS;
+        const t1 = timeToDistance(m.startM, vmax!, tau!);
+        const t2 = timeToDistance(m.endM, vmax!, tau!);
+        const vModel = len / (t2 - t1);
+        const x1 = mode === "distance" ? m.startM : t1;
+        const x2 = mode === "distance" ? m.endM : t2;
+        return { x1, x2, vMeasured, vModel, label: `${m.startM}\u2013${m.endM} m` };
       });
 
   if (usable.length === 0) {
@@ -165,10 +171,31 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
           hidden.has(s.id) ? null : (
             <g key={s.id}>
               <path d={curve(s)} fill="none" stroke={colorFor(i)} strokeWidth={2.5} strokeLinecap="round" />
-              {dots(s).map((d, j) => (
-                <circle key={j} cx={sx(d.x)} cy={sy(d.v)} r={4.5} fill={colorFor(i)} stroke="var(--surface)" strokeWidth={1.5}>
-                  <title>{`${s.name}, ${d.label}: ${fmtTick(d.v)} m/s (målt snittfart)`}</title>
-                </circle>
+              {bars(s).map((d, j) => (
+                <g key={j}>
+                  <line
+                    x1={sx(d.x1)}
+                    x2={sx(d.x2)}
+                    y1={sy(d.vMeasured)}
+                    y2={sy(d.vMeasured)}
+                    stroke={colorFor(i)}
+                    strokeWidth={6}
+                    strokeLinecap="round"
+                    opacity={0.45}
+                  >
+                    <title>{`${s.name}, ${d.label}: målt snittfart ${fmtTick(d.vMeasured)} m/s`}</title>
+                  </line>
+                  <circle
+                    cx={sx((d.x1 + d.x2) / 2)}
+                    cy={sy(d.vModel)}
+                    r={4.5}
+                    fill="var(--surface)"
+                    stroke={colorFor(i)}
+                    strokeWidth={2}
+                  >
+                    <title>{`${s.name}, ${d.label}: modellens snittfart ${fmtTick(d.vModel)} m/s`}</title>
+                  </circle>
+                </g>
               ))}
             </g>
           )
@@ -193,8 +220,10 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
         ))}
       </div>
       <p className={styles.plotNote}>
-        Kurvene er modellen v(t) = v<sub>max</sub>(1 − e<sup>−t/τ</sup>). Prikkene er målt gjennomsnittsfart på hver
-        strekning (lengde / tid), plottet midt i strekningen.
+        Kurvene viser modellens fart v(t) = v<sub>max</sub>(1 − e<sup>−t/τ</sup>) i hvert punkt. Hver <strong>stolpe</strong> er
+        målt <em>snittfart</em> over en strekning (lengde / tid), tegnet over hele strekningen, og <strong>ringen</strong> er
+        modellens snittfart på samme strekning. Snittfarten ligger mellom farten i start og slutt av strekningen, så kurven
+        skal <em>krysse</em> stolpen, men går ikke nødvendigvis gjennom midten. Treffer modellen tiden, ligger ringen midt på stolpen.
       </p>
     </div>
   );

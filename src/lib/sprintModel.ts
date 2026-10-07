@@ -24,6 +24,7 @@ export interface KellerFit {
   rms: number | null; // s, RMS-avvik mellom modell og målt tid
   seVmax: number | null; // m/s, standardfeil (kun når antall målinger > 2)
   seTau: number | null; // s, standardfeil (kun når antall målinger > 2)
+  dof: number | null; // antall målinger minus 2; 0 betyr eksakt tilpasning uten kontroll
   status: "ok" | "need-more" | "failed";
   warnings: string[];
 }
@@ -196,6 +197,7 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
     rms: null,
     seVmax: null,
     seTau: null,
+    dof: null,
     status: "need-more",
     warnings: [],
   };
@@ -243,6 +245,11 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
     );
   }
   const se = standardErrors(ms, vmax, tau, finalSse);
+  if (ms.length === 2) {
+    warnings.push(
+      "Bare to målinger: modellen treffer begge eksakt (to ligninger, to ukjente), så det finnes ingen kontroll og ingen usikkerhet. Legg inn en tredje strekning."
+    );
+  }
   if (se && (se.seTau > 0.3 * tau || se.seTau > 0.4)) {
     warnings.push(
       `τ er dårlig bestemt (±${se.seTau.toFixed(2).replace(".", ",")} s). Legg inn en måling fra 0 m, for eksempel 0–10 m eller 0–20 m, for et sikrere estimat.`
@@ -261,6 +268,7 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
     rms,
     seVmax: se ? se.seVmax : null,
     seTau: se ? se.seTau : null,
+    dof: ms.length - 2,
     status: "ok",
     warnings,
   };
