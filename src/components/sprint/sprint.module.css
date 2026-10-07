@@ -602,3 +602,9 @@
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+/* Profilplott */
+.pointLabel {
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -6,6 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 import { fitKeller } from "@/lib/sprintModel";
 import styles from "./sprint.module.css";
 import SpeedPlot from "./SpeedPlot";
+import ProfilePlot from "./ProfilePlot";
 import SprintTheory from "./SprintTheory";
 
 interface Person {
@@ -64,12 +65,18 @@ export default function SprintDashboard() {
   const [accUnit, setAccUnit] = useState<AccUnit>("ms2");
   const [showPlot, setShowPlot] = useState(false);
   const plotRef = useRef<HTMLElement>(null);
+  const [showProfile, setShowProfile] = useState(false);
+  const profileRef = useRef<HTMLElement>(null);
   const [showTheory, setShowTheory] = useState(false);
   const theoryRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (showPlot) plotRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [showPlot]);
+
+  useEffect(() => {
+    if (showProfile) profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showProfile]);
 
   useEffect(() => {
     if (showTheory) theoryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -369,6 +376,14 @@ export default function SprintDashboard() {
           </button>
           <button
             type="button"
+            id="toggle-profile-btn"
+            className={styles.primaryBtn}
+            onClick={() => setShowProfile((v) => !v)}
+          >
+            {showProfile ? "Skjul profilplott" : "Lag profilplott"}
+          </button>
+          <button
+            type="button"
             id="toggle-theory-btn"
             className={styles.primaryBtn}
             onClick={() => setShowTheory((v) => !v)}
@@ -381,6 +396,20 @@ export default function SprintDashboard() {
           <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={plotRef}>
             <h2>Fartskurver</h2>
             <SpeedPlot
+              subjects={fits.map(({ subject, fit }) => ({
+                id: subject.id,
+                name: subject.name,
+                fit,
+                measurements: subject.results,
+              }))}
+            />
+          </section>
+        )}
+
+        {showProfile && (
+          <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={profileRef}>
+            <h2>Profilplott</h2>
+            <ProfilePlot
               subjects={fits.map(({ subject, fit }) => ({
                 id: subject.id,
                 name: subject.name,

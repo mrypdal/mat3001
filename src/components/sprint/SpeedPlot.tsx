@@ -17,7 +17,7 @@ const W = 820;
 const H = 440;
 const M = { l: 58, r: 24, t: 24, b: 54 };
 
-const colorFor = (i: number) => `hsl(${Math.round((i * 137.508) % 360)} 72% 48%)`;
+export const colorFor = (i: number) => `hsl(${Math.round((i * 137.508) % 360)} 72% 48%)`;
 const fmtTick = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",");
 
 function niceStep(range: number, target = 6) {
