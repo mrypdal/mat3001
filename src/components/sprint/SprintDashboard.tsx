@@ -3,10 +3,10 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { InlineMath, BlockMath } from "react-katex";
 import { fitKeller } from "@/lib/sprintModel";
 import styles from "./sprint.module.css";
 import SpeedPlot from "./SpeedPlot";
+import SprintTheory from "./SprintTheory";
 
 interface Person {
   name: string | null;
@@ -58,10 +58,16 @@ export default function SprintDashboard() {
   const [saving, setSaving] = useState(false);
   const [showPlot, setShowPlot] = useState(false);
   const plotRef = useRef<HTMLElement>(null);
+  const [showTheory, setShowTheory] = useState(false);
+  const theoryRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (showPlot) plotRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [showPlot]);
+
+  useEffect(() => {
+    if (showTheory) theoryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showTheory]);
 
   const user = session?.user;
   const isStaff = user?.role === "admin" || user?.role === "teacher";
@@ -187,22 +193,6 @@ export default function SprintDashboard() {
           </p>
         </header>
 
-        <section className={styles.theory}>
-          <div className={styles.card}>
-            <h2>Modellen</h2>
-            <BlockMath math={String.raw`\dot v = f - \frac{v}{\tau} \;\Rightarrow\; v(t)=v_{\max}\bigl(1-e^{-t/\tau}\bigr),\quad v_{\max}=f\tau`} />
-            <BlockMath math={String.raw`x(t)=v_{\max}\Bigl(t-\tau\bigl(1-e^{-t/\tau}\bigr)\Bigr)`} />
-          </div>
-          <div className={styles.card}>
-            <h2>Slik fungerer det</h2>
-            <ul>
-              <li>Alle løp starter stillestående ved 0 m (<InlineMath math="t=0" />). Tiden for en strekning som 10–20 m er derfor en <em>flyingtid</em>: modellen regner <InlineMath math="T=t(20\,\mathrm{m})-t(10\,\mathrm{m})" />, der <InlineMath math="t(x)" /> er tiden fra start til distanse <InlineMath math="x" />.</li>
-              <li>Vi tilpasser <InlineMath math="v_{\max}" /> og <InlineMath math="\tau" /> ved minste kvadrater på tidene. Du trenger minst to ulike strekninger per person. Med tre eller flere målinger vises også usikkerheten (±). Målinger som starter på 0 m (for eksempel 0–10 m) gir et mye sikrere estimat av <InlineMath math="\tau" />.</li>
-              <li>Modellen er mest presis for de første 30–40 m, før utmattelse reduserer fremdriftskraften.</li>
-            </ul>
-          </div>
-        </section>
-
         <section className={styles.formGrid}>
           <form className={styles.card} onSubmit={addSubject}>
             <h2>Ny testperson</h2>
@@ -294,7 +284,6 @@ export default function SprintDashboard() {
                     <th>τ</th>
                     <th>a₀ = v<sub>max</sub>/τ</th>
                     <th>Avvik (RMS)</th>
-                    <th>Vurdering</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -333,14 +322,6 @@ export default function SprintDashboard() {
                       <td className={styles.num}>
                         {fit.rms !== null && (fit.dof ?? 0) > 0 ? <>{fmt(fit.rms, 3)}<span className={styles.unit}>s</span></> : <span className={styles.dash} title={fit.rms !== null ? "Eksakt tilpasning: to målinger gir ingen kontroll av modellen" : undefined}>–</span>}
                       </td>
-                      <td className={styles.status}>
-                        {fit.status === "ok" && fit.warnings.length === 0 && <span className={styles.ok}>✓ OK</span>}
-                        {fit.warnings.map((w, i) => (
-                          <div key={i} className={fit.status === "ok" ? styles.warn : undefined}>
-                            {fit.status === "ok" ? "⚠ " : ""}{w}
-                          </div>
-                        ))}
-                      </td>
                       <td>
                         {canDelete(subject.createdBy) && (
                           <button className={styles.delBtn} onClick={() => deleteSubject(subject)} title="Slett testperson">Slett</button>
@@ -363,6 +344,14 @@ export default function SprintDashboard() {
           >
             {showPlot ? "Skjul fartsplott" : "Lag fartsplott"}
           </button>
+          <button
+            type="button"
+            id="toggle-theory-btn"
+            className={styles.primaryBtn}
+            onClick={() => setShowTheory((v) => !v)}
+          >
+            {showTheory ? "Skjul teori" : "Vis teori"}
+          </button>
         </div>
 
         {showPlot && (
@@ -376,6 +365,13 @@ export default function SprintDashboard() {
                 measurements: subject.results,
               }))}
             />
+          </section>
+        )}
+
+        {showTheory && (
+          <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={theoryRef}>
+            <h2>Teori: Kellers sprintmodell</h2>
+            <SprintTheory />
           </section>
         )}
       </main>

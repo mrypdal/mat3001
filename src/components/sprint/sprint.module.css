@@ -484,3 +484,100 @@
   font-size: 0.85rem;
   line-height: 1.5;
 }
+
+/* Teori */
+.plotBar {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.prose {
+  max-width: 820px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.prose h3 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.partTitle {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.prose p {
+  margin: 0.6rem 0;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0.6rem 0;
+  padding-left: 1.4rem;
+}
+
+.prose li {
+  margin: 0.35rem 0;
+}
+
+.callout {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  background: color-mix(in srgb, var(--primary) 7%, transparent);
+  overflow-x: auto;
+}
+
+.step {
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+
+.stepHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stepHead h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.stepBody {
+  margin-top: 0.5rem;
+}
+
+.stepBody :global(.katex-display) {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.questions li {
+  margin: 0.6rem 0;
+}
