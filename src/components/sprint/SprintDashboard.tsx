@@ -39,6 +39,10 @@ const PRESETS: [number, number][] = [
 
 const fmt = (n: number, d = 2) => n.toFixed(d).replace(".", ",");
 const parseNum = (s: string) => parseFloat(s.trim().replace(",", "."));
+const G_ACC = 9.81; // m/s², til visning av akselerasjon i g
+
+type SpeedUnit = "ms" | "kmh";
+type AccUnit = "ms2" | "g";
 
 export default function SprintDashboard() {
   const { data: session, status } = useSession();
@@ -56,6 +60,8 @@ export default function SprintDashboard() {
   const [timeS, setTimeS] = useState("");
   const [resultError, setResultError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [speedUnit, setSpeedUnit] = useState<SpeedUnit>("ms");
+  const [accUnit, setAccUnit] = useState<AccUnit>("ms2");
   const [showPlot, setShowPlot] = useState(false);
   const plotRef = useRef<HTMLElement>(null);
   const [showTheory, setShowTheory] = useState(false);
@@ -170,6 +176,11 @@ export default function SprintDashboard() {
 
   const personLabel = (p: Person) => p.name || p.email;
 
+  const speedLabel = speedUnit === "kmh" ? "km/t" : "m/s";
+  const showSpeed = (v: number) => fmt(speedUnit === "kmh" ? v * 3.6 : v, speedUnit === "kmh" ? 1 : 2);
+  const accLabel = accUnit === "g" ? "g" : "m/s²";
+  const showAcc = (a: number) => fmt(accUnit === "g" ? a / G_ACC : a);
+
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
@@ -268,7 +279,27 @@ export default function SprintDashboard() {
         </section>
 
         <section className={styles.card}>
-          <h2>Testpersoner og estimater</h2>
+          <div className={styles.tableHead}>
+            <h2>Testpersoner og estimater</h2>
+            <div className={styles.unitToggles}>
+              <div className={styles.segment} role="group" aria-label="Enhet for fart">
+                <button type="button" className={speedUnit === "ms" ? styles.segActive : ""} onClick={() => setSpeedUnit("ms")}>
+                  m/s
+                </button>
+                <button type="button" className={speedUnit === "kmh" ? styles.segActive : ""} onClick={() => setSpeedUnit("kmh")}>
+                  km/t
+                </button>
+              </div>
+              <div className={styles.segment} role="group" aria-label="Enhet for akselerasjon">
+                <button type="button" className={accUnit === "ms2" ? styles.segActive : ""} onClick={() => setAccUnit("ms2")}>
+                  m/s²
+                </button>
+                <button type="button" className={accUnit === "g" ? styles.segActive : ""} onClick={() => setAccUnit("g")}>
+                  g
+                </button>
+              </div>
+            </div>
+          </div>
           {loading ? (
             <div className={styles.empty}>Laster …</div>
           ) : fits.length === 0 ? (
@@ -311,13 +342,13 @@ export default function SprintDashboard() {
                         )}
                       </td>
                       <td className={styles.num}>
-                        {fit.vmax !== null ? <><span className={styles.big}>{fmt(fit.vmax)}</span><span className={styles.unit}>m/s</span>{fit.seVmax !== null && <div className={styles.sub}>± {fmt(fit.seVmax)}</div>}</> : <span className={styles.dash}>–</span>}
+                        {fit.vmax !== null ? <><span className={styles.big}>{showSpeed(fit.vmax)}</span><span className={styles.unit}>{speedLabel}</span>{fit.seVmax !== null && <div className={styles.sub}>± {showSpeed(fit.seVmax)}</div>}</> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
                         {fit.tau !== null ? <><span className={styles.big}>{fmt(fit.tau)}</span><span className={styles.unit}>s</span>{fit.seTau !== null && <div className={styles.sub}>± {fmt(fit.seTau)}</div>}</> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
-                        {fit.a0 !== null ? <>{fmt(fit.a0)}<span className={styles.unit}>m/s²</span></> : <span className={styles.dash}>–</span>}
+                        {fit.a0 !== null ? <>{showAcc(fit.a0)}<span className={styles.unit}>{accLabel}</span></> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
                         {fit.rms !== null && (fit.dof ?? 0) > 0 ? <>{fmt(fit.rms, 3)}<span className={styles.unit}>s</span></> : <span className={styles.dash} title={fit.rms !== null ? "Eksakt tilpasning: to målinger gir ingen kontroll av modellen" : undefined}>–</span>}

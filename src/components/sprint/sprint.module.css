@@ -582,3 +582,23 @@
 .questions li {
   margin: 0.6rem 0;
 }
+
+/* Enhetsvalg i tabellen */
+.tableHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tableHead h2 {
+  margin: 0;
+}
+
+.unitToggles {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
