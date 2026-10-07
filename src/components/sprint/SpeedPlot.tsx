@@ -11,7 +11,7 @@ export interface SpeedPlotSubject {
   measurements: SprintMeasurement[];
 }
 
-type Mode = "time" | "distance";
+type Mode = "distance" | "time" | "position";
 
 const W = 820;
 const H = 440;
@@ -27,6 +27,9 @@ function niceStep(range: number, target = 6) {
   const nice = norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10;
   return nice * mag;
 }
+
+/** Modellens posisjon (m) som funksjon av tid: x(t) = vmax (t - τ (1 - e^{-t/τ})). */
+const positionAt = (t: number, vmax: number, tau: number) => vmax * (t - tau * (1 - Math.exp(-t / tau)));
 
 export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }) {
   const [mode, setMode] = useState<Mode>("distance");
@@ -47,18 +50,21 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
 
   const geometry = useMemo(() => {
     const visible = usable.filter((s) => !hidden.has(s.id));
+    const shown = visible.length ? visible : usable;
     const maxEnd = Math.max(40, ...usable.flatMap((s) => s.measurements.map((m) => m.endM)));
     const xDistMax = Math.ceil(maxEnd / 10) * 10;
     let xMax = xDistMax;
-    if (mode === "time") {
-      const tMax = Math.max(
-        1,
-        ...(visible.length ? visible : usable).map((s) => timeToDistance(xDistMax, s.fit.vmax!, s.fit.tau!))
-      );
+    if (mode !== "distance") {
+      const tMax = Math.max(1, ...shown.map((s) => timeToDistance(xDistMax, s.fit.vmax!, s.fit.tau!)));
       xMax = Math.ceil(tMax * 2) / 2;
     }
-    const vTop = Math.max(8, ...(visible.length ? visible : usable).map((s) => s.fit.vmax!));
-    const yMax = Math.ceil(vTop + 0.5);
+    let yMax: number;
+    if (mode === "position") {
+      yMax = xDistMax;
+    } else {
+      const vTop = Math.max(8, ...shown.map((s) => s.fit.vmax!));
+      yMax = Math.ceil(vTop + 0.5);
+    }
     return { xMax, yMax, xDistMax };
   }, [usable, hidden, mode]);
 
@@ -79,31 +85,18 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
     const pts: string[] = [];
     for (let i = 0; i <= N; i++) {
       const x = (xMax * i) / N;
-      let v: number;
-      if (mode === "time") v = velocityAt(x, vmax!, tau!);
-      else v = velocityAt(timeToDistance(x, vmax!, tau!), vmax!, tau!);
-      pts.push(`${i === 0 ? "M" : "L"}${sx(x).toFixed(1)},${sy(v).toFixed(1)}`);
+      let y: number;
+      if (mode === "time") y = velocityAt(x, vmax!, tau!);
+      else if (mode === "position") y = positionAt(x, vmax!, tau!);
+      else y = velocityAt(timeToDistance(x, vmax!, tau!), vmax!, tau!);
+      pts.push(`${i === 0 ? "M" : "L"}${sx(x).toFixed(1)},${sy(y).toFixed(1)}`);
     }
     return pts.join(" ");
   };
 
-  // Målt snittfart per strekning (lengde / tid) tegnes som en stolpe over hele strekningen.
-  // Snittfart er ikke det samme som momentan fart, så kurven skal krysse stolpen, ikke gå gjennom midten.
-  // Ringen viser modellens snittfart på samme strekning (ligger på stolpen når modellen treffer tiden).
-  const bars = (s: SpeedPlotSubject) =>
-    s.measurements
-      .filter((m) => m.endM > m.startM && m.timeS > 0)
-      .map((m) => {
-        const { vmax, tau } = s.fit;
-        const len = m.endM - m.startM;
-        const vMeasured = len / m.timeS;
-        const t1 = timeToDistance(m.startM, vmax!, tau!);
-        const t2 = timeToDistance(m.endM, vmax!, tau!);
-        const vModel = len / (t2 - t1);
-        const x1 = mode === "distance" ? m.startM : t1;
-        const x2 = mode === "distance" ? m.endM : t2;
-        return { x1, x2, vMeasured, vModel, label: `${m.startM}\u2013${m.endM} m` };
-      });
+  // I distanse–tid-plottet kjenner vi absolutt tid bare for målinger som starter på 0 m: da er t(endM) = tiden.
+  const positionDots = (s: SpeedPlotSubject) =>
+    s.measurements.filter((m) => m.startM === 0 && m.endM > 0 && m.timeS > 0);
 
   if (usable.length === 0) {
     return (
@@ -113,20 +106,26 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
     );
   }
 
+  const xLabel = mode === "distance" ? "Distanse fra start (m)" : "Tid fra start (s)";
+  const yLabel = mode === "position" ? "Distanse fra start (m)" : "Fart (m/s)";
+
   return (
     <div id="speed-plot">
       <div className={styles.plotControls}>
-        <div className={styles.segment} role="group" aria-label="Akse">
+        <div className={styles.segment} role="group" aria-label="Plottype">
           <button type="button" className={mode === "distance" ? styles.segActive : ""} onClick={() => setMode("distance")}>
             Fart mot distanse
           </button>
           <button type="button" className={mode === "time" ? styles.segActive : ""} onClick={() => setMode("time")}>
             Fart mot tid
           </button>
+          <button type="button" className={mode === "position" ? styles.segActive : ""} onClick={() => setMode("position")}>
+            Distanse mot tid
+          </button>
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className={styles.plotSvg} role="img" aria-label="Fartskurver for testpersonene">
+      <svg viewBox={`0 0 ${W} ${H}`} className={styles.plotSvg} role="img" aria-label="Kurver for testpersonene">
         {/* rutenett og akser */}
         {yTicks.map((y) => (
           <g key={`y${y}`}>
@@ -147,14 +146,14 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
         <line x1={M.l} x2={W - M.r} y1={H - M.b} y2={H - M.b} className={styles.axisLine} />
         <line x1={M.l} x2={M.l} y1={M.t} y2={H - M.b} className={styles.axisLine} />
         <text x={(M.l + W - M.r) / 2} y={H - 10} textAnchor="middle" className={styles.axisLabel}>
-          {mode === "distance" ? "Distanse fra start (m)" : "Tid fra start (s)"}
+          {xLabel}
         </text>
         <text
           transform={`translate(16 ${(M.t + H - M.b) / 2}) rotate(-90)`}
           textAnchor="middle"
           className={styles.axisLabel}
         >
-          Fart (m/s)
+          {yLabel}
         </text>
 
         {/* 40 m-markering i distansemodus */}
@@ -171,32 +170,12 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
           hidden.has(s.id) ? null : (
             <g key={s.id}>
               <path d={curve(s)} fill="none" stroke={colorFor(i)} strokeWidth={2.5} strokeLinecap="round" />
-              {bars(s).map((d, j) => (
-                <g key={j}>
-                  <line
-                    x1={sx(d.x1)}
-                    x2={sx(d.x2)}
-                    y1={sy(d.vMeasured)}
-                    y2={sy(d.vMeasured)}
-                    stroke={colorFor(i)}
-                    strokeWidth={6}
-                    strokeLinecap="round"
-                    opacity={0.45}
-                  >
-                    <title>{`${s.name}, ${d.label}: målt snittfart ${fmtTick(d.vMeasured)} m/s`}</title>
-                  </line>
-                  <circle
-                    cx={sx((d.x1 + d.x2) / 2)}
-                    cy={sy(d.vModel)}
-                    r={4.5}
-                    fill="var(--surface)"
-                    stroke={colorFor(i)}
-                    strokeWidth={2}
-                  >
-                    <title>{`${s.name}, ${d.label}: modellens snittfart ${fmtTick(d.vModel)} m/s`}</title>
+              {mode === "position" &&
+                positionDots(s).map((m, j) => (
+                  <circle key={j} cx={sx(m.timeS)} cy={sy(m.endM)} r={4.5} fill={colorFor(i)} stroke="var(--surface)" strokeWidth={1.5}>
+                    <title>{`${s.name}: ${m.endM} m på ${fmtTick(m.timeS)} s (målt)`}</title>
                   </circle>
-                </g>
-              ))}
+                ))}
             </g>
           )
         )}
@@ -220,10 +199,17 @@ export default function SpeedPlot({ subjects }: { subjects: SpeedPlotSubject[] }
         ))}
       </div>
       <p className={styles.plotNote}>
-        Kurvene viser modellens fart v(t) = v<sub>max</sub>(1 − e<sup>−t/τ</sup>) i hvert punkt. Hver <strong>stolpe</strong> er
-        målt <em>snittfart</em> over en strekning (lengde / tid), tegnet over hele strekningen, og <strong>ringen</strong> er
-        modellens snittfart på samme strekning. Snittfarten ligger mellom farten i start og slutt av strekningen, så kurven
-        skal <em>krysse</em> stolpen, men går ikke nødvendigvis gjennom midten. Treffer modellen tiden, ligger ringen midt på stolpen.
+        {mode === "position" ? (
+          <>
+            Kurvene viser modellen x(t) = v<sub>max</sub>(t − τ(1 − e<sup>−t/τ</sup>)). Prikkene er målinger som starter
+            på 0 m (tiden fra start til sluttpunktet). Flyingtider som 10–20 m gir bare tiden mellom to punkter og kan
+            ikke plottes som egne prikker.
+          </>
+        ) : (
+          <>
+            Kurvene viser modellen v(t) = v<sub>max</sub>(1 − e<sup>−t/τ</sup>).
+          </>
+        )}
       </p>
     </div>
   );
