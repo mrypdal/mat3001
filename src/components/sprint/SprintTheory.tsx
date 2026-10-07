@@ -60,8 +60,13 @@ export default function SprintTheory() {
       <h3>Forutsetninger i modellen</h3>
       <ul>
         <li>Sprinteren starter i ro.</li>
-        <li>Kraften som driver sprinteren framover er konstant.</li>
-        <li>Motstanden mot bevegelsen er proporsjonal med farten.</li>
+        <li>
+          Vi ser på gjennomsnittet over hele skritt, ikke på svingningene i fart og kraft innenfor hvert enkelt skritt.
+        </li>
+        <li>
+          Løperens evne til å skape netto horisontal kraft avtar <em>lineært</em> med farten: den er størst ved start
+          og er null ved <InlineMath math="v_{\max}" />.
+        </li>
         <li>Det tas ikke hensyn til utmattelse.</li>
       </ul>
 
@@ -72,41 +77,50 @@ export default function SprintTheory() {
         <InlineMath math="k\,e^{kt}" />) og å vite at distanse er arealet under fartskurven.
       </p>
 
-      <Step n={1} title="Newtons andre lov">
+      <Step n={1} title="Newtons andre lov og kraften i et skritt">
         <p>
-          Newtons andre lov sier <InlineMath math="F=ma" />. Deler vi på massen, får vi akselerasjonen{" "}
-          <InlineMath math="a=F/m" />, altså kraft <em>per kilo</em> (enhet N/kg = m/s²). Vi antar to krefter i
-          bevegelsesretningen, regnet per kilo:
+          Newtons andre lov for løperen sier at summen av de horisontale kreftene gir akselerasjonen:{" "}
+          <InlineMath math="F_{\text{netto}}=ma" />. Deler vi på massen <InlineMath math="m" />, får vi kraft{" "}
+          <em>per kilo</em> (enhet N/kg = m/s²):
+        </p>
+        <BlockMath math={M`a=\frac{F_{\text{netto}}}{m}.`} />
+        <p>
+          Kraften fra bakken varierer gjennom et skritt. Grovt sett er det to faser:
         </p>
         <ul>
           <li>
-            En <strong>drivkraft</strong> fra bakken, <InlineMath math="f" />, som vi antar er konstant.
+            <strong>Bremsefase (negativ):</strong> foten treffer bakken foran tyngdepunktet, og den horisontale kraften
+            på løperen peker bakover.
           </li>
           <li>
-            En <strong>motstand</strong> som vokser med farten: <InlineMath math="v/\tau" />. Her er{" "}
-            <InlineMath math="\tau" /> en konstant med enhet sekund, slik at <InlineMath math="v/\tau" /> får enhet
-            m/s².
+            <strong>Framdriftsfase (positiv):</strong> foten er under og bak tyngdepunktet, og den horisontale kraften
+            peker framover.
           </li>
         </ul>
         <p>
-          Akselerasjonen er den deriverte av farten, <InlineMath math="a=\dfrac{dv}{dt}" />, så
-        </p>
-        <BlockMath math={M`\frac{dv}{dt}=f-\frac{v}{\tau}.`} />
-        <p>
-          Ved start er <InlineMath math="v=0" />, så akselerasjonen er <InlineMath math="f" />. Når farten øker, øker
-          motstanden og akselerasjonen minker.
+          Det er <em>nettoen</em> over skrittet, framdrift minus bremsing, som bestemmer den gjennomsnittlige
+          akselerasjonen. Siden akselerasjonen er den deriverte av farten, <InlineMath math="a=\dfrac{dv}{dt}" />, kan
+          vi skrive <InlineMath math="\dfrac{dv}{dt}=\dfrac{F_{\text{netto}}}{m}" />.
         </p>
       </Step>
 
-      <Step n={2} title="Maksimal fart">
+      <Step n={2} title="Netto kraft avtar lineært med farten">
         <p>
-          Når akselerasjonen er null, øker ikke farten mer. Da har vi nådd <InlineMath math="v_{\max}" />:
+          Hvor stor netto kraft løperen klarer å skape, avhenger av farten. Modellen antar at den avtar{" "}
+          <em>lineært</em>: den er <InlineMath math="f_0" /> (per kilo) ved <InlineMath math="v=0" /> og null ved{" "}
+          <InlineMath math="v=v_{\max}" />. Grafen av kraft mot fart er en rett linje mellom disse to punktene:
         </p>
-        <BlockMath math={M`0=f-\frac{v_{\max}}{\tau}\quad\Rightarrow\quad f=\frac{v_{\max}}{\tau}.`} />
+        <BlockMath math={M`\frac{F_{\text{netto}}}{m}=f_0\left(1-\frac{v}{v_{\max}}\right).`} />
         <p>
-          Setter vi <InlineMath math="f=v_{\max}/\tau" /> inn i ligningen fra steg 1, får vi
+          Da er <InlineMath math="f_0" /> akselerasjonen ved start, og når <InlineMath math="v=v_{\max}" /> er
+          akselerasjonen null, slik at farten ikke øker mer. Setter vi dette inn i ligningen fra steg 1, får vi
         </p>
-        <BlockMath math={M`\frac{dv}{dt}=\frac{v_{\max}-v}{\tau}.`} />
+        <BlockMath math={M`\frac{dv}{dt}=f_0\left(1-\frac{v}{v_{\max}}\right).`} />
+        <p>
+          For å forenkle innfører vi en konstant <InlineMath math="\tau=\dfrac{v_{\max}}{f_0}" />. Den har enhet
+          sekund. Da er <InlineMath math="f_0=v_{\max}/\tau" />, og
+        </p>
+        <BlockMath math={M`\frac{dv}{dt}=\frac{v_{\max}}{\tau}\left(1-\frac{v}{v_{\max}}\right)=\frac{v_{\max}-v}{\tau}.`} />
         <p>Akselerasjonen er altså proporsjonal med hvor langt farten er fra <InlineMath math="v_{\max}" />.</p>
       </Step>
 
