@@ -8,6 +8,7 @@ import styles from "./sprint.module.css";
 import SpeedPlot from "./SpeedPlot";
 import ProfilePlot from "./ProfilePlot";
 import SprintTheory from "./SprintTheory";
+import SprintPythonHelp from "./SprintPythonHelp";
 
 interface Person {
   name: string | null;
@@ -69,6 +70,8 @@ export default function SprintDashboard() {
   const profileRef = useRef<HTMLElement>(null);
   const [showTheory, setShowTheory] = useState(false);
   const theoryRef = useRef<HTMLElement>(null);
+  const [showPython, setShowPython] = useState(false);
+  const pythonRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (showPlot) plotRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -77,6 +80,10 @@ export default function SprintDashboard() {
   useEffect(() => {
     if (showProfile) profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [showProfile]);
+
+  useEffect(() => {
+    if (showPython) pythonRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showPython]);
 
   useEffect(() => {
     if (showTheory) theoryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -424,6 +431,14 @@ export default function SprintDashboard() {
           >
             {showTheory ? "Skjul teori" : "Vis teori"}
           </button>
+          <button
+            type="button"
+            id="toggle-python-btn"
+            className={styles.primaryBtn}
+            onClick={() => setShowPython((v) => !v)}
+          >
+            {showPython ? "Skjul Pythonhjelp" : "Vis Pythonhjelp"}
+          </button>
         </div>
 
         {showPlot && (
@@ -458,6 +473,13 @@ export default function SprintDashboard() {
           <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={theoryRef}>
             <h2>Teori: Kellers sprintmodell</h2>
             <SprintTheory />
+          </section>
+        )}
+
+        {showPython && (
+          <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={pythonRef}>
+            <h2>Pythonhjelp: Lag din egen kalkulator</h2>
+            <SprintPythonHelp />
           </section>
         )}
       </main>
