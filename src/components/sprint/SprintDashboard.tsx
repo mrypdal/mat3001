@@ -189,8 +189,8 @@ export default function SprintDashboard() {
           <div className={styles.card}>
             <h2>Slik fungerer det</h2>
             <ul>
-              <li>Hver måling er tiden fra <InlineMath math="d_1" /> til <InlineMath math="d_2" /> med stillestående start ved <InlineMath math="t=0" />.</li>
-              <li>Vi tilpasser <InlineMath math="v_{\max}" /> og <InlineMath math="\tau" /> ved minste kvadrater på tidene. Du trenger minst to ulike strekninger per person.</li>
+              <li>Alle løp starter stillestående ved 0 m (<InlineMath math="t=0" />). Tiden for en strekning som 10–20 m er derfor en <em>flyingtid</em>: modellen regner <InlineMath math="T=t(20\,\mathrm{m})-t(10\,\mathrm{m})" />, der <InlineMath math="t(x)" /> er tiden fra start til distanse <InlineMath math="x" />.</li>
+              <li>Vi tilpasser <InlineMath math="v_{\max}" /> og <InlineMath math="\tau" /> ved minste kvadrater på tidene. Du trenger minst to ulike strekninger per person. Med tre eller flere målinger vises også usikkerheten (±). Målinger som starter på 0 m (for eksempel 0–10 m) gir et mye sikrere estimat av <InlineMath math="\tau" />.</li>
               <li>Modellen er mest presis for de første 30–40 m, før utmattelse reduserer fremdriftskraften.</li>
             </ul>
           </div>
@@ -315,10 +315,10 @@ export default function SprintDashboard() {
                         )}
                       </td>
                       <td className={styles.num}>
-                        {fit.vmax !== null ? <><span className={styles.big}>{fmt(fit.vmax)}</span><span className={styles.unit}>m/s</span></> : <span className={styles.dash}>–</span>}
+                        {fit.vmax !== null ? <><span className={styles.big}>{fmt(fit.vmax)}</span><span className={styles.unit}>m/s</span>{fit.seVmax !== null && <div className={styles.sub}>± {fmt(fit.seVmax)}</div>}</> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
-                        {fit.tau !== null ? <><span className={styles.big}>{fmt(fit.tau)}</span><span className={styles.unit}>s</span></> : <span className={styles.dash}>–</span>}
+                        {fit.tau !== null ? <><span className={styles.big}>{fmt(fit.tau)}</span><span className={styles.unit}>s</span>{fit.seTau !== null && <div className={styles.sub}>± {fmt(fit.seTau)}</div>}</> : <span className={styles.dash}>–</span>}
                       </td>
                       <td className={styles.num}>
                         {fit.a0 !== null ? <>{fmt(fit.a0)}<span className={styles.unit}>m/s²</span></> : <span className={styles.dash}>–</span>}

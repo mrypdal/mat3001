@@ -4,8 +4,9 @@
  *   dv/dt = f - v/τ   =>   v(t) = vmax (1 - e^{-t/τ}),   vmax = f τ
  *   x(t)  = vmax ( t - τ (1 - e^{-t/τ}) )
  *
- * En måling er (startM, endM, timeS): tiden en løper bruker fra startM til endM,
- * løpet fra stillestående start ved t = 0 (fotoceller, ingen reaksjonstid).
+ * En måling er (startM, endM, timeS): tiden en løper bruker fra startM til endM.
+ * Alle løp starter stillestående ved 0 m (t = 0), så en måling som 10–20 m er en
+ * flyingtid: modellen regner T = t(endM) − t(startM), der t(x) er tiden fra start til x.
  * Estimeringen minimerer sum av kvadrerte tidsavvik over alle målingene.
  */
 
@@ -21,6 +22,8 @@ export interface KellerFit {
   a0: number | null; // m/s^2, startakselerasjon vmax/τ
   pmax: number | null; // W/kg, vmax^2/(4τ)
   rms: number | null; // s, RMS-avvik mellom modell og målt tid
+  seVmax: number | null; // m/s, standardfeil (kun når antall målinger > 2)
+  seTau: number | null; // s, standardfeil (kun når antall målinger > 2)
   status: "ok" | "need-more" | "failed";
   warnings: string[];
 }
@@ -155,6 +158,35 @@ function conditionNumber(ms: SprintMeasurement[], vmax: number, tau: number): nu
   return Math.sqrt(l1 / l2);
 }
 
+/** Standardfeil for (vmax, τ) fra Jacobi-matrisen: Var = σ² (JᵀJ)⁻¹, σ² = SSE/(n−2). Krever n > 2. */
+function standardErrors(
+  ms: SprintMeasurement[],
+  vmax: number,
+  tau: number,
+  sseValue: number
+): { seVmax: number; seTau: number } | null {
+  const n = ms.length;
+  if (n <= 2) return null;
+  const hv = vmax * 1e-4;
+  const ht = tau * 1e-4;
+  let a = 0, b = 0, c = 0;
+  for (const m of ms) {
+    const dv =
+      (intervalTime(m.startM, m.endM, vmax + hv, tau) - intervalTime(m.startM, m.endM, vmax - hv, tau)) /
+      (2 * hv);
+    const dt =
+      (intervalTime(m.startM, m.endM, vmax, tau + ht) - intervalTime(m.startM, m.endM, vmax, tau - ht)) /
+      (2 * ht);
+    a += dv * dv;
+    b += dv * dt;
+    c += dt * dt;
+  }
+  const det = a * c - b * b;
+  if (!(det > 0)) return null;
+  const sigma2 = sseValue / (n - 2);
+  return { seVmax: Math.sqrt((sigma2 * c) / det), seTau: Math.sqrt((sigma2 * a) / det) };
+}
+
 export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
   const empty: KellerFit = {
     vmax: null,
@@ -162,6 +194,8 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
     a0: null,
     pmax: null,
     rms: null,
+    seVmax: null,
+    seTau: null,
     status: "need-more",
     warnings: [],
   };
@@ -201,10 +235,23 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
   if (nearBound) warnings.push("Tilpasningen ligger ved grensen av tillatt område, så tidene passer dårlig med modellen.");
   if (ms.some((m) => m.endM > 40)) warnings.push("Målinger over 40 m: utmattelse kan gjøre modellen mindre presis.");
   if (vmax < 5 || vmax > 15) warnings.push("Uvanlig vmax (utenfor 5–15 m/s).");
-  if (tau < 0.3 || tau > 2.5) warnings.push("Uvanlig τ (utenfor 0.3–2.5 s).");
-  if (rms > 0.05) warnings.push("Store avvik fra modellen (RMS > 0.05 s). Sjekk for feilregistrerte tider.");
+  if (tau < 0.3 || tau > 3.5) warnings.push("Uvanlig τ (utenfor 0,3–3,5 s).");
+  // Fotoceller har typisk nøyaktighet rundt 0,01–0,02 s.
+  if (rms > 0.03) {
+    warnings.push(
+      "Tidene passer ikke særlig godt med modellen (RMS > 0,03 s). Sjekk tidene, eller bruk gjennomsnitt av flere forsøk."
+    );
+  }
+  const se = standardErrors(ms, vmax, tau, finalSse);
+  if (se && (se.seTau > 0.3 * tau || se.seTau > 0.4)) {
+    warnings.push(
+      `τ er dårlig bestemt (±${se.seTau.toFixed(2).replace(".", ",")} s). Legg inn en måling fra 0 m, for eksempel 0–10 m eller 0–20 m, for et sikrere estimat.`
+    );
+  }
   const cond = conditionNumber(ms, vmax, tau);
-  if (cond > 200) warnings.push("Dårlig betinget: strekningene skiller seg for lite til å bestemme både vmax og τ sikkert.");
+  if (!se && cond > 200) {
+    warnings.push("Dårlig betinget: strekningene skiller seg for lite til å bestemme både vmax og τ sikkert.");
+  }
 
   return {
     vmax,
@@ -212,6 +259,8 @@ export function fitKeller(measurements: SprintMeasurement[]): KellerFit {
     a0: vmax / tau,
     pmax: (vmax * vmax) / (4 * tau),
     rms,
+    seVmax: se ? se.seVmax : null,
+    seTau: se ? se.seTau : null,
     status: "ok",
     warnings,
   };
