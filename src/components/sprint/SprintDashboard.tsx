@@ -196,14 +196,6 @@ export default function SprintDashboard() {
       </nav>
 
       <main className={styles.main}>
-        <header className={styles.hero}>
-          <h1>Estimer v<sub>max</sub> og τ fra sprinttider</h1>
-          <p>
-            Legg inn testpersoner og tider fra fotoceller på ulike strekninger (for eksempel 0–30 m, 10–20 m og 20–30 m).
-            Tabellen under estimerer maksimal fart og akselerasjonstidskonstant for hver testperson.
-          </p>
-        </header>
-
         <section className={styles.formGrid}>
           <form className={styles.card} onSubmit={addSubject}>
             <h2>Ny testperson</h2>
