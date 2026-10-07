@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -24,7 +24,8 @@ export default function LoginPage() {
     if (res?.error) {
       setError("Invalid credentials");
     } else {
-      router.push("/");
+      const session = await getSession();
+      router.push(session?.user?.course === "sprint" ? "/sprint" : "/");
       router.refresh();
     }
   };

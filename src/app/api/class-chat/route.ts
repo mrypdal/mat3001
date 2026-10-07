@@ -5,7 +5,12 @@ import { authOptions } from "@/lib/auth";
 
 export async function GET(request: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    if (session?.user?.course === "sprint") {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
     const messages = await prisma.classMessage.findMany({
+      where: { user: { course: "mat3001" } },
       include: {
         user: {
           select: { name: true, email: true, role: true }
@@ -24,7 +29,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
+    if (!session?.user?.email || session.user.course === "sprint") {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

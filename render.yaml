@@ -9,6 +9,8 @@ services:
         value: file:///data/sqlite.db
       - key: NEXTAUTH_URL
         value: https://calculus-slides-app.onrender.com
+      - key: SPRINT_JOIN_CODE
+        sync: false
       - key: NEXTAUTH_SECRET
         generateValue: true
     disk:

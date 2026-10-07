@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "@/components/Providers";
-import Chatbot from "@/components/Chatbot";
-import ClassChat from "@/components/ClassChat";
+import CourseShell from "@/components/CourseShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           {children}
-          <div style={{ position: "fixed", bottom: "2rem", right: "2rem", display: "flex", gap: "1rem", zIndex: 1000 }}>
-            <ClassChat />
-            <Chatbot />
-          </div>
+          <CourseShell />
         </Providers>
       </body>
     </html>

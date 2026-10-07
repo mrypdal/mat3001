@@ -10,9 +10,9 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Exclude the current user
+    // Exclude the current user; only show users from the same course
     const users = await prisma.user.findMany({
-      where: { email: { not: session.user.email } },
+      where: { email: { not: session.user.email }, course: session.user.course || "mat3001" },
       select: { id: true, name: true, email: true, role: true },
       orderBy: { name: 'asc' }
     });

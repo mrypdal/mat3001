@@ -13,10 +13,34 @@ model User {
   email     String    @unique
   password  String
   role      String    @default("student")
+  course    String    @default("mat3001") // "mat3001" or "sprint"
   createdAt       DateTime        @default(now())
   classMessages   ClassMessage[]
   documents       Document[]      @relation("DocumentOwner")
   sharedDocuments DocumentShare[]
+  sprintSubjects  SprintSubject[]
+  sprintResults   SprintResult[]
+}
+
+model SprintSubject {
+  id          String         @id @default(cuid())
+  name        String
+  createdById String
+  createdBy   User           @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now())
+  results     SprintResult[]
+}
+
+model SprintResult {
+  id          String        @id @default(cuid())
+  subjectId   String
+  subject     SprintSubject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  startM      Float
+  endM        Float
+  timeS       Float
+  createdById String
+  createdBy   User          @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime      @default(now())
 }
 
 model ClassMessage {

@@ -10,6 +10,7 @@ interface User {
   name: string | null;
   email: string;
   role: string;
+  course: string;
   createdAt: string;
 }
 
@@ -24,6 +25,7 @@ export default function AdminPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
+  const [course, setCourse] = useState("mat3001");
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function AdminPage() {
       const res = await fetch("/api/admin/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, role })
+        body: JSON.stringify({ name, email, password, role, course })
       });
       if (res.ok) {
         setName("");
@@ -118,7 +120,7 @@ export default function AdminPage() {
                   <input type="email" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #cbd5e1" }} />
                 </div>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
                 <div>
                   <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: "bold" }}>Password</label>
                   <input type="password" value={password} onChange={e => setPassword(e.target.value)} required minLength={4} style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #cbd5e1" }} />
@@ -129,6 +131,13 @@ export default function AdminPage() {
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>
                     <option value="admin">Admin</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: "bold" }}>Course</label>
+                  <select value={course} onChange={e => setCourse(e.target.value)} style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #cbd5e1", backgroundColor: "white" }}>
+                    <option value="mat3001">MAT3001</option>
+                    <option value="sprint">Sprint</option>
                   </select>
                 </div>
               </div>
@@ -148,6 +157,7 @@ export default function AdminPage() {
                   <th style={{ padding: "1rem", textAlign: "left" }}>Name</th>
                   <th style={{ padding: "1rem", textAlign: "left" }}>Email</th>
                   <th style={{ padding: "1rem", textAlign: "left" }}>Role</th>
+                  <th style={{ padding: "1rem", textAlign: "left" }}>Course</th>
                   <th style={{ padding: "1rem", textAlign: "left" }}>Joined</th>
                   <th style={{ padding: "1rem", textAlign: "right" }}>Actions</th>
                 </tr>
@@ -157,6 +167,7 @@ export default function AdminPage() {
                   <tr key={user.id} style={{ borderBottom: "1px solid #e2e8f0" }}>
                     <td style={{ padding: "1rem" }}>{user.name || "-"}</td>
                     <td style={{ padding: "1rem" }}>{user.email}</td>
+                    <td style={{ padding: "1rem", color: "#64748b", fontSize: "0.9rem" }}>{user.course === "sprint" ? "Sprint" : "MAT3001"}</td>
                     <td style={{ padding: "1rem" }}>
                       <span style={{ 
                         padding: "0.25rem 0.5rem", 

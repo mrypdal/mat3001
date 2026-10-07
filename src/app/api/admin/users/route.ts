@@ -18,6 +18,7 @@ export async function GET() {
         name: true,
         email: true,
         role: true,
+        course: true,
         createdAt: true,
       }
     });
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const { name, email, password, role } = await request.json();
+    const { name, email, password, role, course } = await request.json();
 
     if (!email || !password || !role) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -58,12 +59,14 @@ export async function POST(request: Request) {
         email,
         password: hashedPassword,
         role,
+        course: course === "sprint" ? "sprint" : "mat3001",
       },
       select: {
         id: true,
         name: true,
         email: true,
         role: true,
+        course: true,
         createdAt: true,
       }
     });
