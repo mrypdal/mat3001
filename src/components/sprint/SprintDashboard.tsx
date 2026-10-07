@@ -282,7 +282,7 @@ export default function SprintDashboard() {
                     <th>Målinger</th>
                     <th>v<sub>max</sub></th>
                     <th>τ</th>
-                    <th>a₀ = v<sub>max</sub>/τ</th>
+                    <th>f<sub>0</sub> = v<sub>max</sub>/τ</th>
                     <th>Avvik (RMS)</th>
                     <th></th>
                   </tr>
