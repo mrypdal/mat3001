@@ -91,10 +91,32 @@ export default function SprintDashboard() {
     else if (status === "authenticated" && !hasAccess) router.replace("/");
   }, [status, hasAccess, router]);
 
+  // Laster testpersoner. Brukes både ved første lasting, etter egne endringer og ved automatisk oppdatering.
+  const requestCounter = useRef(0);
+  const knownResults = useRef<Map<string, number> | null>(null);
+  const [flash, setFlash] = useState<Set<string>>(new Set());
+
   const load = async () => {
+    const myRequest = ++requestCounter.current;
     try {
-      const res = await fetch("/api/sprint/subjects");
-      if (res.ok) setSubjects(await res.json());
+      const res = await fetch("/api/sprint/subjects", { cache: "no-store" });
+      if (!res.ok) return;
+      const data: SprintSubject[] = await res.json();
+      // Ignorer svar som er forbigått av en nyere forespørsel (unngår at gamle data overskriver nye).
+      if (myRequest !== requestCounter.current) return;
+
+      // Marker rader som er nye eller har fått flere resultater siden forrige henting.
+      const prev = knownResults.current;
+      const next = new Map(data.map((d) => [d.id, d.results.length] as [string, number]));
+      if (prev) {
+        const changed = data.filter((d) => prev.get(d.id) !== d.results.length).map((d) => d.id);
+        if (changed.length > 0) {
+          setFlash(new Set(changed));
+          setTimeout(() => setFlash(new Set()), 3000);
+        }
+      }
+      knownResults.current = next;
+      setSubjects(data);
     } catch (e) {
       console.error(e);
     } finally {
@@ -102,8 +124,14 @@ export default function SprintDashboard() {
     }
   };
 
+  // Første lasting, og automatisk oppdatering hvert 5. sekund så lenge fanen er synlig.
   useEffect(() => {
-    if (hasAccess) load();
+    if (!hasAccess) return;
+    load();
+    const id = setInterval(() => {
+      if (document.visibilityState === "visible") load();
+    }, 5000);
+    return () => clearInterval(id);
   }, [hasAccess]);
 
   const fits = useMemo(
@@ -279,7 +307,13 @@ export default function SprintDashboard() {
 
         <section className={styles.card}>
           <div className={styles.tableHead}>
-            <h2>Testpersoner og estimater</h2>
+            <h2>
+              Testpersoner og estimater
+              <span className={styles.live} title="Tabellen oppdateres automatisk hvert 5. sekund">
+                <span className={styles.liveDot} />
+                Live
+              </span>
+            </h2>
             <div className={styles.unitToggles}>
               <div className={styles.segment} role="group" aria-label="Enhet for fart">
                 <button type="button" className={speedUnit === "ms" ? styles.segActive : ""} onClick={() => setSpeedUnit("ms")}>
@@ -319,7 +353,7 @@ export default function SprintDashboard() {
                 </thead>
                 <tbody>
                   {fits.map(({ subject, fit }) => (
-                    <tr key={subject.id}>
+                    <tr key={subject.id} className={flash.has(subject.id) ? styles.flashRow : undefined}>
                       <td>
                         <div className={styles.name}>{subject.name}</div>
                         <div className={styles.sub}>lagt inn av {personLabel(subject.createdBy)}</div>
