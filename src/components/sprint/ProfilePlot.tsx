@@ -56,13 +56,13 @@ interface Placed {
 export default function ProfilePlot({ subjects }: { subjects: SpeedPlotSubject[] }) {
   // Samme rekkefølge og farger som i fartsplottet.
   const usable = useMemo(
-    () => subjects.filter((s) => s.fit.vmax !== null && s.fit.tau !== null),
+    () => subjects.filter((s) => s.fit.vmax !== null && s.fit.a0 !== null),
     [subjects]
   );
 
   const layout = useMemo(() => {
     if (usable.length === 0) return null;
-    const dx = domain(usable.map((s) => s.fit.tau!));
+    const dx = domain(usable.map((s) => s.fit.a0!));
     const dy = domain(usable.map((s) => s.fit.vmax!));
     const sx = (x: number) => M.l + ((x - dx.lo) / (dx.hi - dx.lo)) * (W - M.l - M.r);
     const sy = (y: number) => H - M.b - ((y - dy.lo) / (dy.hi - dy.lo)) * (H - M.t - M.b);
@@ -71,7 +71,7 @@ export default function ProfilePlot({ subjects }: { subjects: SpeedPlotSubject[]
       id: s.id,
       name: s.name,
       color: colorFor(i),
-      px: sx(s.fit.tau!),
+      px: sx(s.fit.a0!),
       py: sy(s.fit.vmax!),
     }));
 
@@ -151,7 +151,7 @@ export default function ProfilePlot({ subjects }: { subjects: SpeedPlotSubject[]
 
   return (
     <div id="profile-plot">
-      <svg viewBox={`0 0 ${W} ${H}`} className={styles.plotSvg} role="img" aria-label="Profilplott: v_max mot τ for hver testperson">
+      <svg viewBox={`0 0 ${W} ${H}`} className={styles.plotSvg} role="img" aria-label="Profilplott: v_max mot a_0 for hver testperson">
         {yTicks.map((y) => (
           <g key={`y${y}`}>
             <line x1={M.l} x2={W - M.r} y1={sy(y)} y2={sy(y)} className={styles.gridLine} />
@@ -173,7 +173,7 @@ export default function ProfilePlot({ subjects }: { subjects: SpeedPlotSubject[]
         <line x1={M.l} x2={W - M.r} y1={H - M.b} y2={H - M.b} className={styles.axisLine} />
         <line x1={M.l} x2={M.l} y1={M.t} y2={H - M.b} className={styles.axisLine} />
         <text x={(M.l + W - M.r) / 2} y={H - 10} textAnchor="middle" className={styles.axisLabel}>
-          τ (s)
+          a<tspan baselineShift="sub" fontSize="10">0</tspan> (m/s²)
         </text>
         <text
           transform={`translate(16 ${(M.t + H - M.b) / 2}) rotate(-90)`}
