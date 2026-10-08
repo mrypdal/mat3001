@@ -379,7 +379,9 @@ export default function SprintPythonHelp() {
           tidene fra 0 m som punkter i samme plott.
         </li>
         <li>
-          Hvor lang tid bruker løperen på 100 m ifølge modellen? Er det realistisk? Hvorfor, eller hvorfor ikke?
+          Hvor lang tid bruker løperen på 100 m ifølge modellen? Tips: En langsom løper bruker mer enn 15 s, så du må
+          utvide tidsrutenettet i steg 3, for eksempel til <code>np.linspace(0, 30, 6001)</code>. Er svaret
+          realistisk? Hvorfor, eller hvorfor ikke?
         </li>
         <li>
           Endre én av tidene med 0,02 s. Hvor mye endrer <InlineMath math="v_{\max}" /> og{" "}
