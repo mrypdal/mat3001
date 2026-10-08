@@ -9,6 +9,7 @@ import SpeedPlot from "./SpeedPlot";
 import ProfilePlot from "./ProfilePlot";
 import SprintTheory from "./SprintTheory";
 import SprintPythonHelp from "./SprintPythonHelp";
+import SprintTask from "./SprintTask";
 
 interface Person {
   name: string | null;
@@ -72,6 +73,8 @@ export default function SprintDashboard() {
   const theoryRef = useRef<HTMLElement>(null);
   const [showPython, setShowPython] = useState(false);
   const pythonRef = useRef<HTMLElement>(null);
+  const [showTask, setShowTask] = useState(false);
+  const taskRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (showPlot) plotRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -80,6 +83,10 @@ export default function SprintDashboard() {
   useEffect(() => {
     if (showProfile) profileRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [showProfile]);
+
+  useEffect(() => {
+    if (showTask) taskRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showTask]);
 
   useEffect(() => {
     if (showPython) pythonRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -439,6 +446,14 @@ export default function SprintDashboard() {
           >
             {showPython ? "Skjul Pythonhjelp" : "Vis Pythonhjelp"}
           </button>
+          <button
+            type="button"
+            id="toggle-task-btn"
+            className={styles.primaryBtn}
+            onClick={() => setShowTask((v) => !v)}
+          >
+            {showTask ? "Skjul oppgave" : "Oppgave"}
+          </button>
         </div>
 
         {showPlot && (
@@ -480,6 +495,13 @@ export default function SprintDashboard() {
           <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={pythonRef}>
             <h2>Pythonhjelp: Lag din egen kalkulator</h2>
             <SprintPythonHelp />
+          </section>
+        )}
+
+        {showTask && (
+          <section className={styles.card} style={{ marginTop: "1.5rem" }} ref={taskRef}>
+            <h2>Oppgave: Hvem vinner 40 m?</h2>
+            <SprintTask />
           </section>
         )}
       </main>
