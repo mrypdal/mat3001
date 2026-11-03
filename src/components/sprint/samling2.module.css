@@ -1,0 +1,742 @@
+/* Samling 2 */
+
+/* Valgside */
+.homeTitle {
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.homeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.homeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--foreground);
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.homeCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.18);
+}
+
+.homeCard h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.homeCard p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.homeBadge {
+  align-self: flex-start;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+
+.homeGo {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Faner for del 1–3 */
+.partTabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.partTab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  padding: 0.7rem 1.4rem;
+  min-width: 190px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.partTab:hover {
+  border-color: var(--primary);
+}
+
+.partTabActive {
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  border-color: transparent;
+  color: #fff;
+}
+
+.partTabLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.partTabTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Lysbildepresentasjon */
+.deck {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.deckFull {
+  border-radius: 0;
+  border: none;
+  background: var(--background);
+  padding: 1.5rem 3rem 1.5rem;
+  min-height: 100vh;
+}
+
+.deckHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.deckCount {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.slide {
+  flex: 1;
+  min-height: 520px;
+  padding: 0.5rem 0.5rem 1rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  animation: slideIn 0.25s ease;
+}
+
+.deckFull .slide {
+  font-size: 1.35rem;
+  min-height: 0;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slideTitle {
+  margin: 0 0 1rem;
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+}
+
+.deckFull .slideTitle {
+  font-size: 2.3rem;
+}
+
+.slideBody p {
+  margin: 0.6rem 0;
+}
+
+.slideBody ul,
+.slideBody ol {
+  margin: 0.6rem 0;
+  padding-left: 1.4rem;
+}
+
+.slideBody li {
+  margin: 0.4rem 0;
+}
+
+.slideBody :global(.katex-display) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0.6em 0;
+}
+
+.slideCols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.titleSlide {
+  padding: 2rem 0 1rem;
+}
+
+.titleSlide h1 {
+  font-size: 3.2rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.4rem;
+}
+
+.titleSub {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+}
+
+.agenda {
+  max-width: 760px;
+  padding-left: 1.5rem;
+}
+
+.agenda li {
+  margin: 0.8rem 0;
+}
+
+.checks > li {
+  margin: 0.9rem 0;
+}
+
+.deckNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.dots {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.dot:hover {
+  background: var(--text-muted);
+}
+
+.dotActive {
+  background: var(--primary);
+  transform: scale(1.3);
+}
+
+.twoCharts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.chartTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.paramTable td,
+.paramTable th {
+  padding: 0.6rem 0.9rem;
+}
+
+/* Øvelser */
+.exTabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.exTab {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.exTab:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.exTabActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.exTabActive:hover {
+  color: #fff;
+}
+
+.exIntro p {
+  margin: 0 0 0.5rem;
+  max-width: 880px;
+  line-height: 1.6;
+}
+
+.tasks {
+  max-width: 880px;
+  margin: 0.5rem 0 1.5rem;
+  padding-left: 1.4rem;
+  line-height: 1.6;
+}
+
+.tasks li {
+  margin: 0.4rem 0;
+}
+
+.labGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.chartGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.controlRow {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.rtRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.rtInput {
+  width: 100px;
+  padding: 0.4rem 0.6rem;
+}
+
+.dataTable th,
+.dataTable td {
+  padding: 0.4rem 0.5rem;
+  vertical-align: middle;
+}
+
+.cell {
+  width: 100%;
+  min-width: 70px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.devBig {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.tableActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.source {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.sliderRow {
+  margin-bottom: 1rem;
+}
+
+.sliderHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.2rem;
+}
+
+.sliderName {
+  min-width: 3.2rem;
+  font-weight: 600;
+}
+
+.sliderValue {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.lockBox {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.range {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.fitButtons {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 0.9rem;
+}
+
+.fitButtons button {
+  font-size: 0.92rem;
+  padding: 0.55rem 1rem;
+}
+
+.rmsNow {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.cmpTable {
+  font-size: 0.9rem;
+}
+
+.cmpTable th,
+.cmpTable td {
+  padding: 0.45rem 0.6rem;
+}
+
+.dimCell {
+  color: var(--text-muted);
+}
+
+/* Prediksjon */
+.predictHead {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.colorDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+/* Tegnforklaring uten interaksjon */
+.legendRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.legendStatic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legendLine {
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legendBar {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* Øvelse 4: Python-tutorial */
+.pyStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 0.9rem;
+}
+
+.pyDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.pyLoading .pyDot {
+  background: #d97706;
+  animation: livePulseS2 1.4s ease-in-out infinite;
+}
+
+.pyReady .pyDot {
+  background: #22c55e;
+}
+
+.pyErr .pyDot {
+  background: #ef4444;
+}
+
+@keyframes livePulseS2 {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.pySteps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 920px;
+}
+
+.pyStepHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.pyStepHead h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.stepDone {
+  background: #16a34a;
+}
+
+.pyIntro p {
+  margin: 0.5rem 0;
+  line-height: 1.65;
+}
+
+.pyIntro code,
+.hint code,
+.pyMsg code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(100, 116, 139, 0.14);
+  padding: 0.08em 0.35em;
+  border-radius: 4px;
+}
+
+.pyIntro ol {
+  padding-left: 1.4rem;
+  line-height: 1.65;
+}
+
+.think {
+  margin: 0.6rem 0;
+  padding: 0.5rem 0.9rem;
+  border-left: 3px solid #d97706;
+  background: color-mix(in srgb, #d97706 8%, transparent);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+
+.listing {
+  margin: 0.75rem 0;
+}
+
+.listingLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.listing pre {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow-x: auto;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.listing code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Oppskriften skal skrives av, ikke kopieres */
+.noCopy {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.codeEditor {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5rem 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 2px solid #334155;
+  background: #1e293b;
+  color: #f1f5f9;
+  caret-color: #fff;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  resize: vertical;
+  tab-size: 4;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.codeEditor:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.codeEditor::placeholder {
+  color: #64748b;
+}
+
+.pyActions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.hint {
+  margin: 0.5rem 0;
+  font-size: 0.92rem;
+}
+
+.hint summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.hint div {
+  margin-top: 0.4rem;
+}
+
+.pyMsg {
+  margin: 0.6rem 0;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, #d97706 10%, transparent);
+  border: 1px solid color-mix(in srgb, #d97706 35%, transparent);
+  font-size: 0.92rem;
+}
+
+.pyOk {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.expectedPre {
+  margin: 0.4rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  white-space: pre-wrap;
+}
+
+.outputError {
+  border-left-color: #ef4444;
+}
+
+.outputError > div:first-child {
+  color: #dc2626;
+}
+
+@media (max-width: 960px) {
+  .homeGrid,
+  .labGrid,
+  .chartGrid,
+  .slideCols,
+  .twoCharts {
+    grid-template-columns: 1fr;
+  }
+  .titleSlide h1 {
+    font-size: 2.3rem;
+  }
+}

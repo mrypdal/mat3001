@@ -1,10 +1,10 @@
-import SprintDashboard from "@/components/sprint/SprintDashboard";
+import SprintHome from "@/components/sprint/SprintHome";
 
 export const metadata = {
-  title: "Sprintmodellen – Keller",
-  description: "Estimer v_max og τ i Kellers kinematiske sprintmodell fra tider på ulike distanser.",
+  title: "Sprintmodellen",
+  description: "Velg samling i sprintprosjektet.",
 };
 
 export default function SprintPage() {
-  return <SprintDashboard />;
+  return <SprintHome />;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { fitKeller } from "@/lib/sprintModel";
@@ -234,9 +235,13 @@ export default function SprintDashboard() {
     <div className={styles.page}>
       <nav className={styles.nav}>
         <div className={styles.brand}>
-          Sprintmodellen<small>Keller (1973)</small>
+          <Link href="/sprint" style={{ color: "inherit", textDecoration: "none" }}>Sprintmodellen</Link>
+          <small>Samling 1 · Keller (1973)</small>
         </div>
         <div className={styles.navRight}>
+          <Link href="/sprint" className={styles.ghostBtn} style={{ textDecoration: "none" }}>
+            ← Samlinger
+          </Link>
           <span>{user?.name || user?.email}</span>
           <button className={styles.ghostBtn} onClick={() => signOut({ callbackUrl: "/sprint/login" })}>
             Logg ut
